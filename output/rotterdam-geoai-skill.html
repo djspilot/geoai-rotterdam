@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotterdam GeoAI Skill</title>
+  <style>
+    :root {
+      --ink: #102126;
+      --muted: #5c6b70;
+      --paper: #f7f3e9;
+      --panel: rgba(255, 252, 245, 0.84);
+      --line: rgba(16, 33, 38, 0.12);
+      --accent: #e2552d;
+      --accent-soft: #ffd5c6;
+      --teal: #0f7c82;
+      --gold: #d6a641;
+      --shadow: 0 22px 60px rgba(16, 33, 38, 0.12);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(226, 85, 45, 0.18), transparent 24%),
+        radial-gradient(circle at top right, rgba(15, 124, 130, 0.18), transparent 26%),
+        linear-gradient(180deg, #fcf8ee 0%, #f3eee1 45%, #efe7d7 100%);
+      font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(16, 33, 38, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 33, 38, 0.03) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent 92%);
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: 40px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .card,
+    .panel {
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      right: -70px;
+      top: -90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(214, 166, 65, 0.26), transparent 66%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 33, 38, 0.14);
+      background: rgba(255, 255, 255, 0.52);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    h1, h2, h3 {
+      font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      line-height: 1.02;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(3.2rem, 7vw, 6.1rem);
+      max-width: 11ch;
+    }
+
+    .lead {
+      margin-top: 18px;
+      max-width: 62ch;
+      font-size: 1.07rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--accent) 0%, #ff7a32 100%);
+      color: #fffaf5;
+      box-shadow: 0 14px 28px rgba(226, 85, 45, 0.24);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(16, 33, 38, 0.12);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(16, 33, 38, 0.06);
+      border: 1px solid rgba(16, 33, 38, 0.08);
+      font-size: 0.9rem;
+    }
+
+    .hero-side {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .mini-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-panel {
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(247, 243, 233, 0.82));
+      border: 1px solid rgba(16, 33, 38, 0.08);
+    }
+
+    .mini-panel strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 18px 14px;
+      border-radius: 18px;
+      background: rgba(16, 33, 38, 0.05);
+      text-align: left;
+    }
+
+    .metric .value {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(226, 85, 45, 0.16), rgba(15, 124, 130, 0.16));
+      border: 1px solid rgba(16, 33, 38, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+      color: var(--ink);
+      flex: 0 0 auto;
+    }
+
+    .icon-wrap svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-top,
+    .path-top {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .feature-top h3,
+    .path-top h3 {
+      margin-bottom: 0;
+    }
+
+    .infographic-strip {
+      margin-top: 18px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .infographic-cell {
+      padding: 16px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 241, 231, 0.88));
+      border: 1px solid rgba(16, 33, 38, 0.08);
+      min-height: 180px;
+      position: relative;
+    }
+
+    .infographic-cell::after {
+      content: "→";
+      position: absolute;
+      right: -12px;
+      top: calc(50% - 12px);
+      color: rgba(16, 33, 38, 0.24);
+      font-size: 1.35rem;
+    }
+
+    .infographic-cell:last-child::after {
+      content: none;
+    }
+
+    .infographic-cell h3 {
+      font-size: 1.18rem;
+      margin: 12px 0 8px;
+    }
+
+    .infographic-cell p,
+    .infographic-cell li {
+      color: var(--muted);
+      margin-top: 0;
+    }
+
+    .micro-label {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(16, 33, 38, 0.06);
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-process {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hero-process-card {
+      position: relative;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(16, 33, 38, 0.1);
+      min-height: 132px;
+    }
+
+    .hero-process-card::after {
+      content: "→";
+      position: absolute;
+      right: -11px;
+      top: calc(50% - 12px);
+      font-size: 1.3rem;
+      color: rgba(16, 33, 38, 0.22);
+    }
+
+    .hero-process-card:last-child::after {
+      content: none;
+    }
+
+    .hero-process-card strong {
+      display: block;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .hero-process-card span {
+      display: block;
+      font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+
+    .hero-process-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    main {
+      padding-bottom: 80px;
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 26px;
+      margin-bottom: 18px;
+      align-items: end;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .feature-card {
+      padding: 22px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p,
+    .feature-card li,
+    .timeline p,
+    .faq p,
+    table {
+      color: var(--muted);
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 14px 0 0;
+    }
+
+    .timeline {
+      padding: 24px;
+    }
+
+    .timeline-list {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .step {
+      position: relative;
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(243, 238, 225, 0.92));
+      border: 1px solid rgba(16, 33, 38, 0.09);
+      min-height: 190px;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, var(--teal), #14a8ae);
+      margin-bottom: 14px;
+    }
+
+    .step-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(16, 33, 38, 0.06);
+      border: 1px solid rgba(16, 33, 38, 0.08);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .step-route {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(16, 33, 38, 0.12);
+      color: var(--ink);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .route-inline {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .data-ribbon {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .data-pill {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(16, 33, 38, 0.1);
+      min-width: 180px;
+    }
+
+    .diagram {
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .flow-card {
+      position: relative;
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(245, 240, 228, 0.9));
+      border: 1px solid rgba(16, 33, 38, 0.08);
+      min-height: 180px;
+    }
+
+    .flow-card::after {
+      content: "→";
+      position: absolute;
+      right: -14px;
+      top: calc(50% - 14px);
+      font-size: 1.5rem;
+      color: rgba(16, 33, 38, 0.28);
+    }
+
+    .flow-card:last-child::after {
+      content: none;
+    }
+
+    .flow-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    .decision-board {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .decision-board::before {
+      content: "";
+      position: absolute;
+      inset: auto -70px -90px auto;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(15, 124, 130, 0.16), transparent 65%);
+    }
+
+    .decision-ladder {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .decision-item {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(16, 33, 38, 0.1);
+    }
+
+    .decision-index {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--gold), #f0c25e);
+      color: #14262b;
+      font-weight: 800;
+      box-shadow: 0 10px 18px rgba(214, 166, 65, 0.24);
+    }
+
+    .decision-item h3 {
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+    }
+
+    .decision-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .decision-note {
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(244, 236, 221, 0.92));
+      border: 1px solid rgba(16, 33, 38, 0.08);
+      margin-top: 18px;
+    }
+
+    .decision-note strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .path-card {
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(16, 33, 38, 0.1);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 242, 233, 0.9));
+    }
+
+    .path-card .label {
+      display: inline-flex;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(16, 33, 38, 0.06);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .path-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .path-card p,
+    .path-card li {
+      color: var(--muted);
+    }
+
+    .code-block {
+      margin-top: 16px;
+      background: #152229;
+      color: #edf5f6;
+      border-radius: 18px;
+      padding: 18px;
+      overflow: auto;
+      font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+      font-size: 0.88rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 14px 12px;
+      border-bottom: 1px solid rgba(16, 33, 38, 0.08);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--ink);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .faq {
+      padding: 24px;
+    }
+
+    .faq-item + .faq-item {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(16, 33, 38, 0.08);
+    }
+
+    .faq-item h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      padding: 22px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1120px) {
+      .hero-grid,
+      .section-head,
+      .two,
+      .three,
+      .decision-grid,
+      .path-grid,
+      .infographic-strip,
+      .flow,
+      .timeline-list,
+      .hero-process {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-card::after {
+        content: "↓";
+        right: auto;
+        left: calc(50% - 8px);
+        top: auto;
+        bottom: -18px;
+      }
+
+      .flow-card:last-child::after {
+        content: none;
+      }
+
+      .hero-process-card::after {
+        content: "↓";
+        right: auto;
+        left: calc(50% - 8px);
+        top: auto;
+        bottom: -18px;
+      }
+
+      .hero-process-card:last-child::after {
+        content: none;
+      }
+
+      .infographic-cell::after {
+        content: "↓";
+        right: auto;
+        left: calc(50% - 8px);
+        top: auto;
+        bottom: -18px;
+      }
+
+      .infographic-cell:last-child::after {
+        content: none;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        width: min(var(--max), calc(100% - 18px));
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 16px;
+      }
+
+      .hero-copy,
+      .hero-side,
+      .feature-card,
+      .timeline,
+      .diagram,
+      .decision-board,
+      .faq {
+        padding: 18px;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: 9ch;
+      }
+
+      th:nth-child(2),
+      td:nth-child(2),
+      th:nth-child(3),
+      td:nth-child(3) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div class="hero-grid">
+        <div class="card hero-copy reveal">
+          <div>
+            <div class="eyebrow">Skill Explainer · Rotterdam GeoAI</div>
+            <h1>Hoe deze skill Rotterdam-data begrijpt en omzet in kaarten</h1>
+            <p class="lead">
+              Deze pagina is gebaseerd op de skilldefinitie <strong>rotterdam-geoai</strong> en legt uit wanneer de skill moet starten,
+              welke databronnen ze gebruikt, hoe de GIS-workflow is opgebouwd en waarom IMBOR, TIR en Rotterdam-services samen één logisch systeem vormen.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Rotterdam geodata</span>
+              <span class="chip">IMBOR 2025</span>
+              <span class="chip">TIR</span>
+              <span class="chip">QGIS</span>
+              <span class="chip">ArcGIS REST</span>
+              <span class="chip">WFS</span>
+            </div>
+            <div class="hero-actions">
+              <a class="button primary" href="#workflow">Bekijk de workflow</a>
+              <a class="button secondary" href="#route">Zie zijn beslisroute</a>
+            </div>
+            <div class="hero-process">
+              <div class="hero-process-card">
+                <strong>Stap 1</strong>
+                <span>Vraag scannen</span>
+                <p>Hij zoekt naar Rotterdam, IMBOR, TIR, assets, kaarttaal en GIS-signalen.</p>
+              </div>
+              <div class="hero-process-card">
+                <strong>Stap 2</strong>
+                <span>Bron kiezen</span>
+                <p>Hij beslist tussen TIR, assetservices, IMBOR-model of lokale downloads.</p>
+              </div>
+              <div class="hero-process-card">
+                <strong>Stap 3</strong>
+                <span>Formaat kiezen</span>
+                <p>WFS voor QGIS, REST query voor bulk, SPARQL voor semantiek, GeoJSON voor lokaal gebruik.</p>
+              </div>
+              <div class="hero-process-card">
+                <strong>Stap 4</strong>
+                <span>Analyse draaien</span>
+                <p>Joinen, tellen, filteren, herprojecteren of alleen betekenis uitleggen.</p>
+              </div>
+              <div class="hero-process-card">
+                <strong>Stap 5</strong>
+                <span>Kaart of uitleg</span>
+                <p>De output wordt een HTML-kaart, analysekaart, downloadstap of semantische uitleg.</p>
+              </div>
+            </div>
+          </div>
+          <div class="metric-grid">
+            <div class="metric">
+              <span class="value">3</span>
+              systemen
+            </div>
+            <div class="metric">
+              <span class="value">5+</span>
+              assetservices
+            </div>
+            <div class="metric">
+              <span class="value">2</span>
+              kaarttypen
+            </div>
+          </div>
+        </div>
+
+        <aside class="card hero-side reveal">
+          <div class="mini-stack">
+            <div class="mini-panel">
+              <strong>Wat is de kern?</strong>
+              De skill werkt als een beslislaag tussen Rotterdamse geoservices, lokale downloads en kaartoutput. Ze weet wanneer ze TIR moet gebruiken, wanneer assetdata nodig is en wanneer IMBOR alleen semantische context levert.
+            </div>
+            <div class="mini-panel">
+              <strong>Wanneer triggert hij?</strong>
+              Bij vragen over Rotterdam-assets, buurten, gebieden, WFS-links, ArcGIS REST, QGIS-workflows en kaartvragen zoals “toon op kaart” of “hoeveel per wijk”.
+            </div>
+            <div class="mini-panel">
+              <strong>Wat levert hij op?</strong>
+              Een interactieve HTML-kaart, een statische analysekaart, een ruimtelijke join, een lokale download of een uitleg van IMBOR/TIR en hun rol in GIS.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <main>
+      <section id="snapshot" class="reveal">
+        <div class="card infographic-strip">
+          <article class="infographic-cell">
+            <div class="icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M4 12h10"></path><path d="M4 17h7"></path><circle cx="18" cy="12" r="3"></circle></svg>
+            </div>
+            <h3>1. Lees de vraag</h3>
+            <p>Herken of iemand zoekt naar locatie, aantallen, territorium, betekenis of een downloadbare dataset.</p>
+          </article>
+          <article class="infographic-cell">
+            <div class="icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 21s6-4.5 6-10a6 6 0 1 0-12 0c0 5.5 6 10 6 10Z"></path><circle cx="12" cy="11" r="2.5"></circle></svg>
+            </div>
+            <h3>2. Kies de bron</h3>
+            <p>TIR voor gebieden, assets voor objecten, IMBOR voor betekenis en regels.</p>
+          </article>
+          <article class="infographic-cell">
+            <div class="icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"></rect><path d="M7 8h10"></path><path d="M7 12h6"></path><path d="M10 20h4"></path></svg>
+            </div>
+            <h3>3. Verwerk de data</h3>
+            <p>Laad live via WFS of REST, of werk lokaal met GeoJSON, GeoPackage en chunked downloads.</p>
+          </article>
+          <article class="infographic-cell">
+            <div class="icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 18h16"></path><path d="M7 15l3-3 3 2 4-5"></path><circle cx="7" cy="15" r="1"></circle><circle cx="10" cy="12" r="1"></circle><circle cx="13" cy="14" r="1"></circle><circle cx="17" cy="9" r="1"></circle></svg>
+            </div>
+            <h3>4. Lever output</h3>
+            <p>Maak een interactieve kaart, een analysebeeld, een QGIS-route of een semantische uitleg.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="basis" class="reveal">
+        <div class="section-head">
+          <h2>De drie bouwstenen</h2>
+          <p>
+            De skill rust op drie concepten die niet hetzelfde zijn. Dat onderscheid is precies waarom de workflow werkt en waarom de gebruiker niet per ongeluk een semantisch model als kaartlaag probeert te laden.
+          </p>
+        </div>
+        <div class="grid three">
+          <article class="card feature-card">
+            <div class="feature-top">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3v18"></path><path d="M5 7h14"></path><path d="M5 12h14"></path><path d="M5 17h14"></path></svg>
+              </div>
+              <h3>IMBOR</h3>
+            </div>
+            <p>
+              IMBOR is het informatiemodel voor beheer openbare ruimte. Het legt uit wat objecten zijn, welke eigenschappen erbij horen en welke domeinwaarden geldig zijn.
+            </p>
+            <ul>
+              <li>RDF/OWL in `.ttl`</li>
+              <li>Ook als `.accdb` verspreid</li>
+              <li>Gebruikt als schema, niet als kaartlaag</li>
+            </ul>
+          </article>
+          <article class="card feature-card">
+            <div class="feature-top">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 7l8-3 8 3-8 3-8-3Z"></path><path d="M4 12l8 3 8-3"></path><path d="M4 17l8 3 8-3"></path></svg>
+              </div>
+              <h3>TIR</h3>
+            </div>
+            <p>
+              TIR is de territoriale indeling van Rotterdam. Het levert de polygonen waarmee analyses op gemeente-, gebied-, buurt-, subbuurt- en subbuurtdeelniveau kunnen gebeuren.
+            </p>
+            <ul>
+              <li>Ruimtelijke referentie voor aggregatie</li>
+              <li>Beschikbaar via REST en WFS</li>
+              <li>Onmisbaar voor tellingen per gebied</li>
+            </ul>
+          </article>
+          <article class="card feature-card">
+            <div class="feature-top">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 18h16"></path><path d="M7 18V9"></path><path d="M12 18V5"></path><path d="M17 18v-6"></path></svg>
+              </div>
+              <h3>Assetservices</h3>
+            </div>
+            <p>
+              Dit zijn de feitelijke objectlagen, zoals bomen, afvalbakken, banken en lichtpunten. Deze lagen worden geladen, gefilterd en geanalyseerd in QGIS, Python of een webkaart.
+            </p>
+            <ul>
+              <li>Points of lijnen met echte geometrie</li>
+              <li>Goed te downloaden via ArcGIS query</li>
+              <li>Geschikt voor kaartoutput en statistiek</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="workflow" class="reveal">
+        <div class="card timeline">
+          <div class="section-head">
+            <h2>Hoe de skill werkt</h2>
+            <p>
+              De skill volgt een vaste volgorde: intent herkennen, data kiezen, formaat kiezen, ruimtelijke analyse doen en dan het juiste outputtype maken.
+            </p>
+          </div>
+          <div class="timeline-list">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-tag">Inputfase</div>
+              <h3>Vraag herkennen</h3>
+              <p>De skill kijkt of de vraag gaat over Rotterdam, TIR, IMBOR, WFS, ArcGIS REST, QGIS of een kaartactie zoals tonen, vergelijken of tellen.</p>
+              <div class="step-route">Triggerpatroon <span class="route-inline">Rotterdam + geodata + actie</span></div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-tag">Selectiefase</div>
+              <h3>Bron bepalen</h3>
+              <p>Bij gebiedsvragen kiest hij TIR. Bij objectvragen kiest hij de juiste assetlaag. Bij definities of domeinwaarden gebruikt hij IMBOR.</p>
+              <div class="step-route">Bronkeuze <span class="route-inline">TIR of assets of IMBOR</span></div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-tag">Laadfase</div>
+              <h3>Data laden</h3>
+              <p>QGIS krijgt WFS of lokale GeoJSON. Python gebruikt meestal ArcGIS REST query met paginering. IMBOR blijft documentatie of SPARQL-bron.</p>
+              <div class="step-route">Techniek <span class="route-inline">WFS, REST query, GeoJSON of SPARQL</span></div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-tag">Analysefase</div>
+              <h3>Analyse kiezen</h3>
+              <p>Voor locaties: puntenkaart. Voor vergelijkingen: spatial join en tellingen per buurt of gebied. Voor semantiek: veldbetekenis en domeinwaarden opzoeken.</p>
+              <div class="step-route">Bewerking <span class="route-inline">filter, join, count, classify, explain</span></div>
+            </div>
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-tag">Outputfase</div>
+              <h3>Output maken</h3>
+              <p>De skill levert een interactieve HTML-kaart, een PNG-choropleth, een lokale download, of een concrete QGIS/Python-stap.</p>
+              <div class="step-route">Resultaat <span class="route-inline">kaart, bestand of uitleg</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="route" class="reveal">
+        <div class="decision-grid">
+          <div class="card decision-board">
+            <div class="section-head">
+              <h2>Zo loopt hij er stap voor stap doorheen</h2>
+              <p>
+                Dit is de praktische route die de skill intern volgt. Niet alleen wat hij weet, maar hoe hij van een vraag naar een bruikbaar GIS-resultaat beweegt.
+              </p>
+            </div>
+            <div class="decision-ladder">
+              <div class="decision-item">
+                <div class="decision-index">1</div>
+                <div>
+                  <h3>Herken de bedoeling</h3>
+                  <p>Gaat de vraag om locatie, telling, vergelijking, interpretatie of een downloadactie? Dat bepaalt meteen welke data en welke output in beeld komen.</p>
+                </div>
+              </div>
+              <div class="decision-item">
+                <div class="decision-index">2</div>
+                <div>
+                  <h3>Kies de ruimtelijke basis</h3>
+                  <p>Als de vraag over buurten of gebieden gaat, start hij met TIR. Als de vraag over objecten gaat, start hij met assetlagen zoals bomen of afvalbakken.</p>
+                </div>
+              </div>
+              <div class="decision-item">
+                <div class="decision-index">3</div>
+                <div>
+                  <h3>Beslis tussen live of lokaal</h3>
+                  <p>Voor QGIS of kleine interacties kan live WFS genoeg zijn. Voor bulk, scripting of herhaalbaar werk schakelt hij naar lokale GeoJSON of GeoPackage.</p>
+                </div>
+              </div>
+              <div class="decision-item">
+                <div class="decision-index">4</div>
+                <div>
+                  <h3>Voeg IMBOR toe als betekenislaag</h3>
+                  <p>IMBOR wordt gebruikt om velden, klassen en domeinwaarden te verklaren. Dus niet als kaartlaag, maar als laag van semantische context.</p>
+                </div>
+              </div>
+              <div class="decision-item">
+                <div class="decision-index">5</div>
+                <div>
+                  <h3>Maak een passend eindproduct</h3>
+                  <p>Daarna levert hij precies het juiste type antwoord: een interactieve kaart, choropleth, local export, QGIS-script of tekstuele interpretatie.</p>
+                </div>
+              </div>
+            </div>
+            <div class="decision-note">
+              <strong>Belangrijk onderscheid</strong>
+              TIR en assetservices leveren de geometrie. IMBOR levert de betekenis. De skill werkt goed omdat hij die twee rollen uit elkaar houdt en pas later weer samenbrengt.
+            </div>
+          </div>
+
+          <div class="card feature-card">
+            <h2>Snelle beslisboom</h2>
+            <div class="path-grid">
+              <div class="path-card">
+                <div class="path-top">
+                  <div class="icon-wrap" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M12 21s6-4.5 6-10a6 6 0 1 0-12 0c0 5.5 6 10 6 10Z"></path><circle cx="12" cy="11" r="2.5"></circle></svg>
+                  </div>
+                  <div>
+                    <div class="label">Als de vraag is</div>
+                    <h3>Waar ligt iets?</h3>
+                  </div>
+                </div>
+                <p>Dan kiest hij meestal de objectlaag direct en toont een punt- of polygonkaart.</p>
+                <ul>
+                  <li>Assetlaag laden</li>
+                  <li>Optioneel filteren op gebied</li>
+                  <li>Folium of QGIS-output</li>
+                </ul>
+              </div>
+              <div class="path-card">
+                <div class="path-top">
+                  <div class="icon-wrap" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M4 18h16"></path><path d="M7 15l3-3 3 2 4-5"></path><circle cx="7" cy="15" r="1"></circle><circle cx="10" cy="12" r="1"></circle><circle cx="13" cy="14" r="1"></circle><circle cx="17" cy="9" r="1"></circle></svg>
+                  </div>
+                  <div>
+                    <div class="label">Als de vraag is</div>
+                    <h3>Hoeveel per gebied?</h3>
+                  </div>
+                </div>
+                <p>Dan combineert hij objectdata met TIR via een spatial join en maakt een telling of choropleth.</p>
+                <ul>
+                  <li>TIR polygonen laden</li>
+                  <li>Assets spatial joinen</li>
+                  <li>Groeperen en visualiseren</li>
+                </ul>
+              </div>
+              <div class="path-card">
+                <div class="path-top">
+                  <div class="icon-wrap" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 1 1 4.3 1.7c-.9.9-1.8 1.4-1.8 2.8"></path><path d="M12 17h.01"></path></svg>
+                  </div>
+                  <div>
+                    <div class="label">Als de vraag is</div>
+                    <h3>Wat betekent dit veld?</h3>
+                  </div>
+                </div>
+                <p>Dan verschuift de focus van kaart naar model en gebruikt hij IMBOR, vocabulaire of domeinwaarden.</p>
+                <ul>
+                  <li>IMBOR-module kiezen</li>
+                  <li>Term of klasse opzoeken</li>
+                  <li>Betekenis uitleggen</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="triggers" class="reveal">
+        <div class="section-head">
+          <h2>Wanneer hij moet aanslaan</h2>
+          <p>
+            De frontmatter in de skill noemt expliciet welke soorten vragen hem activeren. Hieronder staat die logica vertaald naar mensentaal.
+          </p>
+        </div>
+        <div class="grid two">
+          <article class="card feature-card">
+            <h3>Directe triggers</h3>
+            <div class="data-ribbon">
+              <div class="data-pill">Rotterdam geodata</div>
+              <div class="data-pill">IMBOR vocabulary</div>
+              <div class="data-pill">TIR gebieden en buurten</div>
+              <div class="data-pill">QGIS workflow</div>
+              <div class="data-pill">WFS services</div>
+              <div class="data-pill">ArcGIS REST endpoints</div>
+            </div>
+          </article>
+          <article class="card feature-card">
+            <h3>Typische gebruikerstaal</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Vraag</th>
+                  <th>Interpretatie</th>
+                  <th>Actie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>“Toon op kaart”</td>
+                  <td>Visuele locatievraag</td>
+                  <td>Folium of QGIS-kaart</td>
+                </tr>
+                <tr>
+                  <td>“Hoeveel per wijk?”</td>
+                  <td>Aggregatievraag</td>
+                  <td>TIR + spatial join + telling</td>
+                </tr>
+                <tr>
+                  <td>“Where are the trees?”</td>
+                  <td>Asset-locaties</td>
+                  <td>Bomen laden en tonen</td>
+                </tr>
+                <tr>
+                  <td>“Wat betekent dit IMBOR-veld?”</td>
+                  <td>Semantische interpretatie</td>
+                  <td>IMBOR raadplegen</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </section>
+
+      <section id="bronnen" class="reveal">
+        <div class="card diagram">
+          <div class="section-head">
+            <h2>Databronnen en formaten</h2>
+            <p>
+              De skill kiest niet blind één formaat. Hij weet dat WFS handig is voor QGIS, REST-query beter voor bulkdownload en IMBOR-TTL alleen een modelbeschrijving is.
+            </p>
+          </div>
+          <div class="flow">
+            <div class="flow-card">
+              <h3>TIR</h3>
+              <p>Polygonlagen voor gemeente, gebieden, buurten, subbuurten en subbuurtdelen.</p>
+              <p><strong>Gebruik:</strong> territoriale context en aggregatie.</p>
+            </div>
+            <div class="flow-card">
+              <h3>Assets</h3>
+              <p>Bomen, afvalbakken, banken, lichtpunten, wegvakonderdelen en meer.</p>
+              <p><strong>Gebruik:</strong> objectlocaties en analyses.</p>
+            </div>
+            <div class="flow-card">
+              <h3>IMBOR</h3>
+              <p>Vocabulaire, kern, domeinwaarden, geometrie-addenda en MIM-mapping.</p>
+              <p><strong>Gebruik:</strong> betekenis, regels en mapping.</p>
+            </div>
+            <div class="flow-card">
+              <h3>Lokale output</h3>
+              <p>GeoJSON, HTML, PNG en QGIS-projectlogica voor verdere verwerking.</p>
+              <p><strong>Gebruik:</strong> lokale analyse en presentatie.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="qgis" class="reveal">
+        <div class="grid two">
+          <article class="card feature-card">
+            <h2>QGIS-denkwijze</h2>
+            <p>
+              In QGIS gebruikt de skill het liefst WFS of lokale bestanden. TIR gaat er eerst in, omdat dat de referentiepolygonen zijn. Daarna komen assetlagen, daarna pas de joins en aggregaties.
+            </p>
+            <ul>
+              <li>Laad TIR eerst</li>
+              <li>Voeg assetlagen toe</li>
+              <li>Exporteer naar GeoPackage voor stabiele analyse</li>
+              <li>Gebruik `within` of `intersects` voor spatial joins</li>
+              <li>Houd EPSG:28992 aan voor metrische analyse</li>
+            </ul>
+          </article>
+          <article class="card feature-card">
+            <h2>PyQGIS-patroon</h2>
+            <p>De skill gebruikt een eenvoudige WFS-URI die past bij QGIS en RD New.</p>
+            <div class="code-block">uri = "url='{endpoint}' typename='{typename}' version='2.0.0' srsname='EPSG:28992' restrictToRequestBBOX='1' pagingEnabled='true'"
+layer = QgsVectorLayer(uri, title, "WFS")
+QgsProject.instance().addMapLayer(layer, False)
+group.addLayer(layer)</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="python" class="reveal">
+        <div class="grid two">
+          <article class="card feature-card">
+            <h2>Python-downloads</h2>
+            <p>
+              Voor grote datasets vertrouwt de skill liever op ArcGIS REST query dan op WFS. Dat komt doordat bulkdownloads via REST beter te pagineren zijn en direct GeoJSON kunnen teruggeven.
+            </p>
+            <div class="code-block">params = {
+    "where": "1=1",
+    "outFields": "*",
+    "returnGeometry": "true",
+    "outSR": "28992",
+    "resultOffset": str(offset),
+    "resultRecordCount": str(batch_size),
+    "f": "geojson",
+}</div>
+          </article>
+          <article class="card feature-card">
+            <h2>Waarom paginering nodig is</h2>
+            <p>
+              Sommige lagen, zoals bomen, bevatten veel meer features dan de server in één antwoord wil teruggeven. De skill telt eerst het totaal, haalt dan batches op en schrijft die als lokale bestanden weg.
+            </p>
+            <ul>
+              <li>CRS standaard: EPSG:28992</li>
+              <li>Batchgrootte: meestal 1000</li>
+              <li>Bij SSL-problemen: verificatie soms versoepelen</li>
+              <li>Voor Folium daarna herprojecteren naar EPSG:4326</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="maps" class="reveal">
+        <div class="section-head">
+          <h2>Welke kaart maakt hij?</h2>
+          <p>
+            De skill maakt niet altijd hetzelfde outputtype. Hij kiest op basis van het soort vraag, de schaal en of de gebruiker vooral wil kijken of vergelijken.
+          </p>
+        </div>
+        <div class="grid three">
+          <article class="card feature-card">
+            <h3>Interactief</h3>
+            <p>Gebruik Folium als de vraag gaat over locaties, klikken, browsen of objectdetails op de kaart.</p>
+            <ul>
+              <li>Puntkaarten</li>
+              <li>Popup-details</li>
+              <li>HTML-output</li>
+            </ul>
+          </article>
+          <article class="card feature-card">
+            <h3>Analytisch</h3>
+            <p>Gebruik geopandas en matplotlib als de vraag draait om tellingen, vergelijkingen of choropleths per buurt of gebied.</p>
+            <ul>
+              <li>Counts per area</li>
+              <li>Choropleth</li>
+              <li>PNG of SVG</li>
+            </ul>
+          </article>
+          <article class="card feature-card">
+            <h3>Hybride</h3>
+            <p>Als de gebruiker zowel wil begrijpen als verkennen, kan de skill beide produceren: een analysetabel of statische kaart plus een interactieve HTML-versie.</p>
+            <ul>
+              <li>Visueel + analytisch</li>
+              <li>Goed voor rapportage</li>
+              <li>Zelfde data, andere output</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="modules" class="reveal">
+        <div class="grid two">
+          <article class="card feature-card">
+            <h2>IMBOR-modules in het kort</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Module</th>
+                  <th>Bestand</th>
+                  <th>Doel</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Vocabulaire</td>
+                  <td>imbor2025-vocabulaire.ttl</td>
+                  <td>Termen en labels</td>
+                </tr>
+                <tr>
+                  <td>Kern</td>
+                  <td>imbor2025-kern.ttl</td>
+                  <td>Klassen en properties</td>
+                </tr>
+                <tr>
+                  <td>Domeinwaarden</td>
+                  <td>imbor2025-domeinwaarden.ttl</td>
+                  <td>Gecontroleerde waarden</td>
+                </tr>
+                <tr>
+                  <td>Geometrie</td>
+                  <td>imbor2025-addendum-geometrie.ttl</td>
+                  <td>Geometrieregels</td>
+                </tr>
+                <tr>
+                  <td>MIM</td>
+                  <td>imbor2025-mim.ttl</td>
+                  <td>Modelmapping</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="card feature-card">
+            <h2>Wat IMBOR niet is</h2>
+            <p>
+              Dit is de belangrijkste nuance van de hele skill: de `.ttl`-bestanden zijn geen kant-en-klare GIS-vectorlagen. Ze beschrijven het model, niet de Rotterdamse objectlocaties zelf.
+            </p>
+            <ul>
+              <li>Niet direct inladen als kaartlaag</li>
+              <li>Wel gebruiken voor veldbetekenis en domeinwaarden</li>
+              <li>Wel querybaar via SPARQL</li>
+              <li>Wel nuttig voor documentatie en mapping naar lokale velden</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="voorbeelden" class="reveal">
+        <div class="card faq">
+          <div class="section-head">
+            <h2>Voorbeelden van vragen</h2>
+            <p>
+              Dit zijn typische prompts die volgens de skill niet hetzelfde soort antwoord moeten krijgen, ook al lijken ze op elkaar.
+            </p>
+          </div>
+          <div class="faq-item">
+            <h3>Waar staan de afvalbakken in Kralingen?</h3>
+            <p>De skill kiest een puntkaart, filtert de assets ruimtelijk op het gebied en levert een HTML-kaart of QGIS-filterworkflow.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Hoeveel bomen per wijk?</h3>
+            <p>De skill kiest TIR + bomen + spatial join + aggregatie en levert eerder een choropleth of analysetabel dan een simpele puntenkaart.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Wat betekent deze IMBOR-code?</h3>
+            <p>Dan hoeft er mogelijk geen kaart te worden gemaakt. De skill schakelt over naar het informatiemodel en zoekt termen, klassen of domeinwaarden op.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Toon alle gebieden van Rotterdam</h3>
+            <p>Dat is een pure TIR-vraag: polygonen laden, labelen en eventueel als eenvoudige referentiekaart weergeven.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="fouten" class="reveal">
+        <div class="grid two">
+          <article class="card feature-card">
+            <h2>Veelgemaakte fouten</h2>
+            <ul>
+              <li>`.ttl` behandelen als GIS-laag</li>
+              <li>Geen paginering gebruiken bij grote lagen</li>
+              <li>EPSG:28992 direct in Folium gebruiken</li>
+              <li>WFS forceren waar REST-query betrouwbaarder is</li>
+              <li>IMBOR verwarren met de feitelijke assetdataset</li>
+            </ul>
+          </article>
+          <article class="card feature-card">
+            <h2>Vuistregels van de skill</h2>
+            <ul>
+              <li>Folium voor verkennen, matplotlib voor analyse</li>
+              <li>TIR eerst, assets daarna</li>
+              <li>RD New behouden voor ruimtelijke bewerkingen</li>
+              <li>Alleen naar WGS84 bij webkaarten</li>
+              <li>Gebruik IMBOR voor betekenis, niet voor geometrie</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Gebaseerd op de skilldefinitie in <code>agent-skill/SKILL.md</code>. Deze HTML vat de werking samen als een publieksvriendelijke documentatiepagina voor de Rotterdam GeoAI workflow.
+    </footer>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach((node, index) => {
+      node.style.transitionDelay = `${Math.min(index * 60, 360)}ms`;
+      observer.observe(node);
+    });
+  </script>
+</body>
+</html>

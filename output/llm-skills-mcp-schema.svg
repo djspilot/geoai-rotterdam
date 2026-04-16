@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-opacity="0.12"/>
+    </filter>
+    <linearGradient id="llm-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="skill-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="mcp-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#34d399"/>
+    </linearGradient>
+    <linearGradient id="tool-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#fbbf24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="720" rx="16" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="500" y="42" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">Architectuur: LLM Motor, Agent Skills &amp; MCP</text>
+  <text x="500" y="64" text-anchor="middle" font-size="13" fill="#64748b">Hoe een AI-agent zijn capaciteiten uitbreidt via Skills en het Model Context Protocol</text>
+
+  <!-- ===== GEBRUIKER ===== -->
+  <g filter="url(#shadow)">
+    <rect x="410" y="88" width="180" height="56" rx="28" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="500" y="116" text-anchor="middle" font-size="15" font-weight="600" fill="#334155">&#x1F9D1; Gebruiker</text>
+    <text x="500" y="133" text-anchor="middle" font-size="11" fill="#64748b">prompt / instructie</text>
+  </g>
+
+  <!-- Pijl gebruiker -> LLM -->
+  <line x1="500" y1="144" x2="500" y2="178" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ===== LLM MOTOR (centraal) ===== -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="182" width="320" height="120" rx="16" fill="url(#llm-grad)"/>
+    <text x="500" y="218" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">LLM Motor</text>
+    <text x="500" y="240" text-anchor="middle" font-size="12" fill="#e0e7ff">(bijv. Claude Opus / Sonnet)</text>
+    <text x="500" y="264" text-anchor="middle" font-size="11" fill="#c7d2fe">Redeneert, plant, selecteert tools &amp; skills</text>
+    <text x="500" y="280" text-anchor="middle" font-size="11" fill="#c7d2fe">Genereert antwoorden &amp; code</text>
+  </g>
+
+  <!-- ===== HARNAS / RUNTIME ===== -->
+  <rect x="80" y="340" width="840" height="24" rx="6" fill="#e2e8f0"/>
+  <text x="500" y="357" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Agent Harnas / Runtime  &#x2500;  orkestreert tools, skills, MCP-verbindingen &amp; permissies</text>
+
+  <!-- ===== DRIE KOLOMMEN ===== -->
+
+  <!-- KOLOM LINKS: AGENT SKILLS -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="400" width="250" height="280" rx="14" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect x="80" y="400" width="250" height="40" rx="14" fill="url(#skill-grad)"/>
+    <rect x="80" y="426" width="250" height="14" fill="url(#skill-grad)"/>
+    <text x="205" y="425" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">Agent Skills</text>
+    <text x="205" y="460" text-anchor="middle" font-size="11" fill="#1e40af">Prompt-gebaseerde instructies die</text>
+    <text x="205" y="475" text-anchor="middle" font-size="11" fill="#1e40af">gedrag &amp; expertise toevoegen</text>
+
+    <!-- Skill items -->
+    <rect x="100" y="495" width="210" height="30" rx="6" fill="#dbeafe"/>
+    <text x="205" y="515" text-anchor="middle" font-size="11" fill="#1e3a8a">&#x1F9E0;  Brainstorming</text>
+
+    <rect x="100" y="532" width="210" height="30" rx="6" fill="#dbeafe"/>
+    <text x="205" y="552" text-anchor="middle" font-size="11" fill="#1e3a8a">&#x1F41B;  Debugging workflow</text>
+
+    <rect x="100" y="569" width="210" height="30" rx="6" fill="#dbeafe"/>
+    <text x="205" y="589" text-anchor="middle" font-size="11" fill="#1e3a8a">&#x1F3AF;  TDD / Code Review</text>
+
+    <rect x="100" y="606" width="210" height="30" rx="6" fill="#dbeafe"/>
+    <text x="205" y="626" text-anchor="middle" font-size="11" fill="#1e3a8a">&#x1F5FA;  Rotterdam GeoAI</text>
+
+    <text x="205" y="660" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Worden ingeladen als extra</text>
+    <text x="205" y="673" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">systeemcontext in de prompt</text>
+  </g>
+
+  <!-- Pijl LLM -> Skills -->
+  <path d="M 400 302 L 400 340 L 205 340 L 205 396" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="6,3" marker-end="url(#arrow-blue)"/>
+  <text x="270" y="330" font-size="10" fill="#3b82f6" font-weight="600">activeert skill</text>
+
+  <!-- KOLOM MIDDEN: MCP SERVERS -->
+  <g filter="url(#shadow)">
+    <rect x="375" y="400" width="250" height="280" rx="14" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="375" y="400" width="250" height="40" rx="14" fill="url(#mcp-grad)"/>
+    <rect x="375" y="426" width="250" height="14" fill="url(#mcp-grad)"/>
+    <text x="500" y="425" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">MCP Servers</text>
+    <text x="500" y="460" text-anchor="middle" font-size="11" fill="#065f46">Gestandaardiseerd protocol voor</text>
+    <text x="500" y="475" text-anchor="middle" font-size="11" fill="#065f46">tools, resources &amp; context</text>
+
+    <!-- MCP items -->
+    <rect x="395" y="495" width="210" height="30" rx="6" fill="#d1fae5"/>
+    <text x="500" y="515" text-anchor="middle" font-size="11" fill="#064e3b">&#x1F4C4;  Context7 (documentatie)</text>
+
+    <rect x="395" y="532" width="210" height="30" rx="6" fill="#d1fae5"/>
+    <text x="500" y="552" text-anchor="middle" font-size="11" fill="#064e3b">&#x270F;&#xFE0F;  Pencil (design editor)</text>
+
+    <rect x="395" y="569" width="210" height="30" rx="6" fill="#d1fae5"/>
+    <text x="500" y="589" text-anchor="middle" font-size="11" fill="#064e3b">&#x1F4BB;  IDE (code uitvoeren)</text>
+
+    <rect x="395" y="606" width="210" height="30" rx="6" fill="#d1fae5"/>
+    <text x="500" y="626" text-anchor="middle" font-size="11" fill="#064e3b">&#x2795;  Eigen servers toevoegbaar</text>
+
+    <text x="500" y="660" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Communicatie via JSON-RPC</text>
+    <text x="500" y="673" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">over stdin/stdout of HTTP</text>
+  </g>
+
+  <!-- Pijl LLM -> MCP -->
+  <line x1="500" y1="302" x2="500" y2="396" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="515" y="380" font-size="10" fill="#10b981" font-weight="600">tool call</text>
+
+  <!-- KOLOM RECHTS: INGEBOUWDE TOOLS -->
+  <g filter="url(#shadow)">
+    <rect x="670" y="400" width="250" height="280" rx="14" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
+    <rect x="670" y="400" width="250" height="40" rx="14" fill="url(#tool-grad)"/>
+    <rect x="670" y="426" width="250" height="14" fill="url(#tool-grad)"/>
+    <text x="795" y="425" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">Ingebouwde Tools</text>
+    <text x="795" y="460" text-anchor="middle" font-size="11" fill="#78350f">Directe acties op het lokale</text>
+    <text x="795" y="475" text-anchor="middle" font-size="11" fill="#78350f">bestandssysteem &amp; shell</text>
+
+    <!-- Tool items -->
+    <rect x="690" y="495" width="210" height="30" rx="6" fill="#fef3c7"/>
+    <text x="795" y="515" text-anchor="middle" font-size="11" fill="#713f12">&#x1F4C2;  Read / Write / Edit</text>
+
+    <rect x="690" y="532" width="210" height="30" rx="6" fill="#fef3c7"/>
+    <text x="795" y="552" text-anchor="middle" font-size="11" fill="#713f12">&#x1F50D;  Grep / Glob</text>
+
+    <rect x="690" y="569" width="210" height="30" rx="6" fill="#fef3c7"/>
+    <text x="795" y="589" text-anchor="middle" font-size="11" fill="#713f12">&#x2699;&#xFE0F;  Bash (shell)</text>
+
+    <rect x="690" y="606" width="210" height="30" rx="6" fill="#fef3c7"/>
+    <text x="795" y="626" text-anchor="middle" font-size="11" fill="#713f12">&#x1F310;  WebFetch / WebSearch</text>
+
+    <text x="795" y="660" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Altijd beschikbaar, zonder</text>
+    <text x="795" y="673" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">extra configuratie</text>
+  </g>
+
+  <!-- Pijl LLM -> Tools -->
+  <path d="M 600 302 L 600 340 L 795 340 L 795 396" stroke="#f59e0b" stroke-width="2" fill="none" marker-end="url(#arrow-orange)"/>
+  <text x="720" y="330" font-size="10" fill="#f59e0b" font-weight="600">tool call</text>
+
+  <!-- Legenda onderaan -->
+  <rect x="80" y="695" width="840" height="2" fill="#e2e8f0"/>
+  <text x="105" y="715" font-size="10" fill="#64748b">
+    <tspan font-weight="600" fill="#6366f1">LLM</tspan> redeneert &amp; beslist  |
+    <tspan font-weight="600" fill="#3b82f6">Skills</tspan> = prompt-instructies (kennis/workflow)  |
+    <tspan font-weight="600" fill="#10b981">MCP</tspan> = extern protocol (tools/data)  |
+    <tspan font-weight="600" fill="#f59e0b">Tools</tspan> = ingebouwde acties (bestanden/shell)
+  </text>
+</svg>

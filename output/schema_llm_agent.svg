@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9" fill="#666"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9" fill="#2e7d32"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="520" fill="#f8faf8" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#1a1a1a">Hoe werkt een LLM-agent?</text>
+  <text x="450" y="58" text-anchor="middle" font-size="13" fill="#888">Van werkinstructie naar resultaat — met data en domeinkennis</text>
+
+  <!-- ==================== INPUT COLUMN (left) ==================== -->
+
+  <!-- 1. Werkinstructie -->
+  <rect x="40" y="120" width="200" height="90" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="140" y="150" text-anchor="middle" font-size="22">💬</text>
+  <text x="140" y="172" text-anchor="middle" font-size="13" font-weight="700" fill="#1565c0">Werkinstructie</text>
+  <text x="140" y="190" text-anchor="middle" font-size="10.5" fill="#555">"Maak een kaart van alle</text>
+  <text x="140" y="203" text-anchor="middle" font-size="10.5" fill="#555">bomen in Rotterdam Zuid"</text>
+
+  <!-- 2. Data -->
+  <rect x="40" y="250" width="200" height="90" rx="12" fill="#fff3e0" stroke="#f57c00" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="140" y="280" text-anchor="middle" font-size="22">🗄️</text>
+  <text x="140" y="302" text-anchor="middle" font-size="13" font-weight="700" fill="#e65100">Data</text>
+  <text x="140" y="320" text-anchor="middle" font-size="10.5" fill="#555">GeoJSON, WFS-services,</text>
+  <text x="140" y="333" text-anchor="middle" font-size="10.5" fill="#555">TIR-gebieden, bomenbestanden</text>
+
+  <!-- 3. Agent Skill -->
+  <rect x="40" y="380" width="200" height="90" rx="12" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="140" y="410" text-anchor="middle" font-size="22">🧩</text>
+  <text x="140" y="432" text-anchor="middle" font-size="13" font-weight="700" fill="#1b5e20">Agent Skill</text>
+  <text x="140" y="450" text-anchor="middle" font-size="10.5" fill="#555">Domeinkennis, patronen,</text>
+  <text x="140" y="463" text-anchor="middle" font-size="10.5" fill="#555">databronnen, kaartrecepten</text>
+
+  <!-- ==================== LLM CENTER ==================== -->
+
+  <rect x="330" y="190" width="240" height="180" rx="20" fill="#ffffff" stroke="#1a5632" stroke-width="2.5" filter="url(#shadow)"/>
+  <!-- Inner glow -->
+  <rect x="340" y="200" width="220" height="160" rx="14" fill="#f0faf2" stroke="none"/>
+
+  <text x="450" y="248" text-anchor="middle" font-size="30">🤖</text>
+  <text x="450" y="280" text-anchor="middle" font-size="17" font-weight="800" fill="#1a5632">LLM Agent</text>
+  <text x="450" y="300" text-anchor="middle" font-size="11" fill="#555">Begrijpt de vraag</text>
+  <text x="450" y="316" text-anchor="middle" font-size="11" fill="#555">Combineert kennis + data</text>
+  <text x="450" y="332" text-anchor="middle" font-size="11" fill="#555">Schrijft &amp; voert code uit</text>
+  <text x="450" y="348" text-anchor="middle" font-size="11" fill="#555">Valideert het resultaat</text>
+
+  <!-- ==================== OUTPUT (right) ==================== -->
+
+  <rect x="660" y="170" width="200" height="220" rx="12" fill="#fce4ec" stroke="#c62828" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="760" y="210" text-anchor="middle" font-size="30">📊</text>
+  <text x="760" y="240" text-anchor="middle" font-size="14" font-weight="700" fill="#b71c1c">Resultaat</text>
+
+  <text x="760" y="268" text-anchor="middle" font-size="11" fill="#555">✅  Statische kaart (PNG)</text>
+  <text x="760" y="288" text-anchor="middle" font-size="11" fill="#555">✅  Interactieve kaart (HTML)</text>
+  <text x="760" y="308" text-anchor="middle" font-size="11" fill="#555">✅  Infographic met grafieken</text>
+  <text x="760" y="328" text-anchor="middle" font-size="11" fill="#555">✅  Tabellen &amp; statistieken</text>
+  <text x="760" y="348" text-anchor="middle" font-size="11" fill="#555">✅  Herbruikbaar Python-script</text>
+  <text x="760" y="375" text-anchor="middle" font-size="10" fill="#999">Klaar in minuten,</text>
+  <text x="760" y="389" text-anchor="middle" font-size="10" fill="#999">niet in dagen</text>
+
+  <!-- ==================== ARROWS ==================== -->
+
+  <!-- Werkinstructie → LLM -->
+  <line x1="240" y1="165" x2="328" y2="240" stroke="#1976d2" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="275" y="190" text-anchor="middle" font-size="9" fill="#1976d2" font-weight="600">vraag</text>
+
+  <!-- Data → LLM -->
+  <line x1="240" y1="290" x2="328" y2="285" stroke="#f57c00" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="284" y="278" text-anchor="middle" font-size="9" fill="#f57c00" font-weight="600">laadt</text>
+
+  <!-- Skill → LLM -->
+  <line x1="240" y1="415" x2="328" y2="335" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <text x="275" y="388" text-anchor="middle" font-size="9" fill="#2e7d32" font-weight="600">instrueert</text>
+
+  <!-- LLM → Output -->
+  <line x1="572" y1="280" x2="658" y2="280" stroke="#c62828" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="615" y="272" text-anchor="middle" font-size="9" fill="#c62828" font-weight="600">genereert</text>
+
+  <!-- ==================== Bottom legend ==================== -->
+  <rect x="120" y="490" width="660" height="22" rx="4" fill="none"/>
+  <circle cx="160" cy="501" r="5" fill="#1976d2"/>
+  <text x="170" y="505" font-size="10" fill="#666">Gebruiker geeft opdracht</text>
+  <circle cx="340" cy="501" r="5" fill="#f57c00"/>
+  <text x="350" y="505" font-size="10" fill="#666">Beschikbare datasets</text>
+  <circle cx="500" cy="501" r="5" fill="#2e7d32"/>
+  <text x="510" y="505" font-size="10" fill="#666">Domeinkennis (skill)</text>
+  <circle cx="660" cy="501" r="5" fill="#c62828"/>
+  <text x="670" y="505" font-size="10" fill="#666">Kant-en-klaar product</text>
+</svg>
