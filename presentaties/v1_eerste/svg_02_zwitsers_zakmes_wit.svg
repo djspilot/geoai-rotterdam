@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Het Zwitsers zakmes uitgelegd">
+  <title>De tool: ons Zwitsers zakmes</title>
+
+  <rect width="1200" height="675" fill="#ffffff"/>
+
+  <text x="600" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#0f172a">De tool: ons Zwitsers zakmes</text>
+  <text x="600" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#475569">Één programma op de laptop — jij vraagt, AI doet de rest</text>
+
+  <!-- Card 1: VS Code -->
+  <rect x="60" y="138" width="310" height="350" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="60" y="138" width="310" height="58" rx="18" fill="#e2e8f0"/>
+  <rect x="60" y="166" width="310" height="30" fill="#e2e8f0"/>
+  <text x="215" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#64748b">HET PROGRAMMA</text>
+
+  <text x="215" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#1e293b">VS Code</text>
+
+  <text x="215" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#475569">Een scherm op je laptop</text>
+  <text x="215" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#475569">Zoals Word of Excel —</text>
+  <text x="215" y="348" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#475569">maar dan voor AI</text>
+
+  <text x="215" y="444" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8">Het mes</text>
+  <text x="215" y="466" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8">(de omgeving)</text>
+
+  <!-- Arrow 1 -->
+  <line x1="382" y1="313" x2="442" y2="313" stroke="#64748b" stroke-width="3"/>
+  <polygon points="442,305 442,321 458,313" fill="#64748b"/>
+
+  <!-- Card 2: Codex (bigger, center) -->
+  <rect x="468" y="118" width="264" height="390" rx="18" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="468" y="118" width="264" height="58" rx="18" fill="#dbeafe"/>
+  <rect x="468" y="146" width="264" height="30" fill="#dbeafe"/>
+  <text x="600" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#3b82f6">DE AI ERIN</text>
+
+  <text x="600" y="218" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="700" fill="#1e3a8a">Codex</text>
+
+  <text x="600" y="268" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#1d4ed8">Begrijpt gewone taal</text>
+  <text x="600" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#1d4ed8">Haalt de data op</text>
+  <text x="600" y="332" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#1d4ed8">Maakt de kaart</text>
+  <text x="600" y="364" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#1d4ed8">Schrijft het rapport</text>
+
+  <text x="600" y="464" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#60a5fa">De bladen</text>
+  <text x="600" y="486" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#60a5fa">(de AI die werkt)</text>
+
+  <!-- Arrow 2 -->
+  <line x1="742" y1="313" x2="802" y2="313" stroke="#64748b" stroke-width="3"/>
+  <polygon points="802,305 802,321 818,313" fill="#64748b"/>
+
+  <!-- Card 3: Resultaat -->
+  <rect x="828" y="138" width="310" height="350" rx="18" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+  <rect x="828" y="138" width="310" height="58" rx="18" fill="#dcfce7"/>
+  <rect x="828" y="166" width="310" height="30" fill="#dcfce7"/>
+  <text x="983" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#22c55e">WAT JE KRIJGT</text>
+
+  <text x="983" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#14532d">Resultaat</text>
+
+  <text x="983" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#166534">Geo kaart</text>
+  <text x="983" y="328" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#166534">Rapport</text>
+  <text x="983" y="366" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#166534">Dashboard</text>
+
+  <text x="983" y="444" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#4ade80">Direct bruikbaar</text>
+  <text x="983" y="466" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#4ade80">voor beslissingen</text>
+
+  <!-- Bottom bar -->
+  <rect x="60" y="560" width="1080" height="62" rx="14" fill="#0f172a"/>
+  <text x="600" y="598" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">Zwitsers zakmes: één ding meenemen — en alles kunnen</text>
+</svg>

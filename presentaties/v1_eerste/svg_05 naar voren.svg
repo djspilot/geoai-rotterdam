@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#ffffff"/>
+
+  <text x="600" y="64" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#0f172a">Wie wil naar voren komen?</text>
+  <text x="600" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#475569">Kies een vraag hieronder — of stel je eigen vraag</text>
+
+  <!-- Prompt card 1 -->
+  <rect x="60" y="138" width="336" height="164" rx="16" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <text x="228" y="174" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#3b82f6">OPTIE 1</text>
+  <text x="228" y="222" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#1e3a8a">Toon alle afvalbakken</text>
+  <text x="228" y="246" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#1e3a8a">in Rotterdam-Zuid,</text>
+  <text x="228" y="270" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#1e3a8a">per buurt</text>
+
+  <!-- Prompt card 2 -->
+  <rect x="432" y="138" width="336" height="164" rx="16" fill="#f0fdf4" stroke="#86efac" stroke-width="2.5"/>
+  <text x="600" y="174" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#22c55e">OPTIE 2</text>
+  <text x="600" y="222" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#166534">Welke buurten hebben</text>
+  <text x="600" y="246" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#166534">te weinig lichtpunten</text>
+  <text x="600" y="270" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#166534">in het centrum?</text>
+
+  <!-- Prompt card 3 -->
+  <rect x="804" y="138" width="336" height="164" rx="16" fill="#fff7ed" stroke="#fdba74" stroke-width="2.5"/>
+  <text x="972" y="174" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#ea580c">OPTIE 3</text>
+  <text x="972" y="222" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#9a3412">Vergelijk groenvoorziening</text>
+  <text x="972" y="246" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#9a3412">Rotterdam-Noord vs</text>
+  <text x="972" y="270" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#9a3412">Rotterdam-Zuid</text>
+
+  <!-- "Or your own question" card -->
+  <rect x="240" y="330" width="720" height="100" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="600" y="372" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#64748b">Of stel je eigen vraag</text>
+  <text x="600" y="402" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#94a3b8">Typ wat jij wilt weten over Rotterdam en we bouwen het samen</text>
+
+  <!-- Big invitation -->
+  <rect x="88" y="460" width="1024" height="100" rx="16" fill="#0f172a"/>
+  <text x="600" y="504" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#ffffff">Kom naar voren — jij stelt de vraag</text>
+  <text x="600" y="538" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#94a3b8">AI bouwt de kaart, live, voor iedereen zichtbaar</text>
+
+  <!-- Bottom note -->
+  <text x="600" y="606" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8">Vragen over wat AI wel en niet kan? Stel ze gerust — we beantwoorden ze graag.</text>
+</svg>

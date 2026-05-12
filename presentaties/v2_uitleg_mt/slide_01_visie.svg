@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#ffffff"/>
+
+  <!-- Title & Subtitle -->
+  <text x="600" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#0f172a">Geo AI: Jouw Expertise, Versneld</text>
+  <text x="600" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#475569">Geen vervanging, maar een krachtige assistent voor de stad</text>
+
+  <!-- Visual: Synergy -->
+  <circle cx="430" cy="340" r="140" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="430" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#64748b">DE EXPERT</text>
+  <text x="430" y="365" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#94a3b8">Kennis van de stad</text>
+  <text x="430" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#94a3b8">Context &amp; Beleid</text>
+
+  <circle cx="770" cy="340" r="140" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="770" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1e40af">DE AI</text>
+  <text x="770" y="365" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#3b82f6">Data-snelheid</text>
+  <text x="770" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#3b82f6">Directe visualisatie</text>
+
+  <!-- Handshake / Intersection area -->
+  <path d="M540 250 A 150 150 0 0 1 660 430 A 150 150 0 0 1 540 250" fill="#dcfce7" opacity="0.6"/>
+  <text x="600" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#166534">GEO AI</text>
+
+  <!-- Bottom bar -->
+  <rect x="100" y="540" width="1000" height="70" rx="14" fill="#0f172a"/>
+  <text x="600" y="582" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">We gebruiken AI om sneller van data naar een goed gesprek te gaan.</text>
+</svg>

@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+
+# Local cache (regeneratable downloads, intermediate files)
+cache/
+
+# Env
+.venv/
+.env

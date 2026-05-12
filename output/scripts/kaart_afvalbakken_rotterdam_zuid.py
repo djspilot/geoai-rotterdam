@@ -1,4 +1,6 @@
-"""Statische kaart: afvalbakken in Rotterdam Zuid."""
+"""Statische kaart: afvalbakken in Rotterdam Zuid (projectstandaard: 8 gebieden)."""
+
+from __future__ import annotations
 
 from pathlib import Path
 
@@ -11,8 +13,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
-DATA = Path("General data/Data")
-OUT = Path("output")
+PROJECT = Path(__file__).resolve().parents[1]
+DATA = PROJECT / "General data" / "Data"
+OUT = PROJECT / "output"
 
 ZUID_GEBIEDEN = [
     "Feijenoord",
@@ -37,6 +40,18 @@ def load_rotterdam(path: Path) -> gpd.GeoDataFrame:
     return gdf if gdf.crs.to_epsg() == 28992 else gdf.to_crs(epsg=28992)
 
 
+def require_paths(paths: list[Path]) -> None:
+    missing = [str(path) for path in paths if not path.exists()]
+    if missing:
+        raise FileNotFoundError(f"Ontbrekende databronnen: {missing}")
+
+
+def require_columns(gdf: gpd.GeoDataFrame, columns: list[str], name: str) -> None:
+    missing = [col for col in columns if col not in gdf.columns]
+    if missing:
+        raise KeyError(f"{name} mist kolommen: {missing}")
+
+
 def add_scale_bar(ax, length_m=2_000):
     """Draw a simple metric scale bar in the lower-left corner."""
     minx, maxx = ax.get_xlim()
@@ -59,21 +74,40 @@ def add_scale_bar(ax, length_m=2_000):
 
 
 def main():
-    gebieden = load_rotterdam(DATA / "tir_gebieden.geojson")
-    afval = load_rotterdam(DATA / "afvalbak.geojson")
+    gebieden_path = DATA / "tir_gebieden.geojson"
+    afval_path = DATA / "afvalbak.geojson"
+    require_paths([gebieden_path, afval_path])
+
+    gebieden = load_rotterdam(gebieden_path)
+    afval = load_rotterdam(afval_path)
+    require_columns(gebieden, ["GEBDNAAM", "geometry"], "tir_gebieden")
+    require_columns(afval, ["WOONPLAATS", "geometry"], "afvalbak")
 
     zuid = gebieden[gebieden["GEBDNAAM"].isin(ZUID_GEBIEDEN)].copy()
     zuid["geometry"] = zuid.geometry.make_valid()
 
+    # Stap 1: attribuutfilter op WOONPLAATS met vaste Zuid-definitie.
+    afval_attr = afval[afval["WOONPLAATS"].isin(ZUID_GEBIEDEN)].copy()
+    print(f"Afvalbakken op attribuutfilter WOONPLAATS: {len(afval_attr)}")
+
+    # Stap 2: ruimtelijke verificatie tegen TIR-gebiedpolygonen.
     afval_zuid = gpd.sjoin(
-        afval,
+        afval_attr,
         zuid[["GEBDNAAM", "geometry"]],
         how="inner",
         predicate="within",
     )
+    keep_cols = [col for col in ["TYPE", "WOONPLAATS", "WIJK", "GEBDNAAM", "geometry"] if col in afval_zuid.columns]
+    afval_zuid = afval_zuid[keep_cols].copy()
 
-    print(f"Afvalbakken in Rotterdam Zuid: {len(afval_zuid)}")
-    print(afval_zuid.groupby("GEBDNAAM").size().sort_values(ascending=False).to_string())
+    print(f"Afvalbakken na ruimtelijke verificatie: {len(afval_zuid)}")
+    per_gebied = afval_zuid.groupby("GEBDNAAM").size().reindex(ZUID_GEBIEDEN, fill_value=0)
+    print(per_gebied.sort_values(ascending=False).to_string())
+
+    OUT.mkdir(exist_ok=True)
+    geojson_out = OUT / "afvalbakken_rotterdam_zuid.geojson"
+    afval_zuid.to_file(geojson_out, driver="GeoJSON")
+    print(f"GeoJSON opgeslagen: {geojson_out}")
 
     fig, ax = plt.subplots(figsize=(14, 12))
 
@@ -144,7 +178,7 @@ def main():
     ax.text(
         0.5,
         0.03,
-        "Bron: Gemeente Rotterdam, SB_Infra/Afvalbak en TIR-gebieden",
+        "Bron: Gemeente Rotterdam, SB_Infra/Afvalbak en TIR-gebieden | Zuid-definitie: 8 TIR-gebieden",
         transform=fig.transFigure,
         ha="center",
         fontsize=9,
@@ -153,7 +187,6 @@ def main():
     ax.set_axis_off()
     plt.tight_layout()
 
-    OUT.mkdir(exist_ok=True)
     out = OUT / "kaart_afvalbakken_rotterdam_zuid.png"
     fig.savefig(out, dpi=150, bbox_inches="tight", facecolor="white")
     plt.close(fig)

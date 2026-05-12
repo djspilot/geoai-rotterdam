@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#ffffff"/>
+
+  <!-- Title & Subtitle -->
+  <text x="600" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#0f172a">Aan de slag: De Menukaart</text>
+  <text x="600" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#475569">Wie uit de zaal durft de eerste casus aan?</text>
+
+  <!-- Volunteer Invitation -->
+  <rect x="100" y="130" width="1000" height="85" rx="16" fill="#fefce8" stroke="#facc15" stroke-width="2"/>
+  <text x="600" y="182" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#854d0e">👉 We zoeken iemand die de AI wil aansturen</text>
+
+  <!-- Column 1: DATA -->
+  <rect x="60" y="240" width="340" height="300" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="230" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#64748b">1. KIES JE DATA</text>
+  <text x="230" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#1e293b">🌳 Bomen (90k+)</text>
+  <text x="230" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#1e293b">🗑️ Afvalbakken</text>
+  <text x="230" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#1e293b">💡 Lichtpunten</text>
+  <text x="230" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#1e293b">📜 Meldingen buitenruimte</text>
+
+  <!-- Column 2: LOCATIE -->
+  <rect x="430" y="240" width="340" height="300" rx="18" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="600" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#3b82f6">2. KIES JE GEBIED</text>
+  <text x="600" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#1d4ed8">📍 Rotterdam-Zuid</text>
+  <text x="600" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#1d4ed8">🏙️ Centrum / Noord</text>
+  <text x="600" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#1d4ed8">🏘️ Jouw eigen wijk</text>
+  <text x="600" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#1d4ed8">🤝 Vergelijk twee wijken</text>
+
+  <!-- Column 3: DOEL -->
+  <rect x="800" y="240" width="340" height="300" rx="18" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+  <text x="970" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#22c55e">3. KIES JE OUTPUT</text>
+  <text x="970" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#166534">🧐 Vind knelpunten</text>
+  <text x="970" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#166534">🗺️ Maak een heatmap</text>
+  <text x="970" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#166534">📊 Cijfers voor rapport</text>
+  <text x="970" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#166534">📈 Dashboard-overzicht</text>
+
+  <!-- Bottom bar -->
+  <rect x="60" y="565" width="1080" height="70" rx="14" fill="#0f172a"/>
+  <text x="600" y="608" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">Jij stelt de vraag — de AI bouwt de beslisinformatie.</text>
+</svg>

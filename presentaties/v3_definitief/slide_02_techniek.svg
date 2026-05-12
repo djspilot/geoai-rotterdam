@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#ffffff"/>
+
+  <!-- Title & Subtitle -->
+  <text x="600" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#0f172a">De Werkplaats: De AI aan het werk zetten</text>
+  <text x="600" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#475569">Onze interface voert de stappen voor ons uit</text>
+
+  <!-- Visual Concept: Interface & AI Execution -->
+  <rect x="100" y="160" width="1000" height="360" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  
+  <!-- The Interface -->
+  <rect x="120" y="180" width="400" height="320" rx="15" fill="#0f172a"/>
+  <text x="320" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">Interface (VS Code)</text>
+  <text x="320" y="270" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#3b82f6">Jij typt je wens...</text>
+  <text x="320" y="310" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#94a3b8">"Maak kaart van bomen..."</text>
+  <text x="320" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#3b82f6">DE AI REAGEERT DIRECT</text>
+
+  <!-- The Execution (Blades/Steps) -->
+  <rect x="560" y="180" width="520" height="320" rx="15" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="820" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1e3a8a">De AI voert uit:</text>
+
+  <rect x="590" y="250" width="460" height="45" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+  <text x="620" y="280" font-family="Arial, sans-serif" font-size="16" fill="#1e40af">📂 Stap 1: Zoekt de juiste databronnen op</text>
+  
+  <rect x="590" y="310" width="460" height="45" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+  <text x="620" y="340" font-family="Arial, sans-serif" font-size="16" fill="#1e40af">🗺️ Stap 2: Bouwt de GIS-kaart en visuals</text>
+
+  <rect x="590" y="370" width="460" height="45" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+  <text x="620" y="400" font-family="Arial, sans-serif" font-size="16" fill="#1e40af">📊 Stap 3: Berekent de sturingscijfers</text>
+
+  <rect x="590" y="430" width="460" height="45" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+  <text x="620" y="460" font-family="Arial, sans-serif" font-size="16" fill="#1e40af">📝 Stap 4: Schrijft het rapportage-concept</text>
+
+  <!-- Bottom bar -->
+  <rect x="100" y="555" width="1000" height="70" rx="14" fill="#0f172a"/>
+  <text x="600" y="598" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">Jij geeft de regie — de interface doet het uitvoerende werk.</text>
+</svg>

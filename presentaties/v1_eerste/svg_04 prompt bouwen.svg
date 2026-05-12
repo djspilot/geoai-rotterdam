@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="600" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#0f172a">Jij bouwt nu een prompt</text>
+  <text x="600" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Kies drie ingrediënten — combineer ze — en de kaart is klaar</text>
+
+  <!-- Column 1: Element -->
+  <rect x="50" y="118" width="310" height="330" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="50" y="118" width="310" height="52" rx="16" fill="#e2e8f0"/>
+  <rect x="50" y="144" width="310" height="26" fill="#e2e8f0"/>
+  <text x="205" y="133" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#64748b">STAP 1 — WAT</text>
+  <text x="205" y="192" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1e293b">Kies een element</text>
+
+  <rect x="74" y="212" width="264" height="48" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="206" y="242" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#1e293b">Afvalbakken</text>
+
+  <rect x="74" y="272" width="264" height="48" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="206" y="302" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#1e293b">Bomen</text>
+
+  <rect x="74" y="332" width="264" height="48" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="206" y="362" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#1e293b">Lichtpunten</text>
+
+  <text x="206" y="424" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">Kies 1 van de 3</text>
+
+  <!-- Plus sign 1 -->
+  <text x="398" y="298" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#cbd5e1">+</text>
+
+  <!-- Column 2: Gebied -->
+  <rect x="445" y="118" width="310" height="330" rx="16" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <rect x="445" y="118" width="310" height="52" rx="16" fill="#dbeafe"/>
+  <rect x="445" y="144" width="310" height="26" fill="#dbeafe"/>
+  <text x="600" y="133" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#3b82f6">STAP 2 — WAAR</text>
+  <text x="600" y="192" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1e3a8a">Kies een gebied</text>
+
+  <rect x="469" y="212" width="264" height="48" rx="10" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="601" y="242" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#1d4ed8">Gemeente Rotterdam</text>
+
+  <rect x="469" y="272" width="264" height="48" rx="10" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="601" y="302" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#1d4ed8">Gebied (bijv. Rotterdam-Zuid)</text>
+
+  <rect x="469" y="332" width="264" height="48" rx="10" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="601" y="362" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#1d4ed8">Buurt (bijv. Afrikaanderwijk)</text>
+
+  <text x="601" y="424" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#60a5fa">Schaalniveau naar keuze</text>
+
+  <!-- Plus sign 2 -->
+  <text x="793" y="298" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#cbd5e1">+</text>
+
+  <!-- Column 3: Vraag -->
+  <rect x="840" y="118" width="310" height="330" rx="16" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+  <rect x="840" y="118" width="310" height="52" rx="16" fill="#dcfce7"/>
+  <rect x="840" y="144" width="310" height="26" fill="#dcfce7"/>
+  <text x="995" y="133" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#22c55e">STAP 3 — WAT WIL JE WETEN</text>
+  <text x="995" y="192" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#14532d">Stel je vraag</text>
+
+  <rect x="864" y="212" width="264" height="48" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="996" y="242" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#166534">Toon alles op de kaart</text>
+
+  <rect x="864" y="272" width="264" height="48" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="996" y="302" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#166534">Vergelijk twee gebieden</text>
+
+  <rect x="864" y="332" width="264" height="48" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="996" y="362" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#166534">Zoek knelpunten / tekorten</text>
+
+  <text x="996" y="424" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#4ade80">Eigen woorden ook prima</text>
+
+  <!-- Combination formula bar -->
+  <rect x="50" y="472" width="1100" height="72" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="600" y="502" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#64748b">Combineer ze tot één zin:</text>
+  <text x="600" y="530" text-anchor="middle" font-family="Courier New, monospace" font-size="18" fill="#1e293b">"[Element] in [Gebied] — [Vraag]"</text>
+
+  <!-- Example -->
+  <rect x="200" y="562" width="800" height="52" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="600" y="585" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Voorbeeld:</text>
+  <text x="600" y="605" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#1e3a8a">"Afvalbakken in Rotterdam-Zuid — waar zitten de tekorten per buurt?"</text>
+</svg>

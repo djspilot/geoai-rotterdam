@@ -1,0 +1,29 @@
+{
+"type": "FeatureCollection",
+"name": "afvalbakken_terbregge",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"features": [
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Veenwortelstraat", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 95494.46510000154376, 440814.904100000858307 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Marie Overeijnderweg", "TYPE": "Puccinibak 100L" }, "geometry": { "type": "Point", "coordinates": [ 94060.716299999505281, 440230.502399999648333 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Galigaanpad", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 94210.475600000470877, 440221.607700001448393 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Galigaanpad", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 94310.133799999952316, 440236.365800000727177 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Galigaanpad", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 94446.127700001001358, 440265.005300000309944 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Galigaanpad", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 94741.474899999797344, 440332.932700000703335 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Air Commodore Geddespad", "TYPE": "Puccinibak 100L" }, "geometry": { "type": "Point", "coordinates": [ 94615.339600000530481, 440265.485700000077486 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Air Commodore Geddespad", "TYPE": "Puccinibak 100L" }, "geometry": { "type": "Point", "coordinates": [ 95331.456700000911951, 440483.541400000452995 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Meerum Terwogtlaan", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 95540.919700000435114, 440638.929699998348951 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Meerum Terwogtlaan", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 95686.936700001358986, 440714.826499998569489 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Meerum Terwogtlaan", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 95697.609099999070168, 440704.036400001496077 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Piet van de Polsingel", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 95427.95549999922514, 440648.221900001168251 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Nico van der Valkpad", "TYPE": "Puccinibak 100L" }, "geometry": { "type": "Point", "coordinates": [ 95279.799400001764297, 440574.814800001680851 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Jan Grijseelspad", "TYPE": "Puccinibak 100L" }, "geometry": { "type": "Point", "coordinates": [ 95010.245099999010563, 440489.75560000166297 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Nico van der Valkweg", "TYPE": "Puccinibak 100L" }, "geometry": { "type": "Point", "coordinates": [ 95278.467799998819828, 440708.243400000035763 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Walstroplein", "TYPE": "Puccinibak 100L" }, "geometry": { "type": "Point", "coordinates": [ 95534.417599998414516, 440757.334300000220537 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Walstroplein", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 95521.943300001323223, 440743.678399998694658 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Walstroplein", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 95508.282999999821186, 440730.45890000090003 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Walstroplein", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 95496.380199998617172, 440715.764499999582767 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Terbregseweg", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 95309.693300001323223, 441158.666400000452995 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Terbregseweg", "TYPE": "Rotterdambak 90L" }, "geometry": { "type": "Point", "coordinates": [ 95342.368599999696016, 441104.948300000280142 ] } },
+{ "type": "Feature", "properties": { "WOONPLAATS": "Hillegersberg-Schiebroek", "WIJK": "Terbregge", "STRAAT": "Air Commodore Geddespad", "TYPE": "Puccinibak 100L" }, "geometry": { "type": "Point", "coordinates": [ 95543.751800000667572, 440583.927400000393391 ] } }
+]
+}
