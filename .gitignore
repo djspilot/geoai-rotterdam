@@ -12,3 +12,4 @@ cache/
 # Env
 .venv/
 .env
+presentaties/
