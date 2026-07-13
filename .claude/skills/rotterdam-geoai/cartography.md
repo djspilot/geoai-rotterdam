@@ -14,13 +14,13 @@ Required reading whenever you make a map. The Rotterdam standard follows the *Ge
 Rules:
 - Nominaal / Ordinaal → categorische kleuren, géén choropleet op ruwe counts.
 - Interval / Ratio → sequentieel of divergerend palet, rekenen mag.
-- Choropleth → **altijd normaliseren** (per km² of per 1000 inwoners). Nooit ruwe totalen per gebied.
+- Choropleet → **altijd normaliseren** (per km² of per 1000 inwoners). Nooit ruwe totalen per gebied.
 
 ## Verplichte kaartelementen
 
 1. **Titel** bovenaan met onderwerp + locatie + (indien bekend) periode.
 2. **Legenda** met alle afgebeelde objecten. Ontbrekende waarden labelen als `"Waarde onbekend"`.
-3. **Schaalstok** in metrische eenheden, afgerond.
+<!-- 3. **Schaalstok** in metrische eenheden, afgerond. -->
 4. **Projectie**: kaarten over NL altijd in **EPSG:28992**. Geen Mercator.
 5. **Laagvolgorde**: punten > lijnen > vlakken (punten bovenaan).
 6. **Labels**: dunne witte halo wanneer ondergrond bont is.
@@ -29,7 +29,7 @@ Rules:
 9. **Normalisatie**: voor choropleet altijd / inwoners of oppervlak.
 10. **Palet**: sequentieel voor oplopend, divergerend voor afwijkingen. Gebruik ColorBrewer.
 
-`rotterdam.style_map(ax, title)` voegt titel, schaalstok en noordpijl in één call toe.
+`rotterdam.style_map(ax, title)` voegt titel en noordpijl in één call toe (schaalstok optioneel via `scalebar=True`, standaard uit).
 
 ## Map type beslisboom
 

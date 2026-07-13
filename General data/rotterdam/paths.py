@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-PROJECT_ROOT = Path("/Users/ds/Werk/GEOAI test")
+# Derived from this file's location so the project is portable across machines:
+# paths.py → rotterdam/ → "General data"/ → PROJECT_ROOT
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 GENERAL_DATA = PROJECT_ROOT / "General data"
 DATA = GENERAL_DATA / "Data"
 OUTPUT = PROJECT_ROOT / "output"

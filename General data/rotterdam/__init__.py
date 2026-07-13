@@ -23,7 +23,7 @@ Module map:
     tir         — filter_to_area, count_per_polygon
     cartography — point_map, choropleth, style_map, finalize_map, save_map, validate_map
     arcgis      — fetch_arcgis_layer (paginated REST download)
-    geocode     — pdok_geocode_rd, cbs_buurten_rotterdam
+    geocode     — pdok_geocode_rd, cbs_buurten_rotterdam, nwb_wegvakken
 
 All functions assume EPSG:28992 (RD New) as the canonical working CRS.
 """
@@ -36,7 +36,7 @@ from .vocab import (
     RD_NEW, WGS84, ROTTERDAM_CENTER_WGS, ROTTERDAM_CENTER_RD,
     ROTTERDAM_ZUID_GEBIEDEN, ROTTERDAM_NOORD_GEBIEDEN,
     ASSET_COLORS, LOCAL_FILES, ARCGIS_BASE, ARCGIS_LAYERS,
-    ASSET_BUURT_FIELD, ASSET_SUBBUURT_FIELD, STYLE,
+    ASSET_BUURT_FIELD, ASSET_SUBBUURT_FIELD, STYLE, nl_getal,
 )
 from .loader import (
     load_rotterdam, load_layer,
@@ -45,12 +45,16 @@ from .loader import (
 from .tir import filter_to_area, count_per_polygon
 from .cartography import (
     setup_headless_matplotlib,
-    style_map, finalize_map, save_map, validate_map,
-    add_scalebar, add_north_arrow, add_pdok_basemap,
+    style_map, finalize_map, fit_figure_to_data, save_map, validate_map,
+    add_scalebar, add_scale_ratio, add_north_arrow, add_pdok_basemap,
+    add_rotterdam_basemap, ROTTERDAM_BASEMAPS,
+    place_legend, add_proportional_legend, add_swatch_legend, add_side_panel,
     point_map, choropleth,
 )
 from .arcgis import fetch_arcgis_layer
-from .geocode import pdok_geocode, pdok_geocode_rd, cbs_buurten_rotterdam
+from .geocode import (
+    pdok_geocode, pdok_geocode_rd, cbs_buurten_rotterdam, nwb_wegvakken,
+)
 
 __all__ = [
     # paths
@@ -60,7 +64,7 @@ __all__ = [
     "RD_NEW", "WGS84", "ROTTERDAM_CENTER_WGS", "ROTTERDAM_CENTER_RD",
     "ROTTERDAM_ZUID_GEBIEDEN", "ROTTERDAM_NOORD_GEBIEDEN",
     "ASSET_COLORS", "LOCAL_FILES", "ARCGIS_BASE", "ARCGIS_LAYERS",
-    "ASSET_BUURT_FIELD", "ASSET_SUBBUURT_FIELD", "STYLE",
+    "ASSET_BUURT_FIELD", "ASSET_SUBBUURT_FIELD", "STYLE", "nl_getal",
     # loader
     "load_rotterdam", "load_layer",
     "require_columns", "require_paths", "safe_centroids",
@@ -68,10 +72,12 @@ __all__ = [
     "filter_to_area", "count_per_polygon",
     # cartography
     "setup_headless_matplotlib",
-    "style_map", "finalize_map", "save_map", "validate_map",
-    "add_scalebar", "add_north_arrow", "add_pdok_basemap",
+    "style_map", "finalize_map", "fit_figure_to_data", "save_map", "validate_map",
+    "add_scalebar", "add_scale_ratio", "add_north_arrow", "add_pdok_basemap",
+    "add_rotterdam_basemap", "ROTTERDAM_BASEMAPS",
+    "place_legend", "add_proportional_legend", "add_swatch_legend", "add_side_panel",
     "point_map", "choropleth",
     # network
     "fetch_arcgis_layer",
-    "pdok_geocode", "pdok_geocode_rd", "cbs_buurten_rotterdam",
+    "pdok_geocode", "pdok_geocode_rd", "cbs_buurten_rotterdam", "nwb_wegvakken",
 ]

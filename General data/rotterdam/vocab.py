@@ -64,6 +64,8 @@ ASSET_BUURT_FIELD = "WIJK"
 ASSET_SUBBUURT_FIELD = "BUURT"
 
 STYLE = {
+    # Preference order across platforms. cartography._apply_rc() filters this
+    # to fonts actually installed, so missing families raise no findfont warnings.
     "font_family": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
     "title_size": 16,
     "title_weight": "bold",
@@ -80,3 +82,15 @@ STYLE = {
     "ax_bg": "#fafafa",
     "separator_color": "#cccccc",
 }
+
+
+def nl_getal(v, decimalen: int = 0) -> str:
+    """Format a number in Dutch/regional notation (invariant 16): thousands
+    separated by a **dot**, decimals by a **comma** — e.g. nl_getal(20028) ->
+    '20.028', nl_getal(1.5, 1) -> '1,5', nl_getal(1234.5, 1) -> '1.234,5'.
+
+    Use this everywhere a number is shown to the reader (labels, legends, texts)
+    instead of `str(v)` or the English default formatting.
+    """
+    s = f"{float(v):,.{decimalen}f}"          # US style: ',' thousands, '.' decimal
+    return s.replace(",", "\x00").replace(".", ",").replace("\x00", ".")

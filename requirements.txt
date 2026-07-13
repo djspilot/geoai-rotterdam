@@ -1,0 +1,11 @@
+geopandas
+shapely
+pandas
+numpy
+matplotlib
+folium
+osmnx
+requests
+contextily
+mapclassify
+plotly

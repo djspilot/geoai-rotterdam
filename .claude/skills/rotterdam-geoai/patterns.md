@@ -3,7 +3,7 @@
 Each block assumes:
 
 ```python
-import sys; sys.path.insert(0, "/Users/ds/Werk/GEOAI test/General data")
+import sys; sys.path.insert(0, r"C:\Users\134020\Downloads\geoai-rotterdam-main\General data")
 from rotterdam import *  # constants + helpers
 import matplotlib.pyplot as plt
 ```
@@ -117,7 +117,7 @@ finalize_map(fig, source="Obsurv via diensten.rotterdam.nl"); save_map(fig, "afv
 4. Valideren tegen richtlijnen.
 
 ```python
-import sys; sys.path.insert(0, "/Users/ds/Werk/GEOAI test/General data")
+import sys; sys.path.insert(0, r"C:\Users\134020\Downloads\geoai-rotterdam-main\General data")
 from rotterdam import *
 import matplotlib.pyplot as plt
 
@@ -167,7 +167,7 @@ if warns: print("\nWaarschuwingen:", *warns, sep="\n  - ")
 4. Output naar PNG geschikt voor printen.
 
 ```python
-import sys; sys.path.insert(0, "/Users/ds/Werk/GEOAI test/General data")
+import sys; sys.path.insert(0, r"C:\Users\134020\Downloads\geoai-rotterdam-main\General data")
 from rotterdam import *
 import matplotlib.pyplot as plt
 from datetime import date
@@ -238,7 +238,7 @@ Agent stap 1 (MCP, in dialoog):
 
 ```python
 # Agent stap 2 (Python, reproduceerbaar):
-import sys; sys.path.insert(0, "/Users/ds/Werk/GEOAI test/General data")
+import sys; sys.path.insert(0, r"C:\Users\134020\Downloads\geoai-rotterdam-main\General data")
 from rotterdam import *
 from shapely.geometry import Point
 
@@ -288,7 +288,7 @@ Agent stap 1 (MCP):
 
 ```python
 # Agent stap 2 (Python):
-import sys; sys.path.insert(0, "/Users/ds/Werk/GEOAI test/General data")
+import sys; sys.path.insert(0, r"C:\Users\134020\Downloads\geoai-rotterdam-main\General data")
 from rotterdam import *
 import matplotlib.pyplot as plt
 

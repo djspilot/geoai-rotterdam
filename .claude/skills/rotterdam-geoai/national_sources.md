@@ -60,6 +60,23 @@ Basisregistratie Grootschalige Topografie. Centimeter-precise topographic featur
 
 - **WMTS basemap**: `https://service.pdok.nl/brt/achtergrondkaart/wmts/v2_0` (best static-map basemap for NL)
 - Layers: `standaard`, `grijs`, `pastel`, `water`.
+- ⚠️ For contextily use the **Web-Mercator** provider `cx.providers.nlmaps.<layer>` (same kaart, EPSG:3857) — see recipe below. A raw `tilematrixset=EPSG:28992` WMTS URL does NOT work with contextily (its tile math is Web Mercator). `rotterdam.add_pdok_basemap(ax, layer=...)` wraps the nlmaps provider correctly.
+
+## Basiskaart Rotterdam — municipal basemap (Gemeente Rotterdam)
+
+The house-style Rotterdam basemap, served from the Rotterdam ArcGIS server (folder `SB_BI`). Use `rotterdam.add_rotterdam_basemap(ax, layer=...)` — it fetches the tiles and mosaics them onto the RD axes.
+
+- **Grijs** (neutral grey): `https://diensten.rotterdam.nl/arcgis/rest/services/SB_BI/Basiskaart_BI_Grijs/MapServer/WMTS`
+- **Kleur** (colour): `.../SB_BI/Basiskaart_BI_Kleur/MapServer`
+- **World** (colour + buurtnamen): `.../SB_BI/Basiskaart_BI_World/MapServer`
+- **Luchtfoto** (actueel, tot ~5 cm/px): `.../LUCHTFOTO/luchtfoto_actueel/MapServer` (folder `LUCHTFOTO`)
+- ⚠️ **CRS matters**: `Grijs`/`Kleur`/`Luchtfoto` are tile-cached in **EPSG:28992 (RD)** → contextily can't use them, so `add_rotterdam_basemap` pulls the ArcGIS REST `/tile/{level}/{row}/{col}` tiles onto the RD axes directly (exact alignment, no reprojection). `World` is cached in **EPSG:3857** → usable via contextily. Both need SSL verification disabled (the `diensten.rotterdam.nl` cert trips default verification, same as `arcgis.py`).
+
+```python
+from rotterdam import add_rotterdam_basemap
+# after plotting RD layers, before add_scalebar:
+add_rotterdam_basemap(ax, layer="grijs")   # of "kleur" / "luchtfoto"
+```
 
 ## Luchtfoto — Aerial Imagery
 
@@ -109,6 +126,22 @@ When you need POIs, paths, or features absent from BGT/Obsurv.
 - **Overpass API**: `https://overpass-api.de/api/interpreter`
 - Use `[out:json][bbox]` and a small Overpass-QL query — never download the planet.
 
+## NWB — Nationaal Wegenbestand (Rijkswaterstaat, via PDOK)
+
+Het gezaghebbende landelijke **wegennet** (Rijkswaterstaat). Gebruik dit voor de
+officiële weggeometrie/naamgeving; voor maximumsnelheid heeft NWB géén veld —
+neem daarvoor OSM (`maxspeed`).
+
+- **WFS**: `https://service.pdok.nl/rws/nationaal-wegenbestand-wegen/wfs/v1_0`
+  (feature types `nwbwegen:wegvakken`, `nwbwegen:hectopunten`).
+- **WMS**: `https://service.pdok.nl/rws/nationaal-wegenbestand-wegen/wms/v1_0`.
+- Default CRS **EPSG:28992**, output o.a. `application/json; subtype=geojson`.
+  De WFS pagineert per 1000 (loop met `startIndex`).
+- **Helper**: `nwb_wegvakken(bbox)` uit `rotterdam` (bbox in RD; gepagineerd → GeoDataFrame).
+- Nuttige velden: `sttNaam`, `wegnummer`, `wegbehnaam`, `bstCode` (baansoort:
+  RB/FP/VP/BUS…), `frc`, `fow`. `wegtype`/`wgtypeOms` is leeg voor gemeentewegen.
+- Aparte service voor vaarwegen: `.../nationaal-wegenbestand-vaarwegen/wfs/v1_0`.
+
 ## NDW — Traffic Data
 
 > **MCP**: NL-GOV-MCP NDW-connector (discovery/metadata).
@@ -135,17 +168,15 @@ National Data Warehouse for traffic. Real-time traffic counts, incidents, parkin
 
 ## Practical Recipes
 
-**Pick basemap for a static matplotlib map**:
+**Pick basemap for a static matplotlib map** (axes in EPSG:28992):
 
 ```python
-import contextily as cx
-# After plotting RD-projected layers on ax:
-cx.add_basemap(ax, crs="EPSG:28992",
-               source="https://service.pdok.nl/brt/achtergrondkaart/wmts/v2_0?"
-                      "layer=grijs&style=default&tilematrixset=EPSG:28992"
-                      "&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image/png"
-                      "&TileMatrix={z}&TileCol={x}&TileRow={y}")
+from rotterdam import add_rotterdam_basemap, add_pdok_basemap
+add_rotterdam_basemap(ax, layer="grijs")   # Rotterdamse huisstijl (RD-tegels, exact)
+add_pdok_basemap(ax, layer="grijs")        # landelijke PDOK BRT (nlmaps/EPSG:3857)
 ```
+
+> Beide functies werken. `add_pdok_basemap` gebruikt intern `cx.providers.nlmaps.<layer>` (EPSG:3857) — NIET de 28992-WMTS-URL, want contextily rekent tile-indices in Web Mercator. Wil je contextily rechtstreeks: `cx.add_basemap(ax, crs="EPSG:28992", source=cx.providers.nlmaps.grijs)`.
 
 **Normalize a Rotterdam choropleth by population**:
 

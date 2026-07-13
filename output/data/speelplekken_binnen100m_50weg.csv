@@ -1,0 +1,524 @@
+﻿SPEELPLEKCODE,STRAAT,WIJK,DOELGROEP,afstand_m
+10570,Colosseumweg,Hillesluis,Sport- en Speel,0.0
+10840,Charloisse Hoofd,Oud Charlois,Sport- en Speel,0.0
+12225,Leuvehoofd,Stadsdriehoek,Centrale Ontmoe,0.0
+11734,Roel Langerakpark,Blijdorpsepolder,Centrale Ontmoe,0.3
+11915,Lodijk,Groot IJsselmonde,Pocketpark,0.4
+11453,Burgemeester Bosplein,Overschie,Pocketpark,1.6
+12221,Bolwerk,Stadsdriehoek,Speelplekje,1.6
+12059,Spaanseweg,Oud Mathenesse,Sport- en Speel,2.4
+1085,Finnjolstraat,Oud IJsselmonde,Sport- en Speel,2.5
+12233,Karel Doormanhof,Cool,Speelplekje,3.7
+10382,Brielselaan,Tarwewijk,Speelplekje,3.7
+11925,Melanchtonweg,Schiebroek,Speelplekje,3.7
+10565,Van Blommesteynstraat,Oud Charlois,Sport- en Speel,4.0
+11702,Anatole Franceplaats,Ommoord,Speelplekje,4.3
+429,Weimansweg,Vreewijk,,4.5
+11943,Anatole Franceplaats,Ommoord,Pocketpark,4.9
+11824,Westblaak,Cool,Sport- en Speel,5.6
+581,Mercatorweg,Dorp,Sport- en Speel,5.8
+10770,Beverwaardseweg,Oud IJsselmonde,Pocketpark,6.2
+11074,Brielselaan,Tarwewijk,Urbansport,6.6
+1056,Soetendaalsestraat,Oude Noorden,Sport- en Speel,6.7
+12290,Adriaan Volkerlaan,Groot IJsselmonde,Centrale Ontmoe,7.2
+409,Donkerslootstraat,Hillesluis,Speelplekje,7.2
+11562,Trompstraat,Rozenburg,Centrale Ontmoe,7.3
+11918,Willem Ruyslaan,Kralingen West,Sport- en Speel,7.4
+224,Venkelweg,Hoogvliet Noord,Sport- en Speel,7.5
+12219,Bovendijk,Zestienhoven,Sport- en Speel,7.6
+11129,Groenezoom,Vreewijk,Sport- en Speel,7.8
+10200,Rochussenstraat,Middelland,Sport- en Speel,7.8
+10922,Albert Camusplaats,Ommoord,Speelplekje,7.9
+10170,Middenhagen,Groot IJsselmonde,Sport- en Speel,7.9
+10314,Robert Owenstraat,Hillegersberg Zuid,Restruimte,8.7
+1408,Josephstraat,Oude Westen,Sport- en Speel,8.8
+12185,Beekweg,Zestienhoven,Centrale Ontmoe,8.8
+11673,Slingeplein,Zuidwijk,Sport- en Speel,9.0
+11337,Spuikade,Oud Charlois,Sport- en Speel,9.2
+10563,Spuikade,Oud Charlois,Sport- en Speel,9.3
+129,Henk Miliusstraat,Hoogvliet Zuid,Sport- en Speel,10.1
+10480,Vaandrigstraat,Oud Crooswijk,Speelplekje,10.2
+10900,Prins Hendrikweg,Dorp,Speelplekje,10.2
+10866,Feijenoordstraat,Noordereiland,Centrale Ontmoe,10.5
+12093,Korte Stadionweg,Feijenoord,Sport- en Speel,10.9
+11766,Terbregse Rechter Rottekade,Molenlaankwartier,Centrale Ontmoe,11.0
+957,Bilderdijkstraat,Spangen,Speelplekje,11.0
+1200,Terwenakker,Stadsdriehoek,Restruimte,11.2
+11959,Batterijstraat,Vreewijk,Restruimte,11.3
+438,Colosseumweg,Hillesluis,Sport- en Speel,11.5
+556,Karapad,Heijplaat,,11.8
+11345,Rochussenstraat,Oude Westen,Speelplekje,11.9
+10312,Snellinckstraat,Middelland,Restruimte,12.1
+10442,Schulpplein,Oud Charlois,Sport- en Speel,12.4
+743,Kapelplein,Delfshaven,Sport- en Speel,12.5
+10993,Prinses Margrietlaan,Hillegersberg Zuid,Sport- en Speel,12.9
+421,Hillekopplein,Afrikaanderwijk,Sport- en Speel,13.0
+11358,Heer Vrankestraat,Oude Noorden,Sport- en Speel,13.1
+513,Sint-Janshaven,Oud Charlois,Centrale Ontmoe,13.1
+1355,Cornelis Kraanstraat,s Gravenland,Sport- en Speel,13.8
+1104,Nieuwe Crooswijkseweg,Nieuw Crooswijk,Pocketpark,14.0
+11276,Koning Willem III weg,Strand en Duin,Speelplekje,14.0
+1055,Heer Vrankestraat,Oude Noorden,Speelplekje,14.0
+1212,Wollefoppenweg,Ommoord,Centrale Ontmoe,14.2
+12087,Piet Cottaarstraat,Overschie,Sport- en Speel,14.3
+603,Rosestraat,Kop van Zuid - Entrepot,Centrale Ontmoe,14.9
+12258,Middenbaan-Zuid,Hoogvliet Zuid,Sport- en Speel,15.1
+11889,Vasteland,Stadsdriehoek,Sport- en Speel,15.3
+1010,Tamboerstraat,Oud Crooswijk,Speelplekje,15.6
+11977,Schiedamsesingel,Cool,Speelplekje,15.7
+597,Dirk van den Burgweg,Dorp,Sport- en Speel,16.0
+897,Brigantijnstraat,Oud Mathenesse,Speelplekje,16.2
+12268,Leen van der Houwenstraat,Strand en Duin,Sport- en Speel,16.2
+12260,Busken Huetstraat,Spangen,Pocketpark,16.5
+11989,Einsteinplaats,Ommoord,Sport- en Speel,17.3
+12277,Wil Vinjestraat,Strand en Duin,Sport- en Speel,17.6
+10122,Struikheide,Ommoord,Sport- en Speel,17.9
+11969,Spinozapark,Lombardijen,Pocketpark,18.0
+11485,Colosseumweg,Hillesluis,Speelplekje,18.8
+793,De Tempelstraat,Liskwartier,Sport- en Speel,18.9
+275,Rozenlaan,Hillegersberg Zuid,Sport- en Speel,19.1
+10906,Hein Willemsestraat,s Gravenland,Speelplekje,19.1
+11923,Kosboulevard,Nesselande,Sport- en Speel,20.9
+10330,Habsburgstraat,Oud Charlois,Speelplekje,21.0
+10861,Zuiderparkweg,Zuidwijk,Sport- en Speel,21.0
+376,Blazoenstraat,Bloemhof,Sport- en Speel,21.1
+11751,Spinozapark,Lombardijen,Pocketpark,21.1
+11961,Korte Hillestraat,Afrikaanderwijk,Sport- en Speel,21.2
+11135,Volmarijnstraat,Middelland,Restruimte,21.4
+10518,West-Varkenoordseweg,Hillesluis,Speelplekje,21.5
+263,Burgemeester Wijnaendtslaan,Kleinpolder,Speelplekje,21.8
+10957,Duivenvoordestraat,Middelland,Sport- en Speel,21.9
+11891,Spinozapark,Lombardijen,Speelplekje,22.1
+11687,Cornelis Heinricksestraat,Groot IJsselmonde,Sport- en Speel,22.4
+12243,Rosestraat,Kop van Zuid - Entrepot,Sport- en Speel,22.5
+326,Burgemeester Hoffmanplein,Noordereiland,Sport- en Speel,22.6
+415,West-Varkenoordseweg,Hillesluis,Pocketpark,22.8
+907,Oudedijk,Kralingen West,Sport- en Speel,23.1
+10674,Noorderlaan,Landzicht,Pocketpark,23.1
+799,Heer Vrankestraat,Oude Noorden,Pocketpark,23.1
+997,Nieuwe Boezemstraat,Oud Crooswijk,Sport- en Speel,23.6
+11921,Marcel Duchampplein,Nesselande,Centrale Ontmoe,23.7
+898,Pinasplein,Oud Mathenesse,Sport- en Speel,24.2
+832,Schiekade,Stadsdriehoek,,24.6
+10696,Aveling,Hoogvliet Zuid,Sport- en Speel,24.8
+256,Welhoeksedijk,Hoogvliet Zuid,Sport- en Speel,25.1
+11810,Dreischorstraat,Pendrecht,Pocketpark,25.1
+12251,Gashouderstraat,Kralingen West,Sport- en Speel,25.2
+11379,Sint-Jacobsplaats,Stadsdriehoek,Speelplekje,25.2
+11047,Donkerslootstraat,Hillesluis,Restruimte,25.2
+425,Posthumalaan,Kop van Zuid,,25.3
+11965,West-Varkenoordseweg,Hillesluis,Restruimte,25.6
+10947,Stroveer,Oude Noorden,Sport- en Speel,25.6
+11435,Hoogvlietsekerkweg,Hoogvliet Noord,Sport- en Speel,25.7
+1441,Valkenstraat,Stadsdriehoek,Sport- en Speel,25.8
+11633,Hazelaarweg,Schiebroek,Sport- en Speel,25.8
+11256,Arolsenplein,Hillegersberg Zuid,Sport- en Speel,25.9
+1417,Tom Mandershof,Cool,Speelplekje,26.1
+11425,Spijkenissestraat,Tarwewijk,Speelplek,26.7
+331,Koopvaardijhof,Noordereiland,Sport- en Speel,27.0
+796,Van Goensstraat,Blijdorp,Pocketpark,27.4
+10936,Schiehaven,Schiemond,Centrale Ontmoe,27.4
+12021,Schieveenstraat,Liskwartier,Restruimte,27.8
+11764,Werkhoefstraat,Nieuwe Westen,Sport- en Speel,28.0
+10106,Honingbijstraat,Kralingen West,Sport- en Speel,28.0
+1103,Rusthoflaan,Nieuw Crooswijk,Sport- en Speel,28.2
+215,Kardoenhof,Hoogvliet Noord,Sport- en Speel,28.5
+12245,Lange Hilleweg,Bloemhof,Speelplekje,28.6
+11097,Lindesingel,Schiebroek,Pocketpark,28.9
+1062,Linker Rottekadehof,Rubroek,Sport- en Speel,29.0
+1071,Haverlandstraat,Rubroek,Sport- en Speel,29.0
+1170,Hopklaver,Ommoord,Sport- en Speel,29.4
+10961,Pluizenmeer,Zevenkamp,Sport- en Speel,29.6
+11413,Stationsweg,Strand en Duin,Sport- en Speel,29.7
+863,Leendert Butterstraat,Kralingen Oost,Speelplekje,29.8
+11981,Schiedamsesingel,Cool,Pocketpark,29.8
+12201,Beekweg,Zestienhoven,Centrale Ontmoe,29.9
+1020,Baljuwplein,Provenierswijk,Pocketpark,30.0
+1460,Ada Lovelacestraat,Zestienhoven,,30.1
+11688,Olympiaweg,Groot IJsselmonde,Sport- en Speel,30.1
+11458,Brielselaan,Tarwewijk,Restruimte,30.5
+525,Karel de Stouteplein,Oud Charlois,Centrale Ontmoe,30.9
+1051,Hendrik de Keyserstraat,Oud Crooswijk,Sport- en Speel,30.9
+11239,Wevershoekstraat,Zuidplein,Sport- en Speel,31.1
+11219,Dadeltuin,Groot IJsselmonde,Sport- en Speel,31.3
+664,Oostmaaslaan,Struisenburg,Speelplekje,31.4
+1324,Jacob Vaillantpad,s Gravenland,Speelplekje,31.5
+931,Mathenesserweg,Spangen,Centrale Ontmoe,31.7
+10462,Marthalaan,Hoogvliet Noord,Speelplekje,31.7
+10035,Heindijk,Groot IJsselmonde,Pocketpark,32.8
+716,Aegidiusstraat,Kralingen West,Pocketpark,33.2
+12286,Adriaan Volkerlaan,Groot IJsselmonde,Restruimte,33.3
+11075,Achterdijk,Landzicht,Speelplekje,33.3
+11719,Koolwitjespad,Hoogvliet Zuid,Speelplekje,33.4
+11165,Charloisse Hoofd,Oud Charlois,Pocketpark,33.7
+1514,Dwarsdijk,Groot IJsselmonde,Sport- en Speel,33.8
+11684,Landkaartjehof,Hoogvliet Zuid,Speelplek,34.5
+871,Kedoestraat,Schiemond,Sport- en Speel,34.9
+12264,Sint-Jobsweg,Schiemond,Pocketpark,35.1
+11718,Zilvervlekhof,Hoogvliet Zuid,Speelplekje,35.2
+12001,Bergwegplantsoen,Liskwartier,Sport- en Speel,35.3
+11279,Carel Willinksingel,Nesselande,Sport- en Speel,35.9
+694,Oostmaaslaan,Struisenburg,Sport- en Speel,36.1
+12095,Langeweg,Strand en Duin,Sport- en Speel,36.4
+12163,De Groot Stiffryplantsoen,Kleinpolder,Sport- en Speel,36.6
+816,Lisplein,Liskwartier,Restruimte,36.7
+1088,Vosbergendam,Beverwaard,Sport- en Speel,36.9
+729,Lelyboskade,Delfshaven,Sport- en Speel,36.9
+11696,Groene Kruisweg,Hoogvliet Noord,Speelplekje,37.2
+428,Kaapstraat,Afrikaanderwijk,Sport- en Speel,37.4
+11528,Korianderplaats,Rozenburg,Speelplekje,37.6
+10730,Plantagelaan,De Esch,Sport- en Speel,37.7
+10078,Dijkstraat,Kralingen West,Sport- en Speel,37.9
+11217,Zuiderpark,Zuiderpark,Centrale Ontmoe,38.2
+211,Kaneelhof,Hoogvliet Noord,Pocketpark,38.2
+1094,Prattenburgplein,Beverwaard,Pocketpark,38.3
+825,Schout Heynricstraat,Agniesebuurt,Sport- en Speel,38.5
+11175,Briandplaats,Ommoord,Speelplekje,39.0
+886,Kedoestraat,Schiemond,Sport- en Speel,39.1
+388,Zaailand,Vreewijk,Pocketpark,39.1
+12134,Wessel Gansfortweg,Hillegersberg Zuid,Restruimte,39.2
+12164,Burgemeester Noletlaan,Kleinpolder,Sport- en Speel,39.2
+10777,Willem de Zwijgerstraat,Overschie,,39.4
+11073,Schotelmos,Ommoord,Speelplekje,39.6
+1498,Grote Kreek,Groot IJsselmonde,Sport- en Speel,40.1
+373,Draaischijf,Kop van Zuid - Entrepot,Sport- en Speel,40.1
+67,Wilgenplaspark,Schiebroek,Sport- en Speel,40.2
+11481,Grift,Vreewijk,Sport- en Speel,40.7
+1063,Oudaenstraat,Rubroek,Sport- en Speel,41.1
+309,Roozandstraat,Pernis,Sport- en Speel,41.2
+10124,Ommoordse Veld,Ommoord,Sport- en Speel,41.3
+882,Kedoestraat,Schiemond,Speelplekje,41.3
+10850,Roel Langerakweg,Blijdorpsepolder,Centrale Ontmoe,41.7
+10848,Hudsonplein,Bospolder,Speelplekje,41.7
+11963,Hekendorpstraat,Groot IJsselmonde,Sport- en Speel,41.9
+12179,Fioringras,Ommoord,Sport- en Speel,42.0
+790,Schimmelpenninckstraat,Blijdorp,Speelplekje,42.1
+12197,Beekweg,Zestienhoven,Pocketpark,42.4
+1007,Boezemstraat,Oud Crooswijk,Sport- en Speel,42.5
+1414,Gouvernestraat,Oude Westen,Speelplekje,42.6
+11880,Hilledijk,Afrikaanderwijk,Sport- en Speel,42.6
+723,Kapiteinsbuurt,Delfshaven,Sport- en Speel,42.7
+11489,Arthur Cravanhof,Nesselande,Sport- en Speel,43.1
+1047,Duivenvoordestraat,Middelland,Pocketpark,43.3
+733,Compagniestraat,Delfshaven,Pocketpark,43.4
+596,Prins der Nederlandenstraat,Dorp,Sport- en Speel,43.8
+414,Immobilialaan,Hillesluis,Speelplekje,44.2
+154,Meeuwenweide,Hoogvliet Zuid,Speelplekje,44.4
+514,Kerkegrient,Oud Charlois,Speelplekje,44.5
+1022,Van der Sluysstraat,Provenierswijk,speelplek,44.6
+515,Dokhavenpark,Oud Charlois,Centrale Ontmoe,44.7
+1222,Bolkruid,Ommoord,Sport- en Speel,44.7
+592,Ponystraat,Dorp,Pocketpark,44.8
+761,Kuipersstraat,Bospolder,Sport- en Speel,45.0
+432,Schiedamsesingel,Cool,Sport- en Speel,45.1
+1025,Keurmeesterstraat,Oud Crooswijk,Speelplekje,45.3
+11163,Park de Hey,Heijplaat,Speelplekje,45.6
+11247,Bovendijk,Zestienhoven,Speelplekje,45.8
+494,Espelo,Zuidwijk,Speelplekje,45.8
+10864,Van Haeftenstraat,Hillesluis,Sport- en Speel,45.9
+11406,Heer Kerstantstraat,Oude Noorden,Pocketpark,46.0
+1488,Mirretuin,Groot IJsselmonde,Speelplekje,46.1
+10459,Boerschaplaan,Oud Crooswijk,Sport- en Speel,46.4
+569,Kapershoekseweg,Hoogvliet Zuid,Speelplekje,46.4
+11317,Diergaardesingel,Oude Westen,Speelplekje,46.7
+11681,Zuiderparkpromenade-Oost,Zuiderpark,Sport- en Speel,46.7
+1400,Juliana van Stolberglaan,Hillegersberg Zuid,Pocketpark,46.8
+782,Van Malsenstraat,Hillesluis,Speelplekje,47.0
+10894,Walravenstraat,Hillesluis,Speelplekje,47.0
+10168,Nassauhaven,Feijenoord,Restruimte,47.0
+10054,Krommenoord,Groot IJsselmonde,Pocketpark,47.2
+1000,Ooienpad,Oud Crooswijk,Speelplekje,47.3
+619,Jan Hoedemakerpad,Hoogvliet Zuid,Speelplekje,47.7
+11980,Schiedamsesingel,Cool,Pocketpark,47.7
+189,Fledermauspad,Hoogvliet Noord,Sport- en Speel,48.2
+1535,Hoge Filterweg,De Esch,Speelplekje,48.7
+336,Stampioenstraat,Feijenoord,Sport- en Speel,49.0
+10924,Overijselsestraat,Hillesluis,Pocketpark,49.1
+11975,Vaanweg,Zuiderpark,Centrale Ontmoe,49.4
+10882,Jan Wilspad,Nesselande,Speelplekje,49.6
+12276,Familie De Marsplein,Vreewijk,speelplek,50.1
+44,Bergsonstraat,Lombardijen,Sport- en Speel,50.1
+11371,Zonnehof,Vreewijk,Speelplekje,50.3
+11271,Meeuwenweide,Hoogvliet Zuid,Sport- en Speel,50.6
+669,Gedempte Zalmhaven,Stadsdriehoek,,50.7
+11870,Waarsmanstraat,Oud IJsselmonde,Pocketpark,50.8
+10984,Walstroplein,Terbregge,Sport- en Speel,50.8
+937,Schinkelstraat,Kralingen West,Sport- en Speel,51.1
+11223,Ruitwagen,Hoogvliet Zuid,Sport- en Speel,51.4
+1019,Baljuwplein,Provenierswijk,Sport- en Speel,51.4
+11848,Kedoestraat,Schiemond,Speelplekje,51.6
+379,Zwederstraat,Bloemhof,Speelplekje,51.8
+12237,Laan van Avant-Garde,Nesselande,Speelplekje,51.9
+11778,Bas Jungeriusstraat,Tarwewijk,Restruimte,52.2
+91,Vloedlijn,Hoogvliet Zuid,Sport- en Speel,52.2
+501,Bornerveld,Zuidwijk,Speelplekje,52.6
+90,Kribbinge,Hoogvliet Zuid,Sport- en Speel,52.8
+1026,Vleeshouwerstraat,Oud Crooswijk,Restruimte,52.8
+291,Cipreslaan,Schiebroek,Restruimte,53.3
+11215,Elfstedenstraat,Groot IJsselmonde,Sport- en Speel,53.4
+1230,Kuinder,Zevenkamp,Pocketpark,53.5
+10092,Talmastraat,Bergpolder,Speelplekje,53.9
+10704,President van Heelstraat,Dorp,Sport- en Speel,54.5
+11395,Abtsweg,Kleinpolder,Pocketpark,54.8
+11151,Reinier Kloegstraat,Hoogvliet Zuid,Speelplekje,54.9
+1185,Theeroos,Ommoord,Pocketpark,55.1
+672,Spijkenissestraat,Tarwewijk,Speelplek,55.3
+401,Janne Bouwensstraat,Hillesluis,Sport- en Speel,55.4
+12303,Pietje Bellstraat,Wielewaal,Speelplekje,55.5
+11483,Korte Stadionweg,Feijenoord,Sport- en Speel,56.0
+880,Kedoestraat,Schiemond,Sport- en Speel,56.0
+12024,Noorderhavenkade,Blijdorp,Pocketpark,56.5
+11259,Marlow Mosshof,Nesselande,Sport- en Speel,56.7
+1396,Sint-Jacobsplaats,Stadsdriehoek,Sport- en Speel,56.9
+12236,Pirandellostraat,Lombardijen,Pocketpark,57.0
+11850,IJsselpad,Rozenburg,Sport- en Speel,57.1
+1432,Van Harmelenstraat,Kleinpolder,Speelplekje,57.2
+11997,Blankenburg,Rozenburg,Pocketpark,57.2
+1184,Theeroos,Ommoord,Speelplekje,57.3
+11700,Ooltgensplaathof,Pendrecht,Sport- en Speel,57.3
+843,Pijnackerplein,Oude Noorden,Sport- en Speel,57.5
+12292,Vaanweg,Zuiderpark,Centrale Ontmoe,57.7
+1307,Kreeftstraat,Oosterflank,Speelplekje,57.8
+10291,Nicolaas Beetsstraat,Spangen,Sport- en Speel,58.8
+1240,Kuinder,Zevenkamp,Pocketpark,58.9
+10148,Zuster Hennekeplein,Provenierswijk,Sport- en Speel,59.3
+1179,Bottelroos,Ommoord,Speelplekje,59.4
+11378,Samuel Mullerstraat,Nieuwe Westen,Restruimte,59.5
+555,Streefkerkstraat,Heijplaat,Speelplekje,59.8
+11171,Spuikade,Oud Charlois,Sport- en Speel,59.9
+917,Jeruzalemstraat,Kralingen West,Pocketpark,60.0
+63,Hoornklaver,Ommoord,Speelplekje,60.2
+10012,Ringersplaats,Kralingen West,Sport- en Speel,60.3
+10074,Van Heukelomstraat,Het Lage Land,Sport- en Speel,60.3
+1087,Dijkmeesterpad,Oud IJsselmonde,Pocketpark,60.4
+12239,Hollandsestraat,Hillesluis,Sport- en Speel,60.7
+1001,Hoendiep,Oud IJsselmonde,Sport- en Speel,60.8
+867,Disselstraat,Vreewijk,Pocketpark,60.8
+290,Wessel Gansfortweg,Schiebroek,Sport- en Speel,61.1
+11265,Volmarijnstraat,Middelland,Restruimte,61.3
+1090,Vosbergendam,Beverwaard,Sport- en Speel,61.3
+10685,Spartapark-Oost,Spangen,Sport- en Speel,61.3
+12079,Wolphaertshof,Oud Charlois,Sport- en Speel,61.4
+420,Van Marumhof,Zestienhoven,Pocketpark,61.5
+147,Henk Sneevlietstraat,Hoogvliet Zuid,Speelplekje,61.6
+958,Spartapark-West,Spangen,Centrale Ontmoe,61.6
+684,Francina Molen,Struisenburg,Speelplekje,61.7
+413,Stichtseplein,Hillesluis,Sport- en Speel,61.7
+11784,Bas Jungeriusstraat,Tarwewijk,Restruimte,61.7
+11782,Bas Jungeriusstraat,Tarwewijk,Restruimte,61.8
+516,Grondherenstraat,Oud Charlois,Pocketpark,61.8
+218,Lavasweg,Hoogvliet Noord,Sport- en Speel,61.9
+10959,Dalenoord,Groot IJsselmonde,Sport- en Speel,62.1
+698,Francina Molen,Struisenburg,Pocketpark,62.1
+810,Delfgaauwstraat,Liskwartier,Restruimte,62.4
+805,Vletstraat,Oude Noorden,Speelplekje,62.5
+11149,Hoekse Brink,Dorp,Sport- en Speel,62.6
+12296,Schuttersweg,Oud Crooswijk,Sport- en Speel,63.0
+10046,Nudenoord,Groot IJsselmonde,Sport- en Speel,63.2
+1086,Schaloenstraat,Oud IJsselmonde,Pocketpark,63.2
+10488,Van der Helmstraat,Het Lage Land,Pocketpark,63.2
+815,doctor Hekmanstraat,Liskwartier,Pocketpark,63.2
+794,Willebrordusplein,Liskwartier,Speelplekje,63.4
+10810,Wilgenstraat,Oude Noorden,Sport- en Speel,63.9
+1204,Trompetbloem,Ommoord,Sport- en Speel,64.1
+402,Pantserstraat,Hillesluis,Sport- en Speel,64.3
+134,Gerard Wilschutpad,Hoogvliet Zuid,Sport- en Speel,64.3
+899,Hogenbanweg,Oud Mathenesse,Centrale Ontmoe,64.3
+10418,Mistralstraat,Oud IJsselmonde,Speelplekje,65.0
+868,Sikkelstraat,Vreewijk,Pocketpark,65.1
+12267,Couwenburg,Stadsdriehoek,Speelplekje,65.2
+1013,Martinplein,Oud Crooswijk,Sport- en Speel,65.2
+1113,Schuttersweg,Oud Crooswijk,Sport- en Speel,65.7
+966,Spiegelstraat,Spangen,Pocketpark,66.0
+939,Vredenoordplein,Kralingen West,Sport- en Speel,66.0
+12053,Velsenluststraat,Middelland,,66.0
+10567,Schilperoortstraat,Oud Charlois,Sport- en Speel,66.0
+452,Meyenhage,Zuidwijk,Pocketpark,66.1
+12177,Boulevard,Rozenburg,Centrale Ontmoe,66.2
+526,Slotboomplein,Oud Charlois,Sport- en Speel,66.2
+895,Italiaansestraat,Oud Mathenesse,Sport- en Speel,66.2
+11065,Walhallalaan,Katendrecht,Sport- en Speel,66.3
+11683,Baarsweg,Hoogvliet Zuid,Pocketpark,66.4
+595,President J.V. Wierdsmastraat,Dorp,Pocketpark,66.5
+10870,Zevenkampse Ring,Zevenkamp,Sport- en Speel,66.9
+11053,Schiemond[WATER],Schiemond,Sport- en Speel,67.2
+10715,Air Commodore Geddespad,Terbregge,Pocketpark,67.6
+11093,Groeneweg,Nesselande,Sport- en Speel,67.7
+10151,Kleinpolderkade,Kleinpolder,Sport- en Speel,67.8
+1513,Pelmolenstraat,Oud IJsselmonde,Sport- en Speel,67.9
+11137,Marinus van Elswijkkade,Nesselande,Pocketpark,68.0
+10430,Glinthorst,Zuidwijk,Sport- en Speel,68.4
+673,Spijkenissestraat,Tarwewijk,Pocketpark,68.6
+10402,Varkenoordsepark,Vreewijk,Speelplekje,68.9
+1337,Van Heukelomstraat,Het Lage Land,Pocketpark,69.2
+11411,Zijdewindestraat,Oude Westen,Sport- en Speel,69.3
+1520,De Graeffstraat,Blijdorp,Pocketpark,69.5
+12175,Beatrice Woodstraat,Nesselande,Sport- en Speel,69.7
+777,Speedwellstraat,Schiemond,Centrale Ontmoe,70.0
+12107,Pinksterweide,Vreewijk,Restruimte,70.3
+1413,Adrianaplein,Oude Westen,Sport- en Speel,70.8
+1477,Kruisherenstraat,Groot IJsselmonde,Sport- en Speel,70.9
+837,Stroveer,Oude Noorden,Sport- en Speel,71.3
+767,Schans,Bospolder,Sport- en Speel,71.4
+11569,Korte Kruisweg,Rozenburg,Sport- en Speel,71.5
+1045,Jan van Avennesstraat,Middelland,Pocketpark,71.5
+858,Zaagmolenkade,Oude Noorden,Sport- en Speel,71.9
+1341,Mertensstraat,Het Lage Land,Pocketpark,72.1
+10072,De Klerkstraat,Het Lage Land,Pocketpark,72.2
+992,Schelfplein,Nieuwe Westen,Sport- en Speel,72.5
+11714,Francis Picabiastraat,Nesselande,Pocketpark,72.6
+521,Van Langendonckstraat,Lombardijen,Speelplekje,72.6
+292,Breitnersingel,Molenlaankwartier,Pocketpark,73.1
+1354,Dirkje Goedhartstraat,s Gravenland,Speelplekje,73.1
+11263,Wim Schuhmacherhof,Nesselande,Sport- en Speel,73.3
+458,Moliereweg,Lombardijen,Pocketpark,73.4
+11313,Rijksweg A20,Terbregge,Centrale Ontmoe,73.7
+900,Poolsestraat,Oud Mathenesse,Centrale Ontmoe,73.8
+1522,Groen van Prinstererstraat,Bergpolder,Speelplekje,74.1
+1265,Koevordermeer,Zevenkamp,Sport- en Speel,74.2
+12205,Frederiksplein,Oud Crooswijk,Sport- en Speel,74.2
+11706,Koninginnelaan,Rozenburg,Restruimte,74.3
+10832,Westerbeekstraat,Hillesluis,Pocketpark,74.3
+11840,Argonautenpark,Hillegersberg Noord,Sport- en Speel,74.4
+1239,Kornet,Zevenkamp,Speelplekje,74.4
+1034,Branco van Dantzigpark,Middelland,Centrale Ontmoe,74.5
+11750,Spinozapark,Lombardijen,Pocketpark,74.5
+10110,Boezemweg,Rubroek,Sport- en Speel,74.5
+11173,Ericaplein,Bloemhof,Sport- en Speel,74.6
+1041,Schietbaanlaan,Middelland,Pocketpark,74.7
+412,Janne Bouwensstraat,Hillesluis,Pocketpark,74.8
+12295,Schuttersweg,Oud Crooswijk,Sport- en Speel,75.1
+1295,Sjanghailaan,Oosterflank,Speelplekje,75.5
+11780,Bas Jungeriusstraat,Tarwewijk,Restruimte,75.6
+11645,Gerard Scholtenstraat,Oude Noorden,Sport- en Speel,75.7
+11783,Bas Jungeriusstraat,Tarwewijk,Restruimte,75.7
+685,Bartholomeus Everardus Molen,Struisenburg,Pocketpark,75.9
+10838,Millinxstraat,Tarwewijk,Sport- en Speel,76.0
+10370,Oleanderplein,Bloemhof,Sport- en Speel,76.0
+1329,Lilian Ngoyiweg,s Gravenland,Sport- en Speel,76.2
+1206,Lentebloem,Ommoord,Pocketpark,76.5
+11860,Pendrechtseweg,Zuiderpark,Sport- en Speel,76.5
+45,Lage Filterweg,De Esch,Sport- en Speel,76.7
+369,Spoorweghaven,Kop van Zuid - Entrepot,Centrale Ontmoe,76.9
+12284,Sommelsdijkstraat,Pendrecht,Sport- en Speel,77.2
+1416,Jacobusstraat,Cool,Sport- en Speel,77.3
+136,Kuipers-Rietbergpad,Hoogvliet Zuid,Speelplekje,77.7
+934,Heer Gillisstraat,Kralingen West,Restruimte,77.9
+11933,Herenwaard,Groot IJsselmonde,Sport- en Speel,77.9
+1162,Weerdesteynstraat,Beverwaard,Pocketpark,78.0
+691,Buizenwerf,Struisenburg,Speelplekje,78.0
+12171,Herman Costerstraat,Afrikaanderwijk,Pocketpark,78.3
+1399,Montessoriweg,Vreewijk,,78.3
+10334,Elsbes,Ommoord,Speelplekje,78.4
+12278,Pilotenpad,Zestienhoven,Speelplekje,78.4
+1115,Crooswijksebocht,Nieuw Crooswijk,Pocketpark,78.6
+11911,Dijkgraafstraat,Oud IJsselmonde,Pocketpark,78.7
+11309,Verschoorstraat,Tarwewijk,Speelplekje,78.8
+968,Louis Couperusstraat,Kralingen West,Pocketpark,79.4
+281,Herastraat,Hillegersberg Noord,Speelplekje,79.5
+11704,Vincent van Goghstraat,Rozenburg,Sport- en Speel,79.5
+10134,Zevenkampse Ring,Zevenkamp,Sport- en Speel,79.6
+12270,Plein 1953,Pendrecht,Sport- en Speel,79.7
+10136,Boreelstraat,Blijdorp,Restruimte,79.7
+10904,Adamshofstraat,Kralingen West,Pocketpark,79.8
+335,Roentgenstraat,Feijenoord,Pocketpark,79.9
+12253,Spaansebocht,Oud Mathenesse,Speelplekje,80.2
+405,Persoonskade,Feijenoord,Sport- en Speel,80.4
+1261,Sneekermeer,Zevenkamp,Sport- en Speel,80.8
+1081,Contenderstraat,Oud IJsselmonde,Speelplekje,80.8
+297,Dirk Swarteveldplein,Schiebroek,Speelplekje,80.8
+1467,Bommelerwaard,Groot IJsselmonde,Sport- en Speel,80.9
+11728,Voorburgstraat,Liskwartier,Speelplekje,81.4
+10953,Stormshoek,Hoogvliet Zuid,Speelplekje,81.6
+1267,Kadoelermeer,Zevenkamp,Sport- en Speel,81.8
+123,Vorsche,Hoogvliet Zuid,Centrale Ontmoe,82.0
+12143,Statenweg,Blijdorp,Centrale Ontmoe,82.1
+12033,Berkenhof,Rozenburg,Speelplekje,82.4
+12141,Wolphaertshof,Oud Charlois,Speelplekje,82.6
+12263,Wandeloordlaan,Nieuw Crooswijk,Sport- en Speel,82.6
+10158,Maeterlinckweg,Lombardijen,Sport- en Speel,82.7
+143,Bijster,Hoogvliet Zuid,Sport- en Speel,82.7
+1260,Bergumermeer,Zevenkamp,Sport- en Speel,83.2
+11999,Prins Hendrikweg,Dorp,Sport- en Speel,83.4
+12200,Baarsweg,Hoogvliet Zuid,Sport- en Speel,83.7
+1216,Blauwgras,Ommoord,Sport- en Speel,84.3
+11724,Louwerslootstraat,Oude Noorden,Sport- en Speel,84.5
+1083,Cadetstraat,Oud IJsselmonde,Speelplekje,84.7
+1313,Vignolastraat,Prinsenland,Speelplekje,84.9
+10526,Hoge Boezem,Kralingen West,Speelplekje,84.9
+346,Socratesstraat,Lombardijen,Sport- en Speel,84.9
+12187,Lodewijk Rogierhof,Zestienhoven,Sport- en Speel,85.2
+10764,Hoge Weije,Hoogvliet Zuid,Restruimte,85.3
+11639,Nachtegaalplein,Oud Charlois,Sport- en Speel,85.5
+10903,Jacominastraat,Afrikaanderwijk,Sport- en Speel,85.6
+10844,Hesselskamp,Zuidwijk,Speelplekje,85.6
+970,Sionstraat,Kralingen West,Sport- en Speel,86.1
+1336,De Klerkstraat,Het Lage Land,Sport- en Speel,86.2
+10902,Joubertstraat,Afrikaanderwijk,Pocketpark,86.3
+1258,Kurt Weillstraat,Zevenkamp,Sport- en Speel,86.5
+10458,Boerschaplaan,Oud Crooswijk,Pocketpark,86.6
+127,Tormentil,Hoogvliet Zuid,Sport- en Speel,86.7
+294,Emmalaan,Hillegersberg Zuid,Pocketpark,86.8
+10082,Dosiostraat,Prinsenland,Speelplekje,87.2
+1373,Sevenaerstraat,Beverwaard,Speelplekje,87.4
+10710,Oudedijk,Kralingen West,Sport- en Speel,87.5
+10004,Tweebosstraat,Afrikaanderwijk,Restruimte,87.5
+11010,Ekster,Hoogvliet Zuid,Restruimte,87.8
+1046,Aleidisstraat,Middelland,Pocketpark,87.9
+1468,Bommelerwaard,Groot IJsselmonde,Pocketpark,87.9
+11919,Herenplaats,Stadsdriehoek,Sport- en Speel,88.0
+10512,Boris Pasternakstraat,Ommoord,Sport- en Speel,88.3
+10108,Weteringstraat,Kralingen West,Sport- en Speel,88.4
+548,Halsterenstraat,Pendrecht,Speelplekje,88.5
+736,Coolhavenstraat,Delfshaven,Speelplekje,88.5
+12089,Sluiskreek,Groot IJsselmonde,Restruimte,88.6
+11641,Aalsdijk,Groot IJsselmonde,,88.8
+812,Schiebroeksestraat,Liskwartier,Restruimte,88.9
+12280,Bree,Hillesluis,Sport- en Speel,89.0
+11049,Robert Baeldestraat,Kralingen West,Sport- en Speel,89.5
+578,Willem Barentsstraat,Dorp,Speelplekje,89.8
+11665,Stormerdijk,Groot IJsselmonde,Speelplekje,90.5
+12083,Eijkmanhof,Zestienhoven,Sport- en Speel,90.6
+1247,Dieze,Zevenkamp,Sport- en Speel,90.6
+12147,Desdemonastraat,Hoogvliet Noord,Centrale Ontmoe,91.0
+995,Jaap Valkhoffplein,Nieuwe Westen,Sport- en Speel,91.0
+11446,Roggeveenstraat,Dorp,Speelplekje,91.3
+10428,Verschoorstraat,Tarwewijk,Sport- en Speel,92.1
+11593,de Plataan,Rozenburg,Sport- en Speel,92.2
+598,Zeeanemoon,Strand en Duin,Restruimte,92.4
+11722,Statenweg,Blijdorp,Sport- en Speel,92.9
+828,Bergstraat,Oude Noorden,Sport- en Speel,93.3
+1238,Harp,Zevenkamp,Pocketpark,94.2
+485,Texelsestraat,Carnisse,Pocketpark,94.3
+10702,Meermanstraat,Rubroek,Sport- en Speel,94.4
+12109,Pascalweg,Lombardijen,Sport- en Speel,94.5
+12288,Adriaan Volkerlaan,Groot IJsselmonde,Restruimte,94.5
+10951,Agata de Bruynkade,Nesselande,Pocketpark,94.6
+1177,Steenbreekvaren,Ommoord,Speelplekje,94.7
+10101,Kralingse Plas,Kralingse Bos,Pocketpark,94.9
+11951,Kosboulevard,Nesselande,Speelplekje,95.8
+10971,Puitstraat,Hoogvliet Zuid,Sport- en Speel,95.8
+117,Wielewaal,Hoogvliet Zuid,Sport- en Speel,95.9
+11375,Parallelweg,Afrikaanderwijk,Speelplekje,96.5
+11013,Herman Bielingplein,Nesselande,Sport- en Speel,96.5
+10538,Kreekkade,Groot IJsselmonde,voetbalveld,97.0
+887,Jaffahof,Kralingen West,Speelplekje,97.0
+1189,Bosbes,Ommoord,Restruimte,97.1
+10250,Dopheide,Ommoord,Pocketpark,97.1
+149,Makreelstraat,Hoogvliet Zuid,Speelplekje,97.6
+787,Vroesenpark,Blijdorp,Sport- en Speel,97.7
+11575,Waalstraat[RZB],Rozenburg,Speelplekje,97.8
+798,Berkelselaan,Bergpolder,Sport- en Speel,97.9
+12121,Tulpenstraat,Rozenburg,Speelplekje,97.9
+11667,Elfstedenstraat,Groot IJsselmonde,Speelplekje,98.1
+426,Hilledijk,Afrikaanderwijk,Sport- en Speel,98.2
+10828,Wijkpark Oude Westen,Oude Westen,Sport- en Speel,98.3
+1231,Kuinder,Zevenkamp,Speelplekje,98.5
+1054,Oostendamstraat,Bloemhof,Speelplek,98.6
+11574,Maasstraat[RZB],Rozenburg,Speelplekje,99.1
+935,Naaldwijkstraat,Kralingen West,Pocketpark,99.3
+424,Martinus Steijnstraat,Afrikaanderwijk,Speelplekje,99.4
+12113,Druivenhoek,Rozenburg,Speelplekje,99.4
+11397,Herikweg,Hoogvliet Noord,Sport- en Speel,99.6
+11359,Schout Eeuwoutstraat,Pernis,Restruimte,99.7
+1208,Passiebloem,Ommoord,Centrale Ontmoe,100.0
