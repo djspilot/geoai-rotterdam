@@ -202,7 +202,7 @@ def main() -> None:
         )
         label.set_path_effects([pe.withStroke(linewidth=2.5, foreground="white")])
 
-    add_scale_bar(ax, length_m=5_000)
+    # geen schaalstok: afstand niet relevant (invariant 14)
 
     area_patch = mpatches.Patch(
         facecolor="#f6f3ee",
@@ -228,11 +228,18 @@ def main() -> None:
         edgecolor="#d9d3cb",
     )
 
+    from matplotlib.transforms import ScaledTranslation
     ax.set_title(
-        f"Alle lichtpunten in Rotterdam Zuid\\n{len(lichtpunten_zuid):,} locaties in 8 gebieden",
+        "Alle lichtpunten in Rotterdam Zuid",
         fontsize=16,
         fontweight="bold",
-        pad=18,
+        pad=28,
+    )
+    # subtitel: niet vet, kleiner dan de titel, net boven de kaart (titelhiërarchie)
+    ax.text(
+        0.5, 1.0, f"{len(lichtpunten_zuid):,} locaties in 8 gebieden",
+        transform=ax.transAxes + ScaledTranslation(0, 7 / 72, fig.dpi_scale_trans),
+        ha="center", va="bottom", fontsize=10.5, color="#555555",
     )
     ax.text(
         0.5,

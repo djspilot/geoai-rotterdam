@@ -129,7 +129,7 @@ def main():
             zorder=2 if name == "Overige typen" else 3,
         )
 
-    add_scale_bar(ax_map)
+    # geen schaalstok: afstand niet relevant (invariant 14)
     ax_map.text(
         0.02,
         0.98,

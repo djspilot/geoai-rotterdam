@@ -96,9 +96,13 @@ def _nice_number(x: float) -> float:
 
 def add_scalebar(ax, location: str = "lower left", total_m: int | None = None,
                  n_segments: int = 5, *, inside: bool = False,
-                 box: bool = False) -> None:
-    """Checkerboard scale bar split in `n_segments` alternating black/white
-    blocks with tick labels. Assumes EPSG:28992 for the data axis.
+                 box: bool = False, variant: str = "A") -> None:
+    """Scale bar with tick labels, assuming EPSG:28992 for the data axis. Twee
+    varianten (zelfde lengte, labels, eenheid en plaatsing):
+
+    - **"A"** (default): geblokte balk — `n_segments` afwisselend zwart/witte blokken.
+    - **"B"**: één enkele **lijn** met verticale streepjes bij elke segmentgrens
+      i.p.v. de blokken.
 
     By default the bar sits *below* the map (in the bottom margin) so it never
     overlaps the geometry. With `inside=True` it is drawn *on* the map in a bottom
@@ -114,6 +118,7 @@ def add_scalebar(ax, location: str = "lower left", total_m: int | None = None,
     whole-km ticks without crowding.
     """
     from matplotlib.patches import Rectangle
+    from matplotlib.lines import Line2D
 
     x0, x1 = ax.get_xlim()
     data_width = x1 - x0
@@ -154,13 +159,29 @@ def add_scalebar(ax, location: str = "lower left", total_m: int | None = None,
         x_start, y_bar = 0.04, 0.0
 
     parts = []                         # artists to fit the inside box around
-    for i in range(n_segments):
-        fc = "black" if i % 2 == 0 else "white"
-        r = Rectangle((x_start + i * seg_frac, y_bar), seg_frac, height,
-                      facecolor=fc, edgecolor="black", linewidth=0.8,
-                      transform=tr, clip_on=False, zorder=10)
-        ax.add_patch(r)
-        parts.append(r)
+    if str(variant).upper() == "A":
+        # variant A: geblokte balk — afwisselend zwart/witte blokken
+        for i in range(n_segments):
+            fc = "black" if i % 2 == 0 else "white"
+            r = Rectangle((x_start + i * seg_frac, y_bar), seg_frac, height,
+                          facecolor=fc, edgecolor="black", linewidth=0.8,
+                          transform=tr, clip_on=False, zorder=10)
+            ax.add_patch(r)
+            parts.append(r)
+    else:
+        # variant B: één enkele lijn met verticale streepjes bij elke segmentgrens
+        base = Line2D([x_start, x_start + bar_frac], [y_bar, y_bar],
+                      transform=tr, color="black", linewidth=1.2,
+                      clip_on=False, zorder=10)
+        ax.add_line(base)
+        parts.append(base)
+        for i in range(n_segments + 1):
+            xt = x_start + i * seg_frac
+            tick = Line2D([xt, xt], [y_bar, y_bar + height],
+                          transform=tr, color="black", linewidth=1.0,
+                          clip_on=False, zorder=10)
+            ax.add_line(tick)
+            parts.append(tick)
 
     # Label in km only when the segment length is a whole number of km,
     # otherwise metres — so tick labels stay whole numbers and never turn
@@ -203,6 +224,8 @@ def add_scalebar(ax, location: str = "lower left", total_m: int | None = None,
                 if isinstance(p, Text):
                     tx, ty = p.get_position()
                     p.set_position((tx + dx, ty))
+                elif isinstance(p, Line2D):        # variant B: lijn/streepjes
+                    p.set_xdata([xx + dx for xx in p.get_xdata()])
                 else:
                     p.set_x(p.get_x() + dx)
             bx0, bx1 = bx0 + dx, bx1 + dx
@@ -266,9 +289,13 @@ def add_scale_ratio(ax, *, prefix: str = "1:", loc: str = "lower left") -> str:
 
 
 def add_north_arrow(ax, x: float | None = None, y: float | None = None, *,
-                    corner: str = "upper left") -> None:
-    """Two-tone triangular north arrow (left half black, right half white) with
-    'N' above the apex, at the **top** of the map (invariant 13).
+                    corner: str = "upper left", variant: str = "A") -> None:
+    """Triangular north arrow with 'N' above the apex, at the **top** of the map
+    (invariant 13). Twee varianten (identiek qua vorm/plaatsing):
+
+    - **"A"** (Noordpijl A, default): tweekleurig — linkerhelft zwart, rechterhelft
+      wit.
+    - **"B"** (Noordpijl B): **volledig zwart** — beide helften zwart.
 
     `corner`: 'upper left' (default) or 'upper right' — use the right corner when
     the left is occupied (e.g. by the legend). Drawn at a **fixed physical size**
@@ -295,11 +322,13 @@ def add_north_arrow(ax, x: float | None = None, y: float | None = None, *,
     bl, br = (0.0, -m - gap - th), (s * 2 * hw, -m - gap - th)
     notch = (s * hw, -m - gap - th + ndf * th)
 
+    dark = "#1a1a1a"
+    right_fill = "white" if str(variant).upper() == "A" else dark   # "B" = volledig zwart
     ax.add_patch(Polygon([apex, bl, notch], closed=True, transform=tr,
-                         facecolor="#1a1a1a", edgecolor="#1a1a1a", linewidth=0.8,
+                         facecolor=dark, edgecolor=dark, linewidth=0.8,
                          zorder=11, clip_on=False))
     ax.add_patch(Polygon([apex, notch, br], closed=True, transform=tr,
-                         facecolor="white", edgecolor="#1a1a1a", linewidth=0.8,
+                         facecolor=right_fill, edgecolor=dark, linewidth=0.8,
                          zorder=11, clip_on=False))
     ax.text(s * hw, -m, "N", transform=tr, ha="center", va="top",
             fontsize=10, fontweight="bold", color="#1a1a1a", zorder=11)
@@ -453,31 +482,47 @@ def add_rotterdam_basemap(ax, layer: str = "grijs", *, max_tiles: int = 400,
 
 
 def style_map(ax, title: str, *, subtitle: str | None = None,
-              scalebar: bool = False, north: "bool | str" = True) -> None:
+              scalebar: bool = False, north: "bool | str" = False,
+              north_variant: str = "A", scalebar_variant: str = "A") -> None:
     """Apply Rotterdam cartographic styling to one axes.
 
-    `north`: True (north arrow top-left, default), False (none), or a corner
-    string ('upper left'/'upper right') to pick the top corner — use the right
-    corner when the left is occupied (invariant 13).
+    `north`: **default False** — een noordpijl is alleen nodig als het noorden niet
+    recht naar boven wijst (gedraaide kaart) of bij een navigatiekaart (invariant
+    13). Standaard noord-boven kaarten krijgen er dus géén. Zet `True` (pijl
+    linksboven) of een hoek-string ('upper left'/'upper right') als een pijl wél
+    nodig is — rechterhoek wanneer de linker bezet is.
     """
     _apply_rc()
     ax.set_axis_off()
     ax.set_facecolor(STYLE["ax_bg"])
 
+    # Titel + subtitel staan ALTIJD boven de kaart, samen — nooit óver de kaart
+    # (invariant "Titel en subtitel boven de kaart"). De subtitel komt net boven de
+    # kaartrand (va="bottom", kleine fysieke marge) en de titel krijgt genoeg pad
+    # om daar nog net boven te vallen.
+    pad = 14
+    if subtitle:
+        from matplotlib.transforms import ScaledTranslation
+        sub_gap_in = 3 / 72.0                     # subtitel-onderkant boven de kaartrand
+        ax.text(
+            0.0, 1.0, subtitle,
+            transform=ax.transAxes
+            + ScaledTranslation(0, sub_gap_in, ax.figure.dpi_scale_trans),
+            ha="left", va="bottom",
+            fontsize=STYLE["subtitle_size"], color=STYLE["subtitle_color"],
+            weight=STYLE["subtitle_weight"],
+        )
+        pad = int(round(sub_gap_in * 72 + STYLE["subtitle_size"] + 8))  # titel boven de subtitel
+
     ax.set_title(
         title, fontsize=STYLE["title_size"], fontweight=STYLE["title_weight"],
-        color=STYLE["title_color"], loc="left", pad=14,
+        color=STYLE["title_color"], loc="left", pad=pad,
     )
-    if subtitle:
-        ax.text(
-            0.0, 1.0, subtitle, transform=ax.transAxes,
-            fontsize=STYLE["subtitle_size"], color=STYLE["subtitle_color"],
-            weight=STYLE["subtitle_weight"], va="top",
-        )
     if scalebar:
-        add_scalebar(ax)
+        add_scalebar(ax, variant=scalebar_variant)
     if north:
-        add_north_arrow(ax, corner=north if isinstance(north, str) else "upper left")
+        add_north_arrow(ax, corner=north if isinstance(north, str) else "upper left",
+                        variant=north_variant)
 
 
 def finalize_map(
@@ -509,13 +554,28 @@ def finalize_map(
     fig.set_facecolor(STYLE["fig_bg"])
 
     if suptitle:
-        fig.suptitle(suptitle, fontsize=18, fontweight="bold",
-                     color=STYLE["title_color"], x=0.05, ha="left", y=0.98)
+        # Stapel de suptitel (+ optionele subregel) met fysieke (inch) marges vanaf
+        # de bovenrand, zodat de tussenruimte ook op een lage/brede figuur klopt —
+        # vaste fracties (0.98/0.945) liepen daar over elkaar. De as-bovenrand `top`
+        # zakt mee zodat de per-paneel titels vrij onder het suptitel-blok vallen.
+        _fw, _fh = fig.get_size_inches()
+        # Hoofdtitel groter dan de deelkaart-titels (STYLE["title_size"]) — zie de
+        # invariant "Titelhiërarchie".
+        sup_fs = STYLE["suptitle_size"]
+        y_top_in = 0.16                                # marge boven de hoofdtitel (inch)
+        fig.suptitle(suptitle, fontsize=sup_fs, fontweight=STYLE["suptitle_weight"],
+                     color=STYLE["title_color"], x=0.05, ha="left",
+                     y=1 - y_top_in / _fh, va="top")
+        header_in = y_top_in + sup_fs / 72.0 + 0.10    # tot onder de suptitel + gap
         if suptitle_subtitle:
-            fig.text(0.05, 0.945, suptitle_subtitle,
+            fig.text(0.05, 1 - header_in / _fh, suptitle_subtitle,
                      fontsize=STYLE["subtitle_size"],
-                     color=STYLE["subtitle_color"], ha="left")
-        top = 0.90
+                     color=STYLE["subtitle_color"], ha="left", va="top")
+            header_in += STYLE["subtitle_size"] / 72.0 + 0.14
+        else:
+            header_in += 0.10
+        header_in += 0.42                              # ruimte voor de per-paneel titel
+        top = 1 - header_in / _fh
     else:
         top = 0.94
 
@@ -960,25 +1020,14 @@ def add_proportional_legend(ax, values, sizes, *, title="Legenda",
     return box
 
 
-def add_swatch_legend(ax, colors, labels, *, title="Legenda", legendakop=None,
-                      corner="auto", data=None, edgecolor="#555555",
-                      fontsize=9):
-    """Categorical / choropleth legend: a bold **title**, an optional **non-bold
-    legendakop** line between the title and the classes (e.g. the unit of the
-    mapped variable; same size/style as the class labels), then one colour swatch
-    + label per class on a fitted white box.
-
-    matplotlib's own legend title cannot carry a differently-styled second line,
-    so this draws the legend itself (like `add_proportional_legend`). `colors` and
-    `labels` are equal-length. Auto-placed like `place_legend` (corner -> edge ->
-    side panel); call **after** the scale bar / north arrow. Returns box.
+def _swatch_legend_metrics(fig, colors, labels, *, title="Legenda",
+                           legendakop=None, fontsize=9):
+    """Bereken de layout-maten (inch) van de kleurstaal-legenda die
+    ``add_swatch_legend`` tekent, zonder te tekenen. Retourneert o.a. ``W`` (de
+    breedte) zodat een zijpaneel exact op de legendabreedte gemaakt kan worden.
+    Gedeeld door ``add_swatch_legend`` en ``add_swatch_legend_sidepanel``.
     """
-    import numpy as np
-    from matplotlib.patches import Rectangle
     from matplotlib.text import Text
-    from matplotlib.transforms import ScaledTranslation
-    fig = ax.figure
-    mx, my = LEGEND_MARGIN
     fig.canvas.draw()
     rend = fig.canvas.get_renderer()
     kop_fs = fontsize                        # legendakop: same size/style as labels
@@ -1005,6 +1054,39 @@ def add_swatch_legend(ax, colors, labels, *, title="Legenda", legendakop=None,
     rows_total = n * row_h + (n - 1) * row_gap
     H = P + title_h + title_gap + kop_h + kop_gap + rows_total + P
     W = max(label_x + lab_w, P + title_w, P + kop_w) + P
+    return dict(P=P, title_h=title_h, title_gap=title_gap, kop_h=kop_h,
+                kop_gap=kop_gap, sw=sw, row_h=row_h, row_gap=row_gap,
+                label_x=label_x, W=W, H=H)
+
+
+def add_swatch_legend(ax, colors, labels, *, title="Legenda", legendakop=None,
+                      corner="auto", data=None, edgecolor="#555555",
+                      fontsize=9):
+    """Categorical / choropleth legend: a bold **title**, an optional **non-bold
+    legendakop** line between the title and the classes (e.g. the unit of the
+    mapped variable; same size/style as the class labels), then one colour swatch
+    + label per class on a fitted white box.
+
+    matplotlib's own legend title cannot carry a differently-styled second line,
+    so this draws the legend itself (like `add_proportional_legend`). `colors` and
+    `labels` are equal-length. Auto-placed like `place_legend` (corner -> edge ->
+    side panel); call **after** the scale bar / north arrow. Returns box.
+    """
+    import numpy as np
+    from matplotlib.patches import Rectangle
+    from matplotlib.transforms import ScaledTranslation
+    fig = ax.figure
+    mx, my = LEGEND_MARGIN
+    kop_fs = fontsize                        # legendakop: same size/style as labels
+
+    # Layout-maten (inch); gedeeld met _swatch_legend_metrics.
+    _m = _swatch_legend_metrics(fig, colors, labels, title=title,
+                                legendakop=legendakop, fontsize=fontsize)
+    P = _m["P"]
+    title_h, title_gap = _m["title_h"], _m["title_gap"]
+    kop_h, kop_gap = _m["kop_h"], _m["kop_gap"]
+    sw, row_h, row_gap = _m["sw"], _m["row_h"], _m["row_gap"]
+    label_x, W, H = _m["label_x"], _m["W"], _m["H"]
 
     aw = ax.get_window_extent().width / fig.dpi
     ah = ax.get_window_extent().height / fig.dpi
@@ -1059,6 +1141,78 @@ def add_side_panel(fig, ax, *, width_in: float = 3.2, gap_in: float = 0.15):
     panel = fig.add_axes([(mx0 + mw + gap_in) / new_w, my0 / figh,
                           width_in / new_w, mh / figh])
     panel.set_axis_off()
+    return panel
+
+
+def fit_side_panel(fig, ax, panel, *, margin_in=0.15):
+    """Krimp de breedte van een zijpaneel (van ``add_side_panel``) tot de
+    **werkelijk getekende inhoud + marge** en versmal de figuur navenant, zodat
+    er geen lege ruimte naast de paneelinhoud overblijft. De kaart-as blijft
+    ongewijzigd; de footer/scheidingslijn (op figuur-fracties) schuiven mee.
+
+    Nodig omdat ``save_map``'s ``bbox_inches="tight"`` de **volle paneel-as**
+    meerekent (een onzichtbaar achtergrondvlak of `frame_off` verandert dat niet)
+    en de footer tot ~0.95 van de figuurbreedte loopt — alleen een smaller paneel
+    haalt de witruimte echt weg. Roep aan **ná** alle paneelinhoud + ``finalize_map``
+    / ``fit_figure_to_data``, vlak vóór ``save_map``. Retourneert het paneel.
+    """
+    fig.canvas.draw()
+    r = fig.canvas.get_renderer()
+    figw, figh = fig.get_size_inches()
+    ppos, mpos = panel.get_position(), ax.get_position()
+    px0i = ppos.x0 * figw
+    mx0i, mwi = mpos.x0 * figw, mpos.width * figw
+
+    skip = {panel.patch, panel.xaxis, panel.yaxis, *panel.spines.values()}
+    right = px0i
+    children = list(panel.get_children())
+    leg = panel.get_legend()
+    if leg is not None:
+        children.append(leg)
+    for ch in children:
+        if ch in skip or not ch.get_visible():
+            continue
+        try:
+            bb = ch.get_window_extent(r)
+        except Exception:
+            continue
+        if bb.width > 0 and bb.height > 0:
+            right = max(right, bb.x1 / fig.dpi)
+
+    pw_new = max(0.1, (right - px0i) + margin_in)
+    new_w = px0i + pw_new
+    if new_w >= figw - 1e-3:
+        return panel                          # niets te winnen
+    fig.set_size_inches(new_w, figh)
+    ax.set_position([mx0i / new_w, mpos.y0, mwi / new_w, mpos.height])
+    panel.set_position([px0i / new_w, ppos.y0, pw_new / new_w, ppos.height])
+    return panel
+
+
+def add_swatch_legend_sidepanel(fig, ax, colors, labels, *, title="Legenda",
+                                legendakop=None, fontsize=9, gap_in=0.15):
+    """Teken een kleurstaal-legenda in een zijpaneel dat **precies zo breed is
+    als de legenda + marge** — dus geen overbodige witruimte rechts. De totale
+    figuurbreedte wordt zo kaart + gap + legendabreedte + marge.
+
+    Gebruik dit i.p.v. los ``add_side_panel`` + ``add_swatch_legend`` wanneer de
+    legenda niet in een hoek/rand van de kaart past (invariant 8). Roep aan **ná**
+    ``finalize_map`` / ``fit_figure_to_data``. Retourneert de paneel-as.
+    """
+    import warnings
+    mx = LEGEND_MARGIN[0]
+    metrics = _swatch_legend_metrics(fig, colors, labels, title=title,
+                                     legendakop=legendakop, fontsize=fontsize)
+    # Ruim genoeg paneel zodat de legenda-box past; fit_side_panel trimt daarna
+    # exact tot de box + marge (kaart + gap + legendabreedte + marge).
+    panel = add_side_panel(fig, ax, width_in=metrics["W"] / (1 - 2 * mx),
+                           gap_in=gap_in)
+    with warnings.catch_warnings():
+        # In een zijpaneel is de "no free corner"-melding verwacht gedrag.
+        warnings.filterwarnings("ignore", message="add_swatch_legend: no free")
+        add_swatch_legend(panel, colors, labels, title=title,
+                          legendakop=legendakop, fontsize=fontsize)
+    fit_side_panel(fig, ax, panel)
     return panel
 
 

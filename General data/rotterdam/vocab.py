@@ -67,10 +67,15 @@ STYLE = {
     # Preference order across platforms. cartography._apply_rc() filters this
     # to fonts actually installed, so missing families raise no findfont warnings.
     "font_family": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
-    "title_size": 16,
+    # Titelhiërarchie (skill-invariant "Titelhiërarchie"): hoofdtitel altijd vet en
+    # groter dan de subtitel (die dus nooit vet is); bij deelkaarten is de
+    # overkoepelende hoofdtitel (suptitle) groter dan de deelkaart-titels (title).
+    "suptitle_size": 19,        # overkoepelende hoofdtitel bij meerdere deelkaarten
+    "suptitle_weight": "bold",
+    "title_size": 16,           # (deelkaart-)titel / hoofdtitel van een enkele kaart
     "title_weight": "bold",
     "title_color": "#1a1a1a",
-    "subtitle_size": 10.5,
+    "subtitle_size": 10.5,      # kleiner dan de titel; nooit vet
     "subtitle_color": "#555555",
     "subtitle_weight": "normal",
     "footer_size": 7.5,

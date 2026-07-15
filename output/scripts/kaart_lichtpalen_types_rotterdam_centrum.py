@@ -115,7 +115,7 @@ def main():
             zorder=3 if name != "Overige typen" else 2,
         )
 
-    add_scale_bar(ax_map)
+    # geen schaalstok: afstand niet relevant (invariant 14)
     ax_map.text(
         0.02,
         0.98,
@@ -138,11 +138,18 @@ def main():
         zorder=4,
     )
     ax_map.set_axis_off()
+    from matplotlib.transforms import ScaledTranslation
     ax_map.set_title(
-        "Lichtpunten per type in Stadsdriehoek\n(deel van Rotterdam Centrum)",
+        "Lichtpunten per type in Stadsdriehoek",
         fontsize=16,
         fontweight="bold",
-        pad=14,
+        pad=26,
+    )
+    # subtitel: niet vet, kleiner dan de titel, net boven de kaart (titelhiërarchie)
+    ax_map.text(
+        0.5, 1.0, "(deel van Rotterdam Centrum)",
+        transform=ax_map.transAxes + ScaledTranslation(0, 7 / 72, ax_map.figure.dpi_scale_trans),
+        ha="center", va="bottom", fontsize=10.5, color="#555555",
     )
 
     bar_series = grouped_counts.reindex(top_types + ["Overige typen"]).fillna(0)

@@ -87,7 +87,7 @@ def main() -> None:
     highlight = gebieden[gebieden["GEBDNAAM"].isin([A, B])]
     highlight.plot(ax=ax_map, facecolor="none", edgecolor="#1f1f1f", linewidth=1.8, zorder=5)
 
-    add_scale_bar(ax_map)
+    # geen schaalstok: afstand niet relevant (invariant 14)
 
     legend_handles = [
         mpatches.Patch(facecolor="#f2efe9", edgecolor="#a39a8d", label="Gebieden Rotterdam"),
@@ -96,7 +96,10 @@ def main() -> None:
         mlines.Line2D([], [], color="#9aa3ad", marker="o", linestyle="None", markersize=6, alpha=0.5, label="Overige afvalbakken"),
     ]
     ax_map.legend(handles=legend_handles, title="Legenda", loc="lower right", frameon=True)
-    ax_map.set_title("Afvalbakken binnen gemeente Rotterdam\nmet focus op 2 gebieden", fontsize=13, fontweight="bold")
+    ax_map.set_title("Afvalbakken binnen gemeente Rotterdam", fontsize=13, fontweight="bold")
+    # subtitel deelkaart: niet vet, kleiner dan de titel (titelhiërarchie)
+    ax_map.text(0.5, 1.0, "met focus op 2 gebieden", transform=ax_map.transAxes,
+                ha="center", va="top", fontsize=9.5, color="#555555")
     ax_map.set_axis_off()
 
     labels = [A, B]

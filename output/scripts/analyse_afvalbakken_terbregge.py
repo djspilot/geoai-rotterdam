@@ -137,11 +137,18 @@ def main() -> None:
     ]
     ax.legend(handles=handles, title="Legenda", loc="lower right", frameon=True, framealpha=0.95)
 
+    from matplotlib.transforms import ScaledTranslation
     ax.set_title(
-        f"Afvalbakken en knelpunten in {WIJK_NAAM}\nKnelpunt = buiten {SERVICE_RADIUS_M} meter van dichtstbijzijnde afvalbak",
+        f"Afvalbakken en knelpunten in {WIJK_NAAM}",
         fontsize=14,
         fontweight="bold",
-        pad=14,
+        pad=26,
+    )
+    # subtitel: niet vet, kleiner dan de titel, net boven de kaart (titelhiërarchie)
+    ax.text(
+        0.5, 1.0, f"Knelpunt = buiten {SERVICE_RADIUS_M} meter van dichtstbijzijnde afvalbak",
+        transform=ax.transAxes + ScaledTranslation(0, 7 / 72, fig.dpi_scale_trans),
+        ha="center", va="bottom", fontsize=10, color="#555555",
     )
     ax.text(
         0.5,

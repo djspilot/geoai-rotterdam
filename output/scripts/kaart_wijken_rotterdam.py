@@ -23,7 +23,7 @@ import matplotlib.patheffects as pe
 
 from rotterdam import (
     load_layer, style_map, add_scalebar, add_rotterdam_basemap, add_pdok_basemap,
-    finalize_map, fit_figure_to_data, add_side_panel, save_map,
+    finalize_map, fit_figure_to_data, add_side_panel, fit_side_panel, save_map,
     setup_headless_matplotlib, RD_NEW,
 )
 
@@ -55,7 +55,7 @@ except Exception as e:
     bron_delen.append("Basiskaart: PDOK BRT")
 
 style_map(ax, "Wijken in Rotterdam")
-add_scalebar(ax, inside=True)
+# geen schaalstok: overzichtskaart, afstand niet relevant (invariant 14)
 
 finalize_map(fig, source=" · ".join(bron_delen), tight_bottom=True)
 fit_figure_to_data(fig, ax)
@@ -77,5 +77,8 @@ for i, (nr, naam) in enumerate(rows):
                fontweight="bold", color="#222222")
     panel.text(x0 + 0.09, y, str(naam), fontsize=7, ha="left", va="top",
                color="#222222")
+
+# paneel exact tot de lijst-inhoud krimpen -> geen witruimte ernaast
+fit_side_panel(fig, ax, panel)
 
 print("opgeslagen:", save_map(fig, "wijken_rotterdam"))

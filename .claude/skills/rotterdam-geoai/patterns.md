@@ -329,3 +329,60 @@ for ax, naam in zip(axes, ["Rotterdam Centrum", "Hillegersberg-Schiebroek"]):
     style_map(ax, naam)
 finalize_map(fig, source="Obsurv via diensten.rotterdam.nl"); save_map(fig, "vergelijking_centrum_hillegersberg")
 ```
+
+## 9. Categorische overzichtskaart met kleurstaal-legenda in een zijpaneel
+
+Bv. "kaart van alle buurten": vlakken gekleurd per categorie (hier per gebied). Bij veel
+categorieën past de kleurstaal-legenda in geen hoek/rand → gebruik
+`add_swatch_legend_sidepanel`. Die maakt het zijpaneel **precies zo breed als de legenda +
+marge**, dus de totale figuurbreedte = kaart + gap + legenda + marge (geen witruimte ernaast).
+Roep aan **ná** `finalize_map` + `fit_figure_to_data`.
+
+```python
+import matplotlib.cm as cm, matplotlib.colors as mcolors
+
+buurten  = load_layer("buurten")
+gemeente = load_layer("gemeente")
+
+# Kleur per gebied (categorisch). >20 categorieën? Combineer tab20 + tab20b.
+gebieden = sorted(buurten["GEBDNAAM"].unique())
+_sw = list(cm.tab20.colors) + list(cm.tab20b.colors)
+palette = [mcolors.to_hex(_sw[i]) for i in range(len(gebieden))]
+buurten["_kleur"] = buurten["GEBDNAAM"].map(dict(zip(gebieden, palette)))
+
+fig, ax = plt.subplots(figsize=(13, 9))
+buurten.plot(ax=ax, color=buurten["_kleur"], edgecolor="white", linewidth=0.4)
+gemeente.boundary.plot(ax=ax, color="#333333", linewidth=1.0)
+ax.set_aspect("equal")
+
+style_map(ax, f"Rotterdam — alle buurten (n = {len(buurten)})")
+finalize_map(fig, source="TIR via diensten.rotterdam.nl")
+fit_figure_to_data(fig, ax)
+
+add_swatch_legend_sidepanel(fig, ax, palette, gebieden,
+                            title="Legenda", legendakop="Buurten per gebied", fontsize=8)
+save_map(fig, "rotterdam_alle_buurten")
+```
+
+## 10. Vrije paneelinhoud (naamlijst e.d.) zonder witruimte — `fit_side_panel`
+
+Voor een zijpaneel met **eigen inhoud** (bv. een genummerde naamlijst, of een
+matplotlib-`legend` + lijst) is er geen kant-en-klare helper. Teken de inhoud in
+een ruim `add_side_panel` en roep dáárna `fit_side_panel(fig, ax, panel)` aan: die
+krimpt het paneel tot de werkelijk getekende inhoud + marge. Nodig omdat
+`save_map`'s `bbox_inches="tight"` de **volle paneel-as** meerekent (een onzichtbaar
+achtergrondvlak verandert dat niet) en de footer tot ~0.95 van de figuurbreedte loopt.
+
+```python
+finalize_map(fig, source="…"); fit_figure_to_data(fig, ax)
+
+panel = add_side_panel(fig, ax, width_in=4.0)     # ruim; wordt straks gekrompen
+panel.text(0.0, 1.0, "Wijken", fontweight="bold", va="top", ha="left")
+for i, (nr, naam) in enumerate(rows):             # eigen lay-out (fracties)
+    y = 0.95 - i * lh
+    panel.text(0.02, y, f"{nr}", ha="right", va="top", fontsize=7, fontweight="bold")
+    panel.text(0.04, y, naam, ha="left",  va="top", fontsize=7)
+
+fit_side_panel(fig, ax, panel)                    # paneel tot inhoud + marge krimpen
+save_map(fig, "…")
+```

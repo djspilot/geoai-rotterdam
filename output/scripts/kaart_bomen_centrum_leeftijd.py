@@ -87,7 +87,7 @@ except Exception as e:
     bron_delen.append("Basiskaart: PDOK BRT")
 
 style_map(ax, "Bomen in Rotterdam Centrum naar leeftijd (per 10 jaar)")
-add_scalebar(ax, inside=True)
+# geen schaalstok: thematische kaart, afstand niet relevant (invariant 14)
 finalize_map(fig, source=" · ".join(bron_delen), tight_bottom=True)
 fit_figure_to_data(fig, ax)
 

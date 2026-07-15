@@ -18,7 +18,7 @@ from __future__ import annotations
 import sys
 from urllib.parse import urlencode
 
-sys.path.insert(0, "/Users/ds/Werk/GEOAI test/General data")
+sys.path.insert(0, r"C:\Users\134020\Downloads\geoai-rotterdam-main\General data")
 
 import geopandas as gpd
 import matplotlib.pyplot as plt
@@ -32,6 +32,7 @@ from rotterdam import (
     ROTTERDAM_NOORD_GEBIEDEN,
     finalize_map,
     load_layer,
+    place_legend,
     save_map,
     style_map,
     validate_map,
@@ -95,8 +96,9 @@ p99 = sub["afvalbak_per_1000"].quantile(0.99)
 sub_plot = sub[sub["afvalbak_per_1000"] <= p99]
 corr = sub["afvalbak_per_1000"].corr(sub[INCOME_COL])
 
-# 4. Plot — 2 panelen + scatter inset
-fig, axes = plt.subplots(1, 2, figsize=(16, 9), constrained_layout=False)
+# 4. Plot — 2 panelen + scatter inset. Figuurhoogte volgt de brede/lage vorm van
+#    Noord (aspect ~1.46), zodat de kaarten de figuur vullen zonder verticale witruimte.
+fig, axes = plt.subplots(1, 2, figsize=(16, 7.4), constrained_layout=False)
 
 noord_border = noord.boundary
 
@@ -128,8 +130,9 @@ noord_border.plot(ax=ax2, color="black", linewidth=1.0)
 style_map(ax2, "Armoede-aandeel",
           subtitle=f"mediaan {mediaan_laag_inkomen:.0f}% per buurt")
 
-# Scatter inset rechts-boven op ax1 (uit zicht van titel + legenda)
-inset = ax1.inset_axes([0.64, 0.66, 0.34, 0.30])
+# Scatter inset linksonder op ax1 (over de data; opaque achtergrond). Zo blijft de
+# datavrije hoek rechtsonder vrij voor de legenda (die de data moet ontwijken).
+inset = ax1.inset_axes([0.06, 0.07, 0.33, 0.29])
 inset.scatter(sub_plot[INCOME_COL], sub_plot["afvalbak_per_1000"],
               s=10, alpha=0.55, color="#444")
 # trendlijn
@@ -155,6 +158,34 @@ finalize_map(
     suptitle="Sociale rechtvaardigheid: afvalbak-dekking vs armoede — Rotterdam Noord",
     suptitle_subtitle=interpretatie,
 )
+
+# geopandas plaatst de legenda vast, óver de data. Herplaats beide legenda's
+# consistent naar de datavrije hoek rechtsonder (invariant 8, compacte fontsize),
+# met dezelfde swatches; ná finalize_map. De scatter-inset (paneel 1) staat
+# linksonder over de data en wordt door de legenda ontweken.
+from shapely.geometry import box as _box  # noqa: E402
+
+
+def _relocate_legend(ax, avoid=None, corner="lower right", fontsize=8):
+    leg = ax.get_legend()
+    if leg is None:
+        return
+    handles = list(leg.legend_handles)
+    labels = [t.get_text() for t in leg.get_texts()]
+    title = leg.get_title().get_text()
+    leg.remove()
+    place_legend(ax, handles, labels, title=title, corner=corner, data=avoid,
+                 fontsize=fontsize)
+
+
+_ix0, _iy0 = ax1.get_xlim()[0], ax1.get_ylim()[0]
+_iw = ax1.get_xlim()[1] - _ix0
+_ih = ax1.get_ylim()[1] - _iy0
+_inset_box = _box(_ix0 + 0.03 * _iw, _iy0 + 0.05 * _ih,
+                  _ix0 + 0.41 * _iw, _iy0 + 0.38 * _ih)
+_relocate_legend(ax1, avoid=gpd.GeoSeries([_inset_box], crs=RD_NEW))
+_relocate_legend(ax2, avoid=None)
+
 warns = validate_map(fig, axes[0], data=cbs_noord, normalized=True)
 for w in warns:
     print("WARN:", w)

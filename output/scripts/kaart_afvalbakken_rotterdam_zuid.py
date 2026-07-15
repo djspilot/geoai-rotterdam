@@ -143,7 +143,7 @@ def main():
         )
         label.set_path_effects([pe.withStroke(linewidth=2.5, foreground="white")])
 
-    add_scale_bar(ax)
+    # geen schaalstok: afstand niet relevant (invariant 14)
 
     area_patch = mpatches.Patch(
         facecolor="#f6f3ee",

@@ -148,13 +148,20 @@ def main() -> None:
         edgecolor="#d9d3cb",
     )
 
-    add_scale_bar(ax, length_m=1_000)
+    # geen schaalstok: afstand niet relevant (invariant 14)
 
+    from matplotlib.transforms import ScaledTranslation
     ax.set_title(
-        "Afvalbakken en bomen in Rotterdam Centrum\nProjectstandaard met attribuutfilter + ruimtelijke verificatie",
+        "Afvalbakken en bomen in Rotterdam Centrum",
         fontsize=15,
         fontweight="bold",
-        pad=18,
+        pad=28,
+    )
+    # subtitel: niet vet, kleiner dan de titel, net boven de kaart (titelhiërarchie)
+    ax.text(
+        0.5, 1.0, "Projectstandaard met attribuutfilter + ruimtelijke verificatie",
+        transform=ax.transAxes + ScaledTranslation(0, 7 / 72, fig.dpi_scale_trans),
+        ha="center", va="bottom", fontsize=10.5, color="#555555",
     )
     ax.text(
         0.5,

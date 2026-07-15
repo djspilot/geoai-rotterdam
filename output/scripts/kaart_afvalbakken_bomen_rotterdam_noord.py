@@ -160,7 +160,7 @@ def main():
         zorder=5,
     )
 
-    add_scale_bar(ax)
+    # geen schaalstok: afstand niet relevant (invariant 14)
 
     area_patch = mpatches.Patch(
         facecolor="#f6f3ee",
@@ -195,11 +195,18 @@ def main():
         edgecolor="#d9d3cb",
     )
 
+    from matplotlib.transforms import ScaledTranslation
     ax.set_title(
-        "Afvalbakken en bomen in Rotterdam Noord\nStedelijke gebieden ten noorden van de Maas",
+        "Afvalbakken en bomen in Rotterdam Noord",
         fontsize=16,
         fontweight="bold",
-        pad=18,
+        pad=28,
+    )
+    # subtitel: niet vet, kleiner dan de titel, net boven de kaart (titelhiërarchie)
+    ax.text(
+        0.5, 1.0, "Stedelijke gebieden ten noorden van de Maas",
+        transform=ax.transAxes + ScaledTranslation(0, 7 / 72, fig.dpi_scale_trans),
+        ha="center", va="bottom", fontsize=10.5, color="#555555",
     )
     ax.text(
         0.5,

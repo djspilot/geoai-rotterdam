@@ -102,7 +102,7 @@ def main():
         zorder=6,
     )
 
-    add_scale_bar(ax)
+    # geen schaalstok: afstand niet relevant (invariant 14)
 
     footprint_area = UNITS * CONTAINER_LENGTH * CONTAINER_WIDTH / 1_000_000
     gross_area = site.area / 1_000_000

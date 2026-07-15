@@ -87,7 +87,7 @@ except Exception as e:
     bron_delen.append("Basiskaart: PDOK BRT")
 
 style_map(ax, "Inwonerdichtheid per buurt in Rotterdam")
-add_scalebar(ax, inside=True)
+# geen schaalstok: choropleet, afstand niet relevant (invariant 14)
 finalize_map(fig, source=" · ".join(bron_delen), tight_bottom=True)
 fit_figure_to_data(fig, ax)
 

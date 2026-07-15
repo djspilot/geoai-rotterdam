@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from pathlib import Path
 
-BASE = Path("/Users/ds/Werk/GEOAI test/General data/Data")
-OUT  = Path("/Users/ds/Werk/GEOAI test/output")
+ROOT = Path(__file__).resolve().parents[2]
+BASE = ROOT / "General data" / "Data"
+OUT  = ROOT / "output" / "maps"
 
 # ── Data laden ────────────────────────────────────────────────────────────────
 buurten = gpd.read_file(BASE / "tir_buurten.geojson").set_crs(epsg=28992, allow_override=True)
@@ -68,7 +69,7 @@ ax.legend(handles=patches, title="Buurt (aantal afvalbakken)",
 
 totaal = len(afval_kralingen)
 ax.set_title(f"Afvalbakken in Kralingen-Crooswijk  (totaal: {totaal})",
-             fontsize=14, pad=14)
+             fontsize=14, fontweight="bold", pad=14)
 ax.set_axis_off()
 plt.tight_layout()
 

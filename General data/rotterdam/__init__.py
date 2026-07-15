@@ -49,6 +49,7 @@ from .cartography import (
     add_scalebar, add_scale_ratio, add_north_arrow, add_pdok_basemap,
     add_rotterdam_basemap, ROTTERDAM_BASEMAPS,
     place_legend, add_proportional_legend, add_swatch_legend, add_side_panel,
+    add_swatch_legend_sidepanel, fit_side_panel,
     point_map, choropleth,
 )
 from .arcgis import fetch_arcgis_layer
@@ -76,6 +77,7 @@ __all__ = [
     "add_scalebar", "add_scale_ratio", "add_north_arrow", "add_pdok_basemap",
     "add_rotterdam_basemap", "ROTTERDAM_BASEMAPS",
     "place_legend", "add_proportional_legend", "add_swatch_legend", "add_side_panel",
+    "add_swatch_legend_sidepanel", "fit_side_panel",
     "point_map", "choropleth",
     # network
     "fetch_arcgis_layer",

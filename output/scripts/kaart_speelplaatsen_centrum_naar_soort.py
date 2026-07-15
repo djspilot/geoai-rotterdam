@@ -26,7 +26,8 @@ from sklearn.cluster import DBSCAN  # noqa: F401  (kan handig zijn voor variante
 from rotterdam import (
     load_layer, fetch_arcgis_layer, style_map, add_scalebar,
     add_rotterdam_basemap, add_pdok_basemap, finalize_map, fit_figure_to_data,
-    add_side_panel, save_map, setup_headless_matplotlib, RD_NEW, CACHE,
+    add_side_panel, fit_side_panel, save_map, setup_headless_matplotlib,
+    RD_NEW, CACHE,
 )
 
 setup_headless_matplotlib()
@@ -160,7 +161,7 @@ for idx, r in speel_c.iterrows():
     placed.append(box_at(*chosen))
 
 style_map(ax, "Speelplaatsen in het stadscentrum van Rotterdam — naar soort")
-add_scalebar(ax, inside=True)
+# geen schaalstok: thematische indexkaart, afstand niet relevant (invariant 14)
 
 finalize_map(fig, source=f"Obsurv via diensten.rotterdam.nl · {basiskaart}",
              tight_bottom=True)               # schaalstok staat in de kaart
@@ -191,6 +192,9 @@ panel.text(0.11, yl, nums, transform=panel.transAxes, ha="right", va="top",
            ma="right", fontsize=8, linespacing=1.35)
 panel.text(0.13, yl, names, transform=panel.transAxes, ha="left", va="top",
            ma="left", fontsize=8, linespacing=1.35)
+
+# paneel exact tot de legenda + namenlijst krimpen -> geen witruimte ernaast
+fit_side_panel(fig, ax, panel)
 
 out = save_map(fig, "speelplaatsen_centrum_naar_soort")
 print(f"Speelplaatsen in Centrum: {len(speel_c)}")

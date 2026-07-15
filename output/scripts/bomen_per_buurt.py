@@ -8,8 +8,9 @@ import matplotlib.colors as mcolors
 import folium
 from pathlib import Path
 
-BASE = Path("/Users/ds/Werk/GEOAI test/General data/Data")
-OUT  = Path("/Users/ds/Werk/GEOAI test/output")
+ROOT = Path(__file__).resolve().parents[2]
+BASE = ROOT / "General data" / "Data"
+OUT  = ROOT / "output" / "maps"
 
 # ── 1. Laad buurten ──────────────────────────────────────────────────────────
 print("Buurten laden...")
@@ -57,7 +58,8 @@ for _, row in buurten.nlargest(10, "aantal_bomen").iterrows():
         fontsize=5.5, color="#222222",
         bbox=dict(boxstyle="round,pad=0.2", fc="white", alpha=0.6, ec="none"),
     )
-ax.set_title("Bomen per buurt – Gemeente Rotterdam", fontsize=16, pad=12)
+ax.set_title("Bomen per buurt – Gemeente Rotterdam", fontsize=16,
+             fontweight="bold", pad=12)
 ax.set_axis_off()
 plt.tight_layout()
 out_png = OUT / "bomen_per_buurt.png"
