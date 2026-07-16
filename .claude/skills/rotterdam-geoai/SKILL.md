@@ -97,7 +97,7 @@ Een typisch script is 10–20 regels. Het zware werk zit in de `rotterdam`-packa
 4. **Welk kaarttype?** Zie `cartography.md` map-type-tabel. Standaard: `point_map()` voor punten, `choropleth()` voor verhoudingen per gebied.
 5. **Genormaliseerd?** Voor choropleet ja, altijd. `count_per_polygon(normalize_by=...)`.
 6. **Polish**: `finalize_map(fig, source=..., date=..., suptitle=...)` — footer + marges + optionele paginatitel.
-7. **Valideren**: `validate_map(fig, ax, data=..., normalized=True)`. Print warnings; fix vóór save.
+7. **Valideren**: `validate_map(fig, ax, data=..., normalized=True)`. Print warnings; fix vóór save. Controleert o.a. titel, legenda, CRS, assen-uit, normalisatie/klassen, **bronvermelding** (inv. 4/11), **titelhiërarchie** (hoofdtitel vet, subtitel niet vet — inv. 17) en **NL-getalnotatie** (inv. 16).
 8. **Output** naar `output/` via `save_map()`.
 
 Twee complete vraag→antwoord flows staan in `patterns.md` (operationele vraag + briefkaart wethouder).

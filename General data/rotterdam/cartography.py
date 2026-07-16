@@ -1235,7 +1235,11 @@ def validate_map(
     """Check a finished map against the Rotterdam kartografische richtlijnen."""
     warns: list[str] = []
 
-    if not (ax.get_title() or any(t.get_text() for t in fig.texts)):
+    _titles = [ax.get_title(loc=_l) for _l in ("center", "left", "right")]
+    _sup = getattr(fig, "_suptitle", None)
+    if _sup is not None and _sup.get_text().strip():
+        _titles.append(_sup.get_text())
+    if not any(s and s.strip() for s in _titles):
         warns.append("Geen titel — voeg toe via style_map(ax, title=...).")
 
     has_legend = ax.get_legend() is not None
@@ -1257,6 +1261,43 @@ def validate_map(
 
     if n_classes is not None and n_classes > 9:
         warns.append(f"{n_classes} klassen is te veel (max 9, voorkeur 5).")
+
+    # Bronvermelding in de footer (invariant 4 / 11)
+    if not any(t.get_text().strip().lower().startswith("bron:") for t in fig.texts):
+        warns.append("Geen bronvermelding — geef finalize_map(fig, source=...) mee.")
+
+    # Titelhiërarchie (invariant 17): hoofdtitel vet, subtitel nooit vet
+    import matplotlib.colors as _mc
+
+    def _bold(t) -> bool:
+        w = t.get_fontweight()
+        return w in ("bold", "semibold", "demibold", "heavy", "black") or (
+            isinstance(w, (int, float)) and w >= 600)
+
+    _lt = getattr(ax, "_left_title", None)
+    if _lt is not None and _lt.get_text().strip() and not _bold(_lt):
+        warns.append("Hoofdtitel is niet vetgedrukt (invariant 17).")
+    for _t in list(ax.texts) + list(fig.texts):
+        try:
+            _col = _mc.to_hex(_t.get_color()).lower()
+        except Exception:
+            continue
+        if _t.get_text().strip() and _col == STYLE["subtitle_color"].lower() and _bold(_t):
+            warns.append("Subtitel is vetgedrukt — subtitel mag nooit vet (invariant 17).")
+            break
+
+    # NL-getalnotatie (invariant 16): geen Engelse duizendtal-komma (bv. '20,028')
+    import re as _re
+    _texts = list(ax.texts) + list(fig.texts)
+    if ax.get_legend() is not None:
+        _texts += list(ax.get_legend().get_texts())
+    _eng = _re.compile(r"\d,\d{3}(?!\d)")
+    for _t in _texts:
+        _s = _t.get_text()
+        if _s and _eng.search(_s):
+            warns.append(
+                f"Engelse getalnotatie in label ('{_s.strip()}') — gebruik nl_getal() (invariant 16).")
+            break
 
     if strict and warns:
         raise AssertionError("Kaart-validatie faalde:\n  - " + "\n  - ".join(warns))
