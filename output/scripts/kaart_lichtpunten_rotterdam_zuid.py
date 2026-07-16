@@ -17,7 +17,11 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
+import sys
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "General data"))
+from rotterdam import (style_map, finalize_map, place_legend, save_map,
+                       validate_map, nl_getal)
 DATA = ROOT / "General data" / "Data"
 OUT = ROOT / "output" / "maps"          # kaarten
 DATA_OUT = ROOT / "output" / "data"     # geexporteerde geodata
@@ -208,59 +212,27 @@ def main() -> None:
     # geen schaalstok: afstand niet relevant (invariant 14)
 
     area_patch = mpatches.Patch(
-        facecolor="#f6f3ee",
-        edgecolor="#8c8377",
+        facecolor="#f6f3ee", edgecolor="#8c8377",
         label=f"Gebieden Rotterdam Zuid ({len(zuid)})",
     )
     licht_handle = mlines.Line2D(
-        [],
-        [],
-        color="#145DA0",
-        marker="o",
-        linestyle="None",
-        markersize=6,
-        label=f"Lichtpunten ({len(lichtpunten_zuid):,})",
-    )
-    ax.legend(
-        handles=[area_patch, licht_handle],
-        title="Legenda",
-        loc="lower right",
-        frameon=True,
-        framealpha=0.95,
-        facecolor="white",
-        edgecolor="#d9d3cb",
+        [], [], color="#145DA0", marker="o", linestyle="None", markersize=6,
+        label=f"Lichtpunten ({nl_getal(len(lichtpunten_zuid))})",
     )
 
-    from matplotlib.transforms import ScaledTranslation
-    ax.set_title(
-        "Alle lichtpunten in Rotterdam Zuid",
-        fontsize=16,
-        fontweight="bold",
-        pad=28,
-    )
-    # subtitel: niet vet, kleiner dan de titel, net boven de kaart (titelhiërarchie)
-    ax.text(
-        0.5, 1.0, f"{len(lichtpunten_zuid):,} locaties in 8 gebieden",
-        transform=ax.transAxes + ScaledTranslation(0, 7 / 72, fig.dpi_scale_trans),
-        ha="center", va="bottom", fontsize=10.5, color="#555555",
-    )
-    ax.text(
-        0.5,
-        0.03,
-        "Bron: Gemeente Rotterdam, SB_Infra/LICHTPUNTEN en TIR-gebieden",
-        transform=fig.transFigure,
-        ha="center",
-        fontsize=9,
-        color="#5e5a55",
-    )
+    # Kaartelementen + footer via de library (conventies)
+    style_map(ax, "Alle lichtpunten in Rotterdam Zuid",
+              subtitle=f"{nl_getal(len(lichtpunten_zuid))} locaties in 8 gebieden")
+    finalize_map(fig, source="Obsurv (SB_Infra/LICHTPUNTEN) + TIR via diensten.rotterdam.nl")
+    place_legend(ax, [area_patch, licht_handle],
+                 [area_patch.get_label(), licht_handle.get_label()],
+                 title="Legenda", corner="auto", data=lichtpunten_zuid)
 
-    ax.set_axis_off()
-    plt.tight_layout()
-
-    png_out = OUT / "kaart_lichtpunten_rotterdam_zuid.png"
-    fig.savefig(png_out, dpi=150, bbox_inches="tight", facecolor="white")
-    plt.close(fig)
-    print(f"Kaart opgeslagen: {png_out}")
+    warns = validate_map(fig, ax, data=lichtpunten_zuid)
+    if warns:
+        print("Waarschuwingen:", *warns, sep="\n  - ")
+    out = save_map(fig, "kaart_lichtpunten_rotterdam_zuid")
+    print(f"Kaart opgeslagen: {out}")
 
 
 if __name__ == "__main__":
