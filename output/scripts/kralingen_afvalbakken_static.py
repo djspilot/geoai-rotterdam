@@ -1,13 +1,16 @@
 """Statische kaart: Kralingen-Crooswijk met afvalbakken per buurt."""
 
+import sys
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "General data"))
+from rotterdam import style_map, finalize_map, place_legend, save_map, validate_map
+
 BASE = ROOT / "General data" / "Data"
-OUT  = ROOT / "output" / "maps"
 
 # ── Data laden ────────────────────────────────────────────────────────────────
 buurten = gpd.read_file(BASE / "tir_buurten.geojson").set_crs(epsg=28992, allow_override=True)
@@ -58,22 +61,24 @@ for _, row in kralingen.iterrows():
         zorder=5,
     )
 
-# Legenda
+# Legenda-handles (kleur per buurt + aantal)
 patches = [
-    mpatches.Patch(color=kleur_map[naam], label=f"{naam}  ({len(afval_kralingen[afval_kralingen['BUURTNAAM']==naam])})")
+    mpatches.Patch(color=kleur_map[naam],
+                   label=f"{naam}  ({len(afval_kralingen[afval_kralingen['BUURTNAAM']==naam])})")
     for naam in buurt_namen
 ]
-ax.legend(handles=patches, title="Buurt (aantal afvalbakken)",
-          loc="lower right", fontsize=8, title_fontsize=9,
-          framealpha=0.9, edgecolor="#cccccc")
 
 totaal = len(afval_kralingen)
-ax.set_title(f"Afvalbakken in Kralingen-Crooswijk  (totaal: {totaal})",
-             fontsize=14, fontweight="bold", pad=14)
-ax.set_axis_off()
-plt.tight_layout()
+# Kaartelementen + footer via de library (conventies: titel/subtitel, bron, marges)
+style_map(ax, "Afvalbakken in Kralingen-Crooswijk",
+          subtitle=f"totaal: {totaal} afvalbakken")
+finalize_map(fig, source="Obsurv via diensten.rotterdam.nl")
+# Legenda in een datavrije hoek (invariant 8)
+place_legend(ax, handles=patches, labels=[p.get_label() for p in patches],
+             title="Buurt (aantal afvalbakken)", corner="auto", data=afval_kralingen)
 
-out = OUT / "kralingen_afvalbakken.png"
-plt.savefig(out, dpi=150, bbox_inches="tight")
-plt.close()
+warns = validate_map(fig, ax, data=afval_kralingen)
+if warns:
+    print("Waarschuwingen:", *warns, sep="\n  - ")
+out = save_map(fig, "kralingen_afvalbakken")
 print(f"Opgeslagen: {out}")
