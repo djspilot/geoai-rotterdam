@@ -13,8 +13,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
-PROJECT = Path(__file__).resolve().parent
-OUT = PROJECT / "output"
+OUT = Path(__file__).resolve().parents[2] / "output" / "maps"
 
 PLACE = "Dronten, Flevoland, Netherlands"
 UNITS = 100_000
@@ -166,7 +165,7 @@ def main():
     )
     fig.subplots_adjust(left=0.03, right=0.99, top=0.93, bottom=0.08)
 
-    OUT.mkdir(exist_ok=True)
+    OUT.mkdir(parents=True, exist_ok=True)
     out = OUT / "kaart_dronten_100k_containerwoningen.png"
     fig.savefig(out, dpi=150, bbox_inches="tight", facecolor="white")
     plt.close(fig)

@@ -17,8 +17,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
-DATA = Path("General data/Data")
-OUT = Path("output")
+ROOT = Path(__file__).resolve().parents[2]
+DATA = ROOT / "General data" / "Data"
+OUT = ROOT / "output" / "maps"          # kaarten
+DATA_OUT = ROOT / "output" / "data"     # geexporteerde geodata
 API_LAYER = "https://diensten.rotterdam.nl/arcgis/rest/services/SB_Infra/LICHTPUNTEN/MapServer/0/query"
 BATCH_SIZE = 2000
 
@@ -163,8 +165,9 @@ def main() -> None:
     print("Per gebied:")
     print(lichtpunten_zuid.groupby("GEBDNAAM").size().sort_values(ascending=False).to_string())
 
-    OUT.mkdir(exist_ok=True)
-    geojson_out = OUT / "lichtpunten_rotterdam_zuid.geojson"
+    OUT.mkdir(parents=True, exist_ok=True)
+    DATA_OUT.mkdir(parents=True, exist_ok=True)
+    geojson_out = DATA_OUT / "lichtpunten_rotterdam_zuid.geojson"
     lichtpunten_zuid.to_file(geojson_out, driver="GeoJSON")
     print(f"GeoJSON opgeslagen: {geojson_out}")
 
