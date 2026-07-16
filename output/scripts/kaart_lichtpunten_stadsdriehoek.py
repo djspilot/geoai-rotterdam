@@ -3,12 +3,20 @@ Kaart: Lichtpunten in Stadsdriehoek (Centrum), Rotterdam
 Download via ArcGIS REST + statische kaart met matplotlib/geopandas
 """
 
+import sys
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import pandas as pd
 import requests
 import json
+from pathlib import Path
 from urllib.parse import urlencode
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "General data"))
+from rotterdam import style_map, finalize_map, place_legend, save_map, validate_map
+
+DATA = ROOT / "General data" / "Data"
 
 # --- 1. Download lichtpunten voor Stadsdriehoek ---
 base_url = "https://diensten.rotterdam.nl/arcgis/rest/services/SB_Infra/LICHTPUNTEN/MapServer/0/query"
@@ -50,11 +58,11 @@ geojson = {"type": "FeatureCollection", "features": all_features}
 lichtpunten = gpd.GeoDataFrame.from_features(geojson, crs="EPSG:28992")
 
 # Sla op als GeoJSON voor hergebruik
-lichtpunten.to_file("General data/Data/lichtpunten_stadsdriehoek.geojson", driver="GeoJSON")
-print("Opgeslagen als General data/Data/lichtpunten_stadsdriehoek.geojson")
+lichtpunten.to_file(DATA / "lichtpunten_stadsdriehoek.geojson", driver="GeoJSON")
+print(f"Opgeslagen als {DATA / 'lichtpunten_stadsdriehoek.geojson'}")
 
 # --- 2. Laad TIR buurten voor de achtergrond ---
-buurten = gpd.read_file("General data/Data/tir_buurten.geojson")
+buurten = gpd.read_file(DATA / "tir_buurten.geojson")
 if buurten.crs is None:
     buurten = buurten.set_crs(epsg=28992)
 elif buurten.crs.to_epsg() != 28992:
@@ -85,15 +93,10 @@ if "LICHTPUNTTYPE" in lichtpunten.columns:
     for i, ltype in enumerate(sorted(types)):
         subset = lichtpunten[lichtpunten["LICHTPUNTTYPE"].fillna("Onbekend") == ltype]
         subset.plot(ax=ax, markersize=5, color=cmap(i), alpha=0.7, label=ltype)
-    ax.legend(title="Lichtpunttype", fontsize=7, title_fontsize=9,
-              loc="upper left", framealpha=0.9)
 else:
-    lichtpunten.plot(ax=ax, markersize=5, color="#e74c3c", alpha=0.6)
+    lichtpunten.plot(ax=ax, markersize=5, color="#e74c3c", alpha=0.6, label="Lichtpunt")
 
-# Annotatie
-ax.set_title(f"Lichtpunten in Stadsdriehoek (Centrum)\n{len(lichtpunten)} lichtpunten",
-             fontsize=14, fontweight="bold")
-ax.set_axis_off()
+ax.set_aspect("equal")
 
 # Voeg buurt labels toe
 for _, row in stadsdriehoek.iterrows():
@@ -107,8 +110,17 @@ for _, row in stadsdriehoek.iterrows():
         ax.annotate(label, xy=(centroid.x, centroid.y), fontsize=5,
                     ha="center", va="center", color="#555555")
 
-plt.tight_layout()
-output_path = "kaart_lichtpunten_stadsdriehoek.png"
-plt.savefig(output_path, dpi=150, bbox_inches="tight")
-print(f"Kaart opgeslagen als {output_path}")
-plt.close()
+# Kaartelementen + footer via de library (conventies)
+style_map(ax, "Lichtpunten in Stadsdriehoek (Centrum)",
+          subtitle=f"{len(lichtpunten)} lichtpunten")
+finalize_map(fig, source="Obsurv via diensten.rotterdam.nl")
+_handles, _labels = ax.get_legend_handles_labels()
+if _handles:
+    place_legend(ax, _handles, _labels, title="Lichtpunttype", corner="auto",
+                 data=lichtpunten)
+
+warns = validate_map(fig, ax, data=lichtpunten)
+if warns:
+    print("Waarschuwingen:", *warns, sep="\n  - ")
+out = save_map(fig, "kaart_lichtpunten_stadsdriehoek")
+print(f"Kaart opgeslagen: {out}")
