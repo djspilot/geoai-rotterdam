@@ -8,7 +8,11 @@ import matplotlib.colors as mcolors
 import folium
 from pathlib import Path
 
+import sys
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "General data"))
+from rotterdam import choropleth, finalize_map, save_map, validate_map
+
 BASE = ROOT / "General data" / "Data"
 OUT  = ROOT / "output" / "maps"
 
@@ -31,40 +35,34 @@ counts = joined.groupby("BUURTNAAM").size().reset_index(name="aantal_bomen")
 buurten = buurten.merge(counts, on="BUURTNAAM", how="left")
 buurten["aantal_bomen"] = buurten["aantal_bomen"].fillna(0).astype(int)
 
+# Normaliseren (invariant 3): bomen per hectare i.p.v. ruwe aantallen
+buurten["opp_ha"] = buurten.geometry.area / 10_000.0
+buurten["bomen_per_ha"] = (buurten["aantal_bomen"] / buurten["opp_ha"]).round(1)
+
 top10 = buurten.nlargest(10, "aantal_bomen")[["BUURTNAAM", "GEBDNAAM", "aantal_bomen"]]
 print("\nTop 10 buurten met meeste bomen:")
 print(top10.to_string(index=False))
 
-# ── 4. Statische choropleth (PNG) ─────────────────────────────────────────────
+# ── 4. Statische choropleet (genormaliseerd: bomen per hectare) ──────────────
 print("\nStatische kaart opslaan...")
-fig, ax = plt.subplots(1, 1, figsize=(14, 12))
-buurten.plot(
-    column="aantal_bomen",
-    cmap="YlGn",
-    legend=True,
-    legend_kwds={"label": "Aantal bomen", "shrink": 0.6},
-    edgecolor="#666666",
-    linewidth=0.4,
-    ax=ax,
-    missing_kwds={"color": "#eeeeee", "label": "Geen data"},
+fig, ax = choropleth(
+    buurten, "bomen_per_ha", cmap="YlGn",
+    title="Boomdichtheid per buurt — Gemeente Rotterdam",
+    subtitle="bomen per hectare (Obsurv)",
 )
-# Voeg buurtnamen toe voor top 10
-for _, row in buurten.nlargest(10, "aantal_bomen").iterrows():
-    cx = row.geometry.centroid.x
-    cy = row.geometry.centroid.y
+# top-5 dichtste buurten labelen
+for _, row in buurten.nlargest(5, "bomen_per_ha").iterrows():
+    c = row.geometry.representative_point()
     ax.annotate(
-        f"{row['BUURTNAAM']}\n{row['aantal_bomen']:,}",
-        xy=(cx, cy), ha="center", va="center",
-        fontsize=5.5, color="#222222",
+        str(row["BUURTNAAM"]), xy=(c.x, c.y), ha="center", va="center",
+        fontsize=6, color="#222222",
         bbox=dict(boxstyle="round,pad=0.2", fc="white", alpha=0.6, ec="none"),
     )
-ax.set_title("Bomen per buurt – Gemeente Rotterdam", fontsize=16,
-             fontweight="bold", pad=12)
-ax.set_axis_off()
-plt.tight_layout()
-out_png = OUT / "bomen_per_buurt.png"
-plt.savefig(out_png, dpi=150, bbox_inches="tight")
-plt.close()
+finalize_map(fig, source="Obsurv (bomen) + TIR-buurten via diensten.rotterdam.nl")
+warns = validate_map(fig, ax, data=buurten, normalized=True)
+if warns:
+    print("Waarschuwingen:", *warns, sep="\n  - ")
+out_png = save_map(fig, "bomen_per_buurt")
 print(f"  Opgeslagen: {out_png}")
 
 # ── 5. Interactieve Folium choropleth (HTML) ──────────────────────────────────
