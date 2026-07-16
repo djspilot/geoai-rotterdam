@@ -96,13 +96,13 @@ def _nice_number(x: float) -> float:
 
 def add_scalebar(ax, location: str = "lower left", total_m: int | None = None,
                  n_segments: int = 5, *, inside: bool = False,
-                 box: bool = False, variant: str = "A") -> None:
+                 box: bool = False, variant: str = "B") -> None:
     """Scale bar with tick labels, assuming EPSG:28992 for the data axis. Twee
     varianten (zelfde lengte, labels, eenheid en plaatsing):
 
-    - **"A"** (default): geblokte balk — `n_segments` afwisselend zwart/witte blokken.
-    - **"B"**: één enkele **lijn** met verticale streepjes bij elke segmentgrens
-      i.p.v. de blokken.
+    - **"B"** (**default**): één enkele **lijn** met verticale streepjes bij elke
+      segmentgrens.
+    - **"A"**: geblokte balk — `n_segments` afwisselend zwart/witte blokken.
 
     By default the bar sits *below* the map (in the bottom margin) so it never
     overlaps the geometry. With `inside=True` it is drawn *on* the map in a bottom
@@ -289,13 +289,12 @@ def add_scale_ratio(ax, *, prefix: str = "1:", loc: str = "lower left") -> str:
 
 
 def add_north_arrow(ax, x: float | None = None, y: float | None = None, *,
-                    corner: str = "upper left", variant: str = "A") -> None:
+                    corner: str = "upper left", variant: str = "B") -> None:
     """Triangular north arrow with 'N' above the apex, at the **top** of the map
     (invariant 13). Twee varianten (identiek qua vorm/plaatsing):
 
-    - **"A"** (Noordpijl A, default): tweekleurig — linkerhelft zwart, rechterhelft
-      wit.
-    - **"B"** (Noordpijl B): **volledig zwart** — beide helften zwart.
+    - **"B"** (Noordpijl B, **default**): volledig zwart — beide helften zwart.
+    - **"A"** (Noordpijl A): tweekleurig — linkerhelft zwart, rechterhelft wit.
 
     `corner`: 'upper left' (default) or 'upper right' — use the right corner when
     the left is occupied (e.g. by the legend). Drawn at a **fixed physical size**
@@ -483,7 +482,7 @@ def add_rotterdam_basemap(ax, layer: str = "grijs", *, max_tiles: int = 400,
 
 def style_map(ax, title: str, *, subtitle: str | None = None,
               scalebar: bool = False, north: "bool | str" = False,
-              north_variant: str = "A", scalebar_variant: str = "A") -> None:
+              north_variant: str = "B", scalebar_variant: str = "B") -> None:
     """Apply Rotterdam cartographic styling to one axes.
 
     `north`: **default False** — een noordpijl is alleen nodig als het noorden niet
