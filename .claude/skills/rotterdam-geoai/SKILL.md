@@ -1,6 +1,6 @@
 ---
 name: rotterdam-geoai
-description: Use when working with Rotterdam municipality GIS data, IMBOR 2025 asset management model, TIR territorial boundaries, Dutch public space (beheer openbare ruimte) datasets, or when asked to create maps/visualizations of Rotterdam assets. Triggers on Rotterdam geodata, WFS services, ArcGIS REST endpoints, IMBOR vocabulary, TIR gebieden/buurten, QGIS workflows, or questions like "toon op kaart", "maak een kaart", "where are the trees", "hoeveel per wijk".
+description: 'Gebruik deze skill voor alle GIS-taken over de gemeente Rotterdam: kaarten maken en data ophalen/koppelen van Rotterdamse openbare-ruimte-assets (Obsurv: afvalbakken, bomen, lichtpunten, banken, containers, wegvakonderdelen), de TIR-indeling (gemeente/gebied/buurt/subbuurt), CBS wijken en buurten, IMBOR 2025-vocabulaire en Rotterdamse WFS/ArcGIS-endpoints. Zet de skill in zodra iemand vraagt om "maak/toon een kaart van Rotterdam", een choropleet of puntenkaart per buurt/wijk/gebied, "hoeveel per wijk", "waar staan de bomen/afvalbakken", een buurten-/wijken-/grenzenkaart, of om Rotterdamse geodata te laden en te visualiseren - ook als het woord "kaart" niet valt maar het duidelijk om Rotterdamse asset- of gebiedsdata gaat. Niet voor andere gemeenten of algemene, niet-Rotterdamse GIS-vragen.'
 ---
 
 # Rotterdam GeoAI
