@@ -186,6 +186,8 @@ def choropleth(
             "frameon": True,
             "facecolor": "white",
             "edgecolor": STYLE["separator_color"],
+            # hele getallen in de labels als de grenzen op integers zijn afgerond
+            "fmt": "{:.0f}" if integer_breaks else "{:.2f}",
             **_legend_anchor(ax, "lower right"),
         },
     )
@@ -193,5 +195,8 @@ def choropleth(
     if leg is not None:
         leg.set_alignment("left")
         leg.get_title().set_fontweight("bold")
+        # bereik-labels met een streepje i.p.v. komma: "0 - 6" i.p.v. "0, 6"
+        for _t in leg.get_texts():
+            _t.set_text(_t.get_text().replace(", ", " - "))
     style_map(ax, title, subtitle=subtitle)
     return fig, ax
