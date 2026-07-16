@@ -29,7 +29,7 @@ Rules:
 9. **Normalisatie**: voor choropleet altijd / inwoners of oppervlak.
 10. **Palet**: sequentieel voor oplopend, divergerend voor afwijkingen. Gebruik ColorBrewer.
 
-`rotterdam.style_map(ax, title)` voegt titel en noordpijl in één call toe (schaalstok optioneel via `scalebar=True`, standaard uit).
+`rotterdam.style_map(ax, title)` zet de titel (+ subtitel via `subtitle=`). Noordpijl en schaalstok staan **standaard uit** — alleen aanzetten wanneer nodig (invarianten 13/14).
 
 ## Map type beslisboom
 
@@ -49,7 +49,7 @@ Alle defaults zitten in `rotterdam.STYLE`. Aanpassen op één plek = elke kaart 
 
 - **Font**: Helvetica Neue / Helvetica / Arial / DejaVu Sans (eerst beschikbare).
 - **Titel**: 16pt bold, donkergrijs `#1a1a1a`, links uitgelijnd, pad 14.
-- **Subtitel**: 10.5pt, grijs `#555`, direct onder titel.
+- **Subtitel**: 10.5pt normaal (nooit vet), grijs `#555`, boven de kaart onder de titel.
 - **Footer**: 7.5pt, lichtgrijs `#888`, met dunne separator daarboven.
 - **Figure size**: stad `(12, 10)` of `(14, 12)`; gebied/buurt `(10, 10)` of `(12, 12)`.
 - **Markersize**: stadbreed dens `0.3–1`; gebied/buurt `2–6`.
@@ -74,7 +74,7 @@ save_map(fig, "naam")
 ```
 
 `finalize_map` regelt: footer met bron + datum, dunne separator, marges, optionele suptitle/subtitle.
-`validate_map` checkt de 10 richtlijnen — fix de warnings vóór `save_map`.
+`validate_map` checkt titel, legenda, CRS, normalisatie/klassen, **bronvermelding**, **titelhiërarchie** (hoofdtitel vet, subtitel niet vet) en **NL-getalnotatie** — fix de warnings vóór `save_map`.
 
 ## Default kaartoutput
 
