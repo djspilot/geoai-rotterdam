@@ -21,7 +21,7 @@ from matplotlib.lines import Line2D
 
 from rotterdam import (
     load_layer, style_map, finalize_map, place_legend, validate_map,
-    add_north_arrow, add_scalebar, choropleth,
+    add_north_arrow, add_scalebar, add_proportional_legend, choropleth,
 )
 
 _failures: list[str] = []
@@ -76,6 +76,18 @@ _wc = validate_map(figc, axc, data=buurten, normalized=True)
 check("choropleth: geen normalisatie-warning", not any("normalisatie" in x for x in _wc))
 check("choropleth: bronvermelding aanwezig", not any("bronvermelding" in x for x in _wc))
 plt.close(figc)
+
+# 5. Proportionele-symbool legenda telt als legenda (geen ax.legend, wél gemarkeerd)
+figp, axp = plt.subplots(figsize=(8, 8))
+gem.boundary.plot(ax=axp, color="#333")
+axp.scatter([gem.geometry.iloc[0].centroid.x], [gem.geometry.iloc[0].centroid.y], s=[100])
+style_map(axp, "Proportioneel-test")
+finalize_map(figp, source="TIR via diensten.rotterdam.nl")
+add_proportional_legend(axp, values=[10, 50], sizes=[60, 300], corner="auto")
+_wp = validate_map(figp, axp, data=gem)
+check("proportionele legenda: geen 'geen legenda'-warning",
+      not any("Geen legenda" in x for x in _wp))
+plt.close(figp)
 
 print()
 if _failures:

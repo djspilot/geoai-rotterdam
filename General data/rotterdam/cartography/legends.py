@@ -333,6 +333,7 @@ def add_proportional_legend(ax, values, sizes, *, title="Legenda",
     box = Rectangle((0, 0), W, H, transform=tr, facecolor=BOX_FACECOLOR,
                     alpha=BOX_ALPHA, edgecolor=BOX_EDGECOLOR,
                     linewidth=BOX_LINEWIDTH, zorder=9, clip_on=False)
+    box.set_gid(LEGEND_GID)
     ax.add_patch(box)
     if title:
         ax.text(P, H - P, str(title), transform=tr, ha="left", va="top",
@@ -432,6 +433,7 @@ def add_swatch_legend(ax, colors, labels, *, title="Legenda", legendakop=None,
     box = Rectangle((0, 0), W, H, transform=tr, facecolor=BOX_FACECOLOR,
                     alpha=BOX_ALPHA, edgecolor=BOX_EDGECOLOR,
                     linewidth=BOX_LINEWIDTH, zorder=9, clip_on=False)
+    box.set_gid(LEGEND_GID)
     ax.add_patch(box)
     y = H - P
     if title:

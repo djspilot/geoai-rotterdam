@@ -37,7 +37,10 @@ def validate_map(
 
     has_legend = ax.get_legend() is not None
     has_colorbar = len(fig.axes) > 1
-    if not (has_legend or has_colorbar):
+    # Zelf-getekende legenda's (add_proportional_legend / add_swatch_legend) zijn geen
+    # echte ax.legend(); ze markeren hun kader met LEGEND_GID.
+    has_drawn_legend = any(p.get_gid() == LEGEND_GID for p in ax.patches)
+    if not (has_legend or has_colorbar or has_drawn_legend):
         warns.append("Geen legenda of colorbar.")
 
     if data is not None:

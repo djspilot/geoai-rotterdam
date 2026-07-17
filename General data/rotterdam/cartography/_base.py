@@ -35,6 +35,11 @@ LEGEND_MARGIN = (0.01, 0.014)  # (x, y) axes fraction
 MARGIN_MM = 3.3                # verticale hoekmarge in mm
 MARGIN_IN = MARGIN_MM * MM     # zelfde marge in inch (matplotlib rekent in inch)
 
+# gid waarmee zelf-getekende legenda's (add_proportional_legend / add_swatch_legend)
+# hun kader markeren, zodat validate_map ze als legenda herkent (ze zijn geen echte
+# ax.legend()).
+LEGEND_GID = "rotterdam-drawn-legend"
+
 # Shared white box behind the legend / scale bar, so those frames always use the
 # same colour and transparency. `alpha`/`facecolor`/`edgecolor` are applied to the
 # legend (via ax.legend framealpha) and to the drawn scale-bar / size-legend boxes.
@@ -104,7 +109,7 @@ def _nice_number(x: float) -> float:
 
 
 __all__ = [
-    "MM", "LEGEND_MARGIN", "MARGIN_MM", "MARGIN_IN",
+    "MM", "LEGEND_MARGIN", "MARGIN_MM", "MARGIN_IN", "LEGEND_GID",
     "BOX_FACECOLOR", "BOX_ALPHA", "BOX_EDGECOLOR", "BOX_LINEWIDTH",
     "STYLE", "ASSET_COLORS", "RD_NEW", "MAPS_DIR", "nl_getal",
     "setup_headless_matplotlib",
