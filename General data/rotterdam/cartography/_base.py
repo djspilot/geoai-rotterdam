@@ -20,12 +20,20 @@ import geopandas as gpd
 from ..paths import MAPS_DIR
 from ..vocab import ASSET_COLORS, RD_NEW, STYLE, nl_getal
 
+# matplotlib's fysieke eenheid is de inch (dpi_scale_trans). We stellen de
+# lay-out-marges echter in MILLIMETERS op (leesbaarder in NL-context) en rekenen op
+# het gebruikspunt om: inches = mm * MM.
+MM = 1.0 / 25.4                # inch per millimeter
+
 # Corner elements (legend, north arrow, inside scale bar) sit at a fixed distance
 # from the map edge: LEGEND_MARGIN[0] = horizontal inset in *axes fraction*;
-# MARGIN_IN = vertical inset in *inches* (fixed physical size so it doesn't scale
-# with the map's aspect ratio). LEGEND_MARGIN[1] is kept for backward-compat.
+# MARGIN_MM = vertical inset in *millimeters* (fixed physical size so it doesn't scale
+# with the map's aspect ratio). MARGIN_IN is the same value in inches, afgeleid van de
+# mm-bron, zodat de op inch gebaseerde plaatsingscode ongewijzigd blijft werken.
+# LEGEND_MARGIN[1] is kept for backward-compat.
 LEGEND_MARGIN = (0.01, 0.014)  # (x, y) axes fraction
-MARGIN_IN = 0.13               # vertical corner margin in inches
+MARGIN_MM = 3.3                # verticale hoekmarge in mm
+MARGIN_IN = MARGIN_MM * MM     # zelfde marge in inch (matplotlib rekent in inch)
 
 # Shared white box behind the legend / scale bar, so those frames always use the
 # same colour and transparency. `alpha`/`facecolor`/`edgecolor` are applied to the
@@ -96,7 +104,7 @@ def _nice_number(x: float) -> float:
 
 
 __all__ = [
-    "LEGEND_MARGIN", "MARGIN_IN",
+    "MM", "LEGEND_MARGIN", "MARGIN_MM", "MARGIN_IN",
     "BOX_FACECOLOR", "BOX_ALPHA", "BOX_EDGECOLOR", "BOX_LINEWIDTH",
     "STYLE", "ASSET_COLORS", "RD_NEW", "MAPS_DIR", "nl_getal",
     "setup_headless_matplotlib",

@@ -145,32 +145,42 @@ def finalize_map(
                 cur = trial
         lines.append(cur)
 
+    # De footer + ondermarge staan volledig in FYSIEKE millimeters vanaf de
+    # figuur-onderrand. Zo verschuift de lay-out niet als fit_figure_to_data de
+    # figuurhoogte aanpast — met figuur-fracties bewoog de witband tussen kaart en
+    # footer namelijk mee met de hoogte (de terugkerende "witrand aan de onderzijde").
     n = len(lines)
-    line_in = fs / 72.0 * 1.7               # physical line pitch (inches)
-    base = 0.02                             # bottom line baseline (figure fraction)
+    line_mm = fs / 72.0 * 25.4 * 1.7        # regelafstand (mm), afgeleid van de fontgrootte
+    cap_mm = fs / 72.0 * 25.4 * 0.95        # ~hoogte van een footer-regel (mm)
+    pad_bottom_mm = 2.5                     # onderste footer-regel boven de figuurrand
+    sep_gap_mm = 1.3                        # scheidingslijn boven de bovenste regel
+    map_gap_mm = 1.5 if tight_bottom else 2.5   # vaste witmarge kaart <-> scheidingslijn
 
-    # Draw lines stacked upward from the bottom with a fixed physical pitch (so the
-    # spacing survives fit_figure_to_data resizing the figure height). i=0 is top.
+    def _from_bottom(y_mm):                 # y_mm millimeter boven de figuur-onderrand
+        return fig.transFigure + ScaledTranslation(0, y_mm * MM, fig.dpi_scale_trans)
+
+    # Footer-regels van onder naar boven gestapeld (i=0 = bovenste regel).
     for i, ln in enumerate(lines):
-        off = (n - 1 - i) * line_in
-        tr = fig.transFigure + ScaledTranslation(0, off, fig.dpi_scale_trans)
-        fig.text(0.05, base, ln, transform=tr, fontsize=fs,
-                 color=STYLE["footer_color"], ha="left")
-    top_off = (n - 1) * line_in
-    trp = fig.transFigure + ScaledTranslation(0, top_off, fig.dpi_scale_trans)
-    fig.text(0.95, base, publisher, transform=trp, fontsize=fs,
-             color=STYLE["footer_color"], ha="right")
+        y_mm = pad_bottom_mm + (n - 1 - i) * line_mm
+        fig.text(0.05, 0.0, ln, transform=_from_bottom(y_mm), fontsize=fs,
+                 color=STYLE["footer_color"], ha="left", va="baseline")
+    top_baseline_mm = pad_bottom_mm + (n - 1) * line_mm
+    fig.text(0.95, 0.0, publisher, transform=_from_bottom(top_baseline_mm), fontsize=fs,
+             color=STYLE["footer_color"], ha="right", va="baseline")
 
-    # Separator just above the top footer line (0.04 for a single line; rises with
-    # extra lines). The map bottom margin grows by the extra footer height.
-    sep_y = max(0.04, base + (top_off + 0.55 * line_in) / figh)
-    sep = mlines.Line2D([0.05, 0.95], [sep_y, sep_y],
-                        color=STYLE["separator_color"], lw=0.5,
-                        transform=fig.transFigure, figure=fig)
+    # Scheidingslijn net boven de bovenste footer-regel; de kaart-onderrand houdt een
+    # vaste fysieke marge (`map_gap_mm`) daarboven.
+    sep_mm = top_baseline_mm + cap_mm + sep_gap_mm
+    sep = mlines.Line2D([0.05, 0.95], [0.0, 0.0], color=STYLE["separator_color"],
+                        lw=0.5, transform=_from_bottom(sep_mm), figure=fig)
     fig.lines.append(sep)
 
-    bottom = (0.05 if tight_bottom else 0.08) + (n - 1) * line_in / figh
-    fig.subplots_adjust(left=pad, right=1 - pad, top=top, bottom=bottom)
+    bottom_mm = sep_mm + map_gap_mm
+    fig.subplots_adjust(left=pad, right=1 - pad, top=top, bottom=bottom_mm * MM / figh)
+
+    # Fysieke boven-/ondermarge (in mm) bewaren zodat fit_figure_to_data ze exact behoudt.
+    fig._rot_top_mm = (1 - top) * figh / MM
+    fig._rot_bottom_mm = bottom_mm
 
 
 def fit_figure_to_data(fig, ax) -> None:
@@ -190,10 +200,21 @@ def fit_figure_to_data(fig, ax) -> None:
     data_aspect = (x1 - x0) / dh
     sp = fig.subplotpars
     w_frac = sp.right - sp.left
-    h_frac = sp.top - sp.bottom
-    if w_frac <= 0 or h_frac <= 0 or data_aspect <= 0:
+    if w_frac <= 0 or data_aspect <= 0:
         return
-    figw, _ = fig.get_size_inches()
-    fig.set_size_inches(figw, figw * w_frac / (data_aspect * h_frac))
+    figw, figh = fig.get_size_inches()
+    # Behoud de FYSIEKE boven-/ondermarge (header met titel, footerblok) en pas alleen
+    # de ashoogte aan zodat de gelijk-aspect kaart de plotruimte exact vult. De oude
+    # aanpak hield de *fracties* gelijk, waardoor die marges — en dus de witband onder
+    # de kaart — met de nieuwe figuurhoogte meebewogen. Marges in mm; matplotlib's
+    # set_size_inches werkt in inch, dus reken om via MM.
+    top_in = getattr(fig, "_rot_top_mm", (1 - sp.top) * figh / MM) * MM
+    bot_in = getattr(fig, "_rot_bottom_mm", sp.bottom * figh / MM) * MM
+    axes_h_in = figw * w_frac / data_aspect
+    new_figh = top_in + axes_h_in + bot_in
+    if new_figh <= 0:
+        return
+    fig.set_size_inches(figw, new_figh)
+    fig.subplots_adjust(top=1 - top_in / new_figh, bottom=bot_in / new_figh)
 
 
