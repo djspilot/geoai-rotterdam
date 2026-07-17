@@ -44,15 +44,23 @@ Alt WFS: `https://www.gis.rotterdam.nl/gisweb2/INTIR.COM/wfs?Service=WFS&Request
 
 ### Assets (folder: SB_Infra)
 
-| Asset | MapServer |
-|-------|-----------|
-| Bomen | `SB_Infra/Bomen/MapServer` |
-| Afvalbakken | `SB_Infra/Afvalbak/MapServer` |
-| Banken | `SB_Infra/Banken/MapServer` |
-| Lichtpunten | `SB_Infra/LICHTPUNTEN/MapServer` |
-| Wegvakonderdelen | `SB_Infra/Wegvakonderdelen/MapServer` |
-| Containers | `SB_Infra/Container/MapServer` |
-| Verkeersborden | `SB_Infra/Verkeersborden/MapServer` (RVV-modelcode in `MODELNUMMER`, bv. `A0150%` = maximumsnelheid 50 km/u) |
+**Alle openbare-ruimte-assets van `SB_Infra` staan in `rotterdam.ARCGIS_LAYERS`** (64 lagen; test-/duplicaatservices weggelaten). Sleutel = lowercase servicenaam, waarde = `.../MapServer/0`; de geometrie (punt/lijn/vlak) staat als commentaar bij elke regel in `vocab.py`. Ophalen: `fetch_arcgis_layer(ARCGIS_LAYERS["<sleutel>"], where=...)`.
+
+Veelgebruikt (volledige lijst in `vocab.py`):
+
+| Asset | Sleutel | Bijzonderheid |
+|-------|---------|---------------|
+| Bomen | `bomen` | |
+| Afvalbakken | `afvalbakken` | |
+| Banken | `banken` | |
+| Lichtpunten | `lichtpunten` | |
+| Containers | `containers` | |
+| Wegvakonderdelen | `wegvakonderdelen` | |
+| Verkeersborden | `verkeersborden` | RVV-modelcode in `MODELNUMMER`, bv. `A0150%` = maximumsnelheid 50 km/u |
+| Speeltoestellen / Speelplekken | `speeltoestellen` / `speelplekken` | |
+| Laadpalen / Parkeerautomaat | `laadpalen` / `parkeerautomaat` | |
+| Kolken / Straatgoot | `kolken` / `straatgoot` | riolering/afwatering |
+| Groen (punt/vlak) | `groen_punten` / `groen_vlakken` | |
 
 Voor WFS: vervang `rest/services` door `services` en plak `WFSServer?request=GetCapabilities&service=WFS` aan het pad.
 
