@@ -16,12 +16,12 @@ from matplotlib.lines import Line2D
 from rotterdam import (
     load_layer, fetch_arcgis_layer, style_map, finalize_map, fit_figure_to_data,
     place_legend, add_rotterdam_basemap, add_pdok_basemap, validate_map, save_map,
-    setup_headless_matplotlib, RD_NEW, CACHE,
+    setup_headless_matplotlib, RD_NEW, CACHE, ARCGIS_LAYERS,
 )
 
 setup_headless_matplotlib()
 
-SPEEL_URL = "https://diensten.rotterdam.nl/arcgis/rest/services/SB_Infra/Speelplekken/MapServer/0"
+SPEEL_URL = ARCGIS_LAYERS["speelplekken"]
 CACHE_FILE = CACHE / "speelplekken.geojson"
 SPEEL_KLEUR = "#2c7fb8"
 
