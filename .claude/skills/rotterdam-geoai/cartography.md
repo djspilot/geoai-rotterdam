@@ -18,14 +18,14 @@ Rules:
 
 ## Verplichte kaartelementen
 
-1. **Titel** bovenaan met onderwerp + locatie + (indien bekend) periode.
+1. **Titel** bovenaan: hoofdtitel = onderwerp + locatie (Rotterdam + evt. gebied/buurt), subtitel = eenheid/normalisatie + evt. bron/periode. Mensentaal (geen kolomnamen), zinshoofdletter, geen afsluitende punt, beschrijvend i.p.v. duidend. Volledige compositieregels: invariant 19.
 2. **Legenda** met alle afgebeelde objecten. Ontbrekende waarden labelen als `"Waarde onbekend"`.
 <!-- 3. **Schaalstok** in metrische eenheden, afgerond. -->
 4. **Projectie**: kaarten over NL altijd in **EPSG:28992**. Geen Mercator.
 5. **Laagvolgorde**: punten > lijnen > vlakken (punten bovenaan).
 6. **Labels**: dunne witte halo wanneer ondergrond bont is.
 7. **Contrast**: aparte kleuren per objecttype.
-8. **Classificatie**: max 5 klassen (absoluut max 9), grenzen op ronde getallen.
+8. **Classificatie**: max 5 klassen (absoluut max 9), grenzen op ronde getallen. Toon klasse-labels als bereik met een **streepje** (`"0 - 6"`, niet `"0, 6"`) en — bij op hele getallen afgeronde grenzen — zonder decimalen. `choropleth()` doet dit automatisch (`integer_breaks=True`).
 9. **Normalisatie**: voor choropleet altijd / inwoners of oppervlak.
 10. **Palet**: sequentieel voor oplopend, divergerend voor afwijkingen. Gebruik ColorBrewer.
 
