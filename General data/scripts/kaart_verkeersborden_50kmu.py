@@ -21,12 +21,12 @@ from matplotlib.lines import Line2D
 from rotterdam import (
     load_layer, fetch_arcgis_layer, style_map, finalize_map, fit_figure_to_data,
     place_legend, add_rotterdam_basemap, add_pdok_basemap, validate_map, save_map,
-    setup_headless_matplotlib, nl_getal, RD_NEW, CACHE,
+    setup_headless_matplotlib, nl_getal, RD_NEW, CACHE, ARCGIS_LAYERS,
 )
 
 setup_headless_matplotlib()
 
-BORD_URL = "https://diensten.rotterdam.nl/arcgis/rest/services/SB_Infra/Verkeersborden/MapServer/0"
+BORD_URL = ARCGIS_LAYERS["verkeersborden"]
 WHERE = "MODELNUMMER LIKE 'A0150%'"      # A1 maximumsnelheid 50 km/u (alle varianten)
 CACHE_FILE = CACHE / "verkeersborden_50kmu.geojson"
 BORD_KLEUR = "#d42027"                    # RVV-rood

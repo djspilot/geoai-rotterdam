@@ -56,6 +56,7 @@ ARCGIS_LAYERS = {
     "lichtpunten":       f"{ARCGIS_BASE}/SB_Infra/LICHTPUNTEN/MapServer/0",
     "wegvakonderdelen":  f"{ARCGIS_BASE}/SB_Infra/Wegvakonderdelen/MapServer/0",
     "containers":        f"{ARCGIS_BASE}/SB_Infra/Container/MapServer/0",
+    "verkeersborden":    f"{ARCGIS_BASE}/SB_Infra/Verkeersborden/MapServer/0",
 }
 
 # In asset layers (Lichtpunten, Afvalbak, ...) WIJK = TIR buurt, BUURT = TIR subbuurt.

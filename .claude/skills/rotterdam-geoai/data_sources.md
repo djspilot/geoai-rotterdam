@@ -52,6 +52,7 @@ Alt WFS: `https://www.gis.rotterdam.nl/gisweb2/INTIR.COM/wfs?Service=WFS&Request
 | Lichtpunten | `SB_Infra/LICHTPUNTEN/MapServer` |
 | Wegvakonderdelen | `SB_Infra/Wegvakonderdelen/MapServer` |
 | Containers | `SB_Infra/Container/MapServer` |
+| Verkeersborden | `SB_Infra/Verkeersborden/MapServer` (RVV-modelcode in `MODELNUMMER`, bv. `A0150%` = maximumsnelheid 50 km/u) |
 
 Voor WFS: vervang `rest/services` door `services` en plak `WFSServer?request=GetCapabilities&service=WFS` aan het pad.
 
