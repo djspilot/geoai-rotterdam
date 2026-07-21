@@ -39,7 +39,8 @@ Rules:
 | > 5000 punten, citywide | Hexbin of kleine scatter met alpha | matplotlib hexbin |
 | Waarde per gebied (genormaliseerd) | Choropleth, sequentieel | `choropleth()` |
 | Afwijking van centraal punt | Choropleth, divergerend | `choropleth(cmap="RdBu")` |
-| Proportionele grootte per locatie | Scaled symbol (cirkel-oppervlak ∝ waarde) | matplotlib scatter `s=` |
+| Proportionele grootte per locatie | Scaled symbol (cirkel-oppervlak ∝ waarde) | scatter `s=` + `add_proportional_legend` — patroon 11 |
+| Absoluut aantal per gebied (niet genormaliseerd) | Proportionele cirkel op de centroïde | patroon 11 (géén choropleet) |
 | Twee variabelen per gebied | Bivariate choropleth of zij-aan-zij | twee `choropleth()` calls |
 | Categorische verdeling | Dot map met kleur per categorie | `point_map()` per categorie |
 

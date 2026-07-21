@@ -261,7 +261,8 @@ def place_legend(ax, handles=None, labels=None, *, corner="auto", data=None,
 def add_proportional_legend(ax, values, sizes, *, title="Legenda",
                             corner="auto", data=None, facecolor="#2c7fb8",
                             edgecolor="#0b3d5c", alpha=0.55, fontsize=9,
-                            gap_in: float = 0.16, fmt=None):
+                            gap_in: float = 0.16, fmt=None, extras=None,
+                            extra_edgecolor="#8c8c8c", extra_alpha: float = 1.0):
     """Proportional-circle size legend with **equal vertical whitespace** between
     the circles (constant edge-to-edge gap, so the spacing looks even even though
     the circles differ in size — matplotlib's own legend can only equalise the
@@ -270,7 +271,12 @@ def add_proportional_legend(ax, values, sizes, *, title="Legenda",
     `values` : label per circle (numbers or strings, any order),
     `sizes`  : matching scatter areas — the same `s` you passed to `ax.scatter`,
                so the legend circles are exactly the plotted sizes,
-    `fmt`    : optional formatter for numeric `values` (default NL thousands).
+    `fmt`    : optional formatter for numeric `values` (default NL thousands),
+    `extras` : optional `[(facecolor, label), ...]` swatch rows drawn as small
+               squares **below** the circle stack, in the same box. Use it for a
+               class that is not a size but a fill — e.g. a light-grey
+               "Geen bomen" / "Geen gegevens" area (invariant 4: the legend shows
+               every object on the map).
 
     Circles are stacked largest-at-the-bottom at a fixed physical size on a fitted
     white box, auto-placed like `place_legend` (corner -> edge -> side panel; see
@@ -303,7 +309,8 @@ def add_proportional_legend(ax, values, sizes, *, title="Legenda",
         t.figure = fig
         return t.get_window_extent(rend).width / fig.dpi
 
-    lab_w = max(_txt_w(fmt(v)) for v in vals)
+    extras = list(extras or [])
+    lab_w = max([_txt_w(fmt(v)) for v in vals] + [_txt_w(str(l)) for _, l in extras])
     title_w = _txt_w(str(title), "bold") if title else 0.0
     title_h = fontsize * 1.5 / 72.0 if title else 0.0
 
@@ -314,8 +321,10 @@ def add_proportional_legend(ax, values, sizes, *, title="Legenda",
     cx = P + rmax            # common vertical centre line for the circles
     label_x = P + 2 * rmax + label_gap
 
+    sw = fontsize * 1.1 / 72.0                      # swatch side (inch)
     circles_h = sum(diam) + G * (len(diam) - 1)
-    H = P + title_h + title_gap + circles_h + P
+    extras_h = len(extras) * (sw + G)               # each row: gap above + square
+    H = P + title_h + title_gap + circles_h + extras_h + P
     W = max(label_x + lab_w, P + title_w) + P
 
     # find a spot (axes fraction), then draw everything in inches anchored there
@@ -348,6 +357,16 @@ def add_proportional_legend(ax, values, sizes, *, title="Legenda",
         ax.text(label_x, ccy, fmt(v), transform=tr, ha="left", va="center",
                 fontsize=fontsize, color="#222222", zorder=11, clip_on=False)
         yt = ccy - r - G
+    # kleurstaal-rijen onder de cirkels (bv. een "Geen …"-klasse)
+    for fc_, lab in extras:                 # yt draagt al de gap van de cirkel-loop
+        ax.add_patch(Rectangle((cx - sw / 2, yt - sw), sw, sw, transform=tr,
+                               facecolor=fc_, edgecolor=extra_edgecolor,
+                               alpha=extra_alpha, linewidth=0.6, zorder=10,
+                               clip_on=False))
+        ax.text(label_x, yt - sw / 2, str(lab), transform=tr, ha="left",
+                va="center", fontsize=fontsize, color="#222222", zorder=11,
+                clip_on=False)
+        yt -= sw + G
     return box
 
 

@@ -386,3 +386,77 @@ for i, (nr, naam) in enumerate(rows):             # eigen lay-out (fracties)
 fit_side_panel(fig, ax, panel)                    # paneel tot inhoud + marge krimpen
 save_map(fig, "…")
 ```
+
+## 11. Proportionele symbolen — absoluut aantal per buurt
+
+Het alternatief voor een choropleet bij een "per buurt"-vraag. De **cirkeloppervlakte**
+draagt de waarde, niet het vlak — daarom zijn **absolute aantallen hier correct** en geldt
+de normalisatie-eis (invariant 3) niet. Kies dit als de gebruiker de *aantallen* wil zien;
+kies een choropleet als het om *dichtheid* gaat. Zie de gekoppelde intake-vraag in
+`intake.md` (punt 5).
+
+Er is geen kant-en-klare `proportional_map()`; bouw hem uit `plt.subplots` +
+`ax.scatter` + `add_proportional_legend`. Let op de volgorde: legenda **ná**
+`finalize_map` + `fit_figure_to_data` (invariant 8).
+
+```python
+buurten = load_layer("buurten")
+bomen   = load_layer("bomen")
+
+per_buurt = count_per_polygon(bomen, buurten, key="TEKST")   # TEKST = TIR-code, uniek
+per_buurt["n"] = per_buurt["n"].astype(int)
+
+# s is een OPPERVLAK (pt²) -> s lineair in de waarde geeft straal ∝ √waarde: correct.
+S_MAX = 620                    # stadsbreed op 91 buurten; groter => cirkels lopen in elkaar
+nmax  = per_buurt["n"].max()
+pts, sizes = [], []
+for row, c in safe_centroids(per_buurt):
+    if row["n"] <= 0:
+        continue
+    pts.append((c.x, c.y)); sizes.append(row["n"] / nmax * S_MAX)
+
+fig, ax = plt.subplots(figsize=(12, 10))
+per_buurt.plot(ax=ax, facecolor="none", edgecolor=STYLE["boundary_color"],
+               linewidth=STYLE["boundary_width"], zorder=2)
+add_rotterdam_basemap(ax, layer="kleur")
+ax.scatter([p[0] for p in pts], [p[1] for p in pts], s=sizes,
+           facecolor=ASSET_COLORS["bomen"], edgecolor="#14512c",
+           linewidth=0.6, alpha=0.65, zorder=3)
+
+style_map(ax, "Aantal bomen per buurt — Rotterdam",
+          subtitle="cirkeloppervlak evenredig aan het aantal bomen (Obsurv)")
+finalize_map(fig, source="Obsurv via diensten.rotterdam.nl")
+fit_figure_to_data(fig, ax)
+
+# legenda-waarden: ronde getallen, grootste ≈ het maximum in de data
+legend_vals = [500, 2000, int(round(nmax / 500) * 500)]
+add_proportional_legend(ax, legend_vals, [v / nmax * S_MAX for v in legend_vals],
+                        title="Aantal bomen", corner="auto",
+                        facecolor=ASSET_COLORS["bomen"], edgecolor="#14512c", alpha=0.65)
+
+for w in validate_map(fig, ax, data=per_buurt):
+    print("WARN:", w)
+save_map(fig, "bomen_per_buurt_proportioneel")
+```
+
+**Valkuilen**
+- `s` **lineair** in de waarde houden. Schaal je de straal lineair, dan groeit het
+  oppervlak kwadratisch en overdrijft de kaart grote waarden fors.
+- **`S_MAX` afstemmen op de dichtheid van de vlakken.** Stadsbreed op TIR-buurt werkt
+  ~600; op subbuurt lager. Te groot = onleesbare kluwen in de dichte buurten.
+- **Nulwaarden overslaan** — een cirkel met oppervlak 0 rendert als ruis.
+- `alpha` rond 0,65 met een donkere rand, zodat overlappende cirkels nog te scheiden zijn.
+- Gebruik een **unieke** `key` (`TEKST`, de TIR-code) — buurtnamen zijn niet uniek
+  (bv. "Dorp" komt meermaals voor).
+- **Nul is geen afwezigheid.** Een gebied zonder objecten krijgt geen cirkel en is
+  dan niet te onderscheiden van "buiten de data". Vul die vlakken lichtgrijs en zet
+  de klasse in de legenda via `extras=` (invariant 4):
+
+```python
+GEEN = "#d9d9d9"
+per_sb[per_sb["n"] == 0].plot(ax=ax, facecolor=GEEN, alpha=0.85,
+                              edgecolor=STYLE["boundary_color"],
+                              linewidth=0.25, zorder=2.5)
+add_proportional_legend(ax, legend_vals, legend_sizes, title="Aantal bomen",
+                        extras=[(GEEN, "Geen bomen")])   # kleurstaal onder de cirkels
+```
