@@ -41,6 +41,7 @@ Een typisch script is 10–20 regels. Het zware werk zit in de `rotterdam`-packa
 
 | Vraag van de gebruiker | Lees |
 |------------------------|------|
+| "Maak een kaart van …" — heb ik genoeg info? | **`intake.md`** (eerst, vóór alles) |
 | Welke functies / constanten zijn er? | `rotterdam/__init__.py` (publieke API) of submodule |
 | Welke kaartelementen, kleuren, klassen? | **`cartography.md`** + `rotterdam/cartography.py` |
 | Welke Rotterdamse endpoints + lokale files? | **`data_sources.md`** + `rotterdam/vocab.py` |
@@ -72,7 +73,7 @@ Een typisch script is 10–20 regels. Het zware werk zit in de `rotterdam`-packa
    - **zijpaneel-methode**: lukt ook dat niet, dan waarschuwt de routine → zet de legenda in een **zijpaneel**. Voor een kleurstaal-legenda gebruik je hiervoor **`add_swatch_legend_sidepanel(fig, ax, colors, labels, ...)`**: die maakt het paneel **precies zo breed als de legenda + marge** (totale figuurbreedte = kaart + gap + legenda + marge, dus geen overbodige witruimte naast de legenda). Voor een vrije/andere paneelinhoud (bv. een genummerde naamlijst): teken in een `add_side_panel()` en roep dáárna **`fit_side_panel(fig, ax, panel)`** aan — die krimpt het paneel tot de werkelijk getekende inhoud + marge. NB: alleen een smaller paneel (via bovenstaande helpers) haalt die witruimte weg — niet `save_map`'s `bbox_inches="tight"` (die rekent de volle paneel-as mee).
    
    **Volgorde is cruciaal:** roep `place_legend`/`add_*_legend` aan **ná** `add_scalebar`/noordpijl **én ná** `finalize_map` + `fit_figure_to_data`. Anders meet de routine de legenda op de nog-niet-definitieve figuurhoogte en klopt de plaatsing niet met de uiteindelijke kaart.
-9. **Proportionele-symbool legenda's**: gebruik `add_proportional_legend(ax, values, sizes=<zelfde s als ax.scatter>, corner="auto", data=...)`. Die tekent de cirkels op ware kaartgrootte met **gelijke witruimte tussen de cirkelranden** (constante tussenafstand; matplotlib's eigen legenda kan alleen de middelpunten gelijk spatiëren, wat ongelijke gaten geeft) op een passend kader, met dezelfde auto-plaatsing als invariant 8.
+9. **Proportionele-symbool legenda's**: gebruik `add_proportional_legend(ax, values, sizes=<zelfde s als ax.scatter>, corner="auto", data=...)`. Die tekent de cirkels op ware kaartgrootte met **gelijke witruimte tussen de cirkelranden** (constante tussenafstand; matplotlib's eigen legenda kan alleen de middelpunten gelijk spatiëren, wat ongelijke gaten geeft) op een passend kader, met dezelfde auto-plaatsing als invariant 8. Met `extras=[(kleur, label), …]` komen er kleurstaal-rijen ónder de cirkels in hetzelfde kader — gebruik dat voor een klasse die geen grootte maar een vulling is, bv. een lichtgrijze "Geen bomen"/"Geen gegevens"-klasse voor gebieden met waarde 0.
 10. **Basemap standaard in kleur.** Begin standaard met de gekleurde Rotterdamse basemap: `add_rotterdam_basemap(ax, layer="kleur")` (met PDOK-fallback `add_pdok_basemap(ax, layer="standaard")`). Kies alleen een andere laag (`grijs`, `luchtfoto`) als de gebruiker daarom vraagt of als kleur de data onleesbaar maakt — meld dat dan kort.
 11. **AI-disclaimer in de footer.** Elke kaart toont in de footer altijd "Disclaimer: deze kaart is gemaakt met AI." `finalize_map()` voegt dit automatisch toe — niet handmatig weghalen. `finalize_map()` zet daarnaast rechts-uitgelijnd "Gemeente Rotterdam" (uitgever) aan de rechterrand van de footer. Past de bron/datum/disclaimer + uitgever niet op één regel (bv. lange bron of smalle kaart), dan breekt de footer automatisch over meerdere regels af; scheidingslijn en ondermarge schuiven mee.
 12. **Basemap-bronvermelding alleen voor derden.** De eigen Rotterdamse basemaps (`add_rotterdam_basemap`) hoeven **niet** in de bronregel (`finalize_map(source=...)`) — ze zijn onze eigen huisstijl. Achtergronden van andere partijen (PDOK BRT via `add_pdok_basemap`, luchtfoto's van derden, OSM-tegels, enz.) **wel** vermelden. Bouw `source` dus zo op dat de Rotterdam-basemap niets toevoegt en alleen een fallback/derde-partij-basemap een "Basiskaart: …"-deel krijgt.
@@ -97,8 +98,11 @@ Een typisch script is 10–20 regels. Het zware werk zit in de `rotterdam`-packa
     4. **Schrijfwijze.** Zinshoofdletter: alleen het **eerste woord** en **eigennamen** met een hoofdletter (Rotterdam, Charlois), de rest klein. **Geen afsluitende punt.** Houd het kort en beschrijvend — geen volzin, geen leestekens-drukte; een gedachtestreepje (` — `) om thema en locatie te scheiden mag.
     5. **Beschrijf, interpreteer niet.** De titel benoemt wat de kaart *toont*, niet een conclusie of waardeoordeel (dus *"Afvalbakdichtheid per subbuurt"*, niet *"Te weinig afvalbakken in Zuid"*): geen ongevraagde duiding in de titel.
 
+20. **Intake vóór de kaart.** Begin nooit met data laden of code schrijven zolang een kaartbepalende keuze nog open is. Loop bij elke kaartvraag eerst de intake-checklist uit **`intake.md`** langs (onderwerp, gebied, detailniveau, maat/normalisatie, filter, peilmoment, kaarttype, publiek/medium, output). Staat een **blokkerend** punt open en is er geen default voor — bv. "per buurt" zonder dat duidelijk is of je op TIR-buurt of CBS-buurt aggregeert, of een choropleet zonder gekozen normalisatie — **stel dan eerst vragen** aan de gebruiker: één ronde, maximaal 4 vragen via `AskUserQuestion`, concrete opties, aanbeveling als eerste optie. Zijn alleen niet-blokkerende punten open, vraag dan **niet**: neem de skill-default, maak de kaart, en benoem de aanname expliciet bij de oplevering. Vraag nooit naar wat je zelf kunt opzoeken (veldnamen, endpoints, CRS, beschikbare klassen).
+
 ## Beslisboom: van vraag naar kaart
 
+0. **Intake** — zie `intake.md`. Loop de checklist langs, vul in uit de vraag of uit de defaults. Blokkerend punt open → één ronde vragen stellen (max 4, `AskUserQuestion`) en wachten. Anders: aanname nemen en die bij oplevering melden. Vat in één regel samen wat je gaat maken.
 1. **Wat is gevraagd?** locaties tonen / vergelijken / verdeling / dichtheid / relatie tot ander attribuut.
 2. **Welke data?** Eerst `LOCAL_FILES` (snel). Anders `fetch_arcgis_layer(ARCGIS_LAYERS[...])`. Voor inwoneraantallen → `cbs_buurten_rotterdam()`. Voor adressen → `pdok_geocode_rd()`. **Niet gevonden in de skill/Rotterdam-server/nationale bronnen? → invariant 7: vraag de gebruiker (internet doorzoeken of stoppen), ga niet ongevraagd zelf zoeken.**
 3. **Welk gebied?** Stad → centroid Rotterdam, figsize (12,10). Gebied/buurt → `filter_to_area()`, figsize (10,10).
@@ -117,6 +121,7 @@ Skill (alleen documentatie + back-compat shim):
 geoai-rotterdam-main\.claude\skills\rotterdam-geoai\
 ├── SKILL.md             ← deze file: orchestratie + invarianten
 ├── helpers.py           ← shim die `rotterdam` package re-exporteert
+├── intake.md            ← checklist: heb ik genoeg info? welke vragen stel ik?
 ├── cartography.md       ← richtlijnen + meetniveaus + map-type beslisboom
 ├── data_sources.md      ← Rotterdam endpoints + lokale files + IMBOR
 ├── national_sources.md  ← PDOK, BAG, 3D BAG, AHN, BRT basemap, CBS, OSM
