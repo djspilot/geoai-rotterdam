@@ -20,7 +20,7 @@ Intake is **geen interview**. De meeste vragen zijn na drie regels denken al com
 | 1 | **Onderwerp** — welk thema/welke laag? | **Ja** | geen |
 | 2 | **Vraagtype** — locaties tonen / aantallen vergelijken / dichtheid / verdeling / relatie tussen twee variabelen | Nee | leid af uit de formulering; bij twijfel: locaties tonen |
 | 3 | **Gebied** — hele stad, gebied, buurt, of een straal rond een adres? | **Ja**, tenzij afleidbaar | hele gemeente Rotterdam |
-| 4 | **Detailniveau** — gebied / buurt / subbuurt (TIR) of CBS-wijk/buurt | **Ja** bij aggregatie (choropleet, "per …") | TIR-buurt (`WIJK`-veld, invariant 2) |
+| 4 | **Detailniveau** — gebied / buurt / subbuurt (TIR) of CBS-wijk/buurt | **Ja** bij aggregatie ("per …") **of als de gebiedsindeling zelf het onderwerp is** | TIR-buurt (`WIJK`-veld, invariant 2) |
 | 5 | **Kaarttype + maat** — zie de gekoppelde vraag hieronder | **Ja** bij aggregatie | choropleet per km² |
 | 6 | **Selectie/filter** — alleen een bepaald type, eigenaar, status, conditie? | Nee | alles, ongefilterd |
 | 7 | **Peilmoment** — actuele stand of een specifiek jaar/periode? | Nee | meest recente stand van de bron |
@@ -29,6 +29,17 @@ Intake is **geen interview**. De meeste vragen zijn na drie regels denken al com
 | 10 | **Output** — statische PNG of interactieve kaart | Nee | PNG via `save_map()` (invariant 5) |
 | 11 | **Basemap** — kleur, grijs, luchtfoto, geen | Nee | kleur (invariant 10) |
 | 12 | **Extra kaartelementen** — noordpijl/schaalstok nodig? | Nee | uit, tenzij navigatie of afstand relevant (invarianten 13/14) |
+
+### Punt 4: het niveau is soms de hele kaartinhoud
+
+Normaal is de gebiedsindeling een *middel* (je telt iets per buurt) en volstaat de
+default. Maar als de indeling het **onderwerp** is — een grenzenkaart, een kaart met
+buurtnamen, "laat de gebiedsindeling zien" — dan bepáált het niveau wat de kaart
+toont, en mag je het niet invullen met een default. Vraag het dan altijd.
+
+Het verschil is groot: 21 TIR-gebieden zijn met namen leesbaar, 91 buurten worden
+krap, en 578 subbuurten zijn op één stadsbrede kaart niet te labelen (dan moet je
+naar nummers + een naamlijst in een zijpaneel, patroon 10).
 
 ### Punt 5: kaarttype en maat zijn één vraag
 
@@ -56,7 +67,9 @@ Aanvullend, alleen relevant als het speelt:
 - **Vraag alleen wat de kaart daadwerkelijk verandert.** Als beide antwoorden tot dezelfde kaart leiden: niet vragen.
 - **Bundel** alle open punten in **één ronde** van maximaal 4 vragen (`AskUserQuestion`), niet druppelsgewijs.
 - **Bied concrete opties**, geen open vragen. Zet je aanbeveling als eerste optie met "(aanbevolen)" erachter.
-- **Één ronde is genoeg.** Antwoordt de gebruiker niet of zegt hij "kies maar", neem dan de defaults en meld ze.
+- **Één ronde is genoeg — met één uitzondering.** Antwoordt de gebruiker niet of zegt hij "kies maar", neem dan de defaults en meld ze.
+
+  De uitzondering: **ontbreekt het onderwerp (punt 1), dan is een tweede ronde legitiem.** De punten 2, 4 en 5 hangen aan het onderwerp — zolang je niet weet wáárover de kaart gaat, kun je niet zinnig naar detailniveau of kaarttype vragen. Stel in ronde 1 dan alleen wat los van het onderwerp beantwoordbaar is (punt 1 zelf, en bv. publiek/medium), en vraag in ronde 2 door op wat daaruit volgt. Meer dan twee rondes nooit: neem daarna de defaults.
 
 ## Voorbeelden
 
