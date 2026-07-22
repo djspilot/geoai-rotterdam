@@ -46,8 +46,8 @@ from .tir import filter_to_area, count_per_polygon
 from .cartography import (
     setup_headless_matplotlib,
     style_map, finalize_map, fit_figure_to_data, save_map, validate_map,
-    add_scalebar, add_scale_ratio, add_north_arrow, add_pdok_basemap,
-    add_rotterdam_basemap, ROTTERDAM_BASEMAPS,
+    add_scalebar, add_scale_ratio, add_north_arrow, add_area_labels,
+    add_pdok_basemap, add_rotterdam_basemap, ROTTERDAM_BASEMAPS,
     place_legend, add_proportional_legend, add_swatch_legend, add_side_panel,
     add_swatch_legend_sidepanel, fit_side_panel,
     point_map, choropleth,
@@ -74,8 +74,8 @@ __all__ = [
     # cartography
     "setup_headless_matplotlib",
     "style_map", "finalize_map", "fit_figure_to_data", "save_map", "validate_map",
-    "add_scalebar", "add_scale_ratio", "add_north_arrow", "add_pdok_basemap",
-    "add_rotterdam_basemap", "ROTTERDAM_BASEMAPS",
+    "add_scalebar", "add_scale_ratio", "add_north_arrow", "add_area_labels",
+    "add_pdok_basemap", "add_rotterdam_basemap", "ROTTERDAM_BASEMAPS",
     "place_legend", "add_proportional_legend", "add_swatch_legend", "add_side_panel",
     "add_swatch_legend_sidepanel", "fit_side_panel",
     "point_map", "choropleth",

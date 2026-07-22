@@ -249,6 +249,84 @@ def add_north_arrow(ax, x: float | None = None, y: float | None = None, *,
                       edge_y="top", y0_in=0.0, y1_in=0.7)
 
 
+def add_area_labels(ax, gdf, column, *, fontsize: float = 8.5,
+                    color: str = "#1a1a1a", halo="white", halo_width: float = 2.6,
+                    leader_color: str = "#555555", max_shift_pt: float = 34.0,
+                    leader_threshold_pt: float = 5.0, iterations: int = 80,
+                    zorder: float = 5):
+    """Plaats één tekstlabel per vlak op zijn `representative_point` en **duw
+    overlappende labels verticaal uit elkaar** tot niets meer botst; elk label dat
+    daarbij noemenswaardig opschuift krijgt een dun **verwijslijntje** naar zijn eigen
+    vlak. Voor gebiedsnaam-/grenzenkaarten waar de centroïden dicht op elkaar liggen
+    (bv. de TIR-gebieden rond het centrum), zodat de namen leesbaar blijven zonder een
+    legenda met codes.
+
+    Alleen **verticaal** duwen — horizontaal schuiven haalt een label sneller van zijn
+    vlak af. Labels krijgen een witte halo (`halo`/`halo_width`) zodat ze op een
+    gekleurde basemap leesbaar blijven. Een label dat verder dan `max_shift_pt` van zijn
+    punt zou komen wordt daar afgekapt (verder weg wordt de toewijzing misleidend).
+
+    Roep aan **vóór** `finalize_map`/`fit_figure_to_data`: de botsingsdetectie meet de
+    labels op de huidige figuur; verandert de figuurhoogte daarna nog, meet dan opnieuw.
+
+    `gdf`    : GeoDataFrame met vlakken (polygonen),
+    `column` : kolom met de labeltekst (bv. "GEBDNAAM").
+
+    Returns het **aantal labels dat een verwijslijntje kreeg**.
+    """
+    import matplotlib.patheffects as pe
+
+    fig = ax.figure
+    halo_fx = [pe.withStroke(linewidth=halo_width, foreground=halo)]
+    anchors = [(str(r[column]), r.geometry.representative_point())
+               for _, r in gdf.iterrows()]
+
+    def _draw(text, p, dx, dy, leader):
+        kw = dict(xy=(p.x, p.y), xytext=(dx, dy), textcoords="offset points",
+                  ha="center", va="center", fontsize=fontsize, color=color,
+                  zorder=zorder, path_effects=halo_fx)
+        if leader:
+            kw["arrowprops"] = dict(arrowstyle="-", color=leader_color,
+                                    linewidth=0.6, shrinkA=1, shrinkB=2)
+        return ax.annotate(text, **kw)
+
+    offsets = [[0.0, 0.0] for _ in anchors]
+    artists = [_draw(t, p, 0, 0, False) for t, p in anchors]
+    fig.canvas.draw()
+    rend = fig.canvas.get_renderer()
+    px_to_pt = 72.0 / fig.dpi
+
+    for _ in range(iterations):
+        boxes = [a.get_window_extent(rend).expanded(1.04, 1.25) for a in artists]
+        hits = 0
+        for i in range(len(boxes)):
+            for j in range(i + 1, len(boxes)):
+                bi, bj = boxes[i], boxes[j]
+                if not (bi.x0 < bj.x1 and bj.x0 < bi.x1
+                        and bi.y0 < bj.y1 and bj.y0 < bi.y1):
+                    continue
+                hits += 1
+                push = (min(bi.y1, bj.y1) - max(bi.y0, bj.y0)) / 2 * px_to_pt + 0.4
+                up, down = (i, j) if bi.y0 > bj.y0 else (j, i)
+                offsets[up][1] += push
+                offsets[down][1] -= push
+        if not hits:
+            break
+        for k, a in enumerate(artists):
+            offsets[k][1] = max(-max_shift_pt, min(max_shift_pt, offsets[k][1]))
+            a.set_position(tuple(offsets[k]))
+        fig.canvas.draw()
+
+    for a in artists:
+        a.remove()
+    n_leaders = 0
+    for (t, p), (dx, dy) in zip(anchors, offsets):
+        leader = abs(dy) > leader_threshold_pt
+        n_leaders += leader
+        _draw(t, p, dx, dy, leader)
+    return n_leaders
+
+
 def _reserve_zone(ax, **descriptor) -> None:
     """Register a furniture footprint (north arrow, scale bar) on the axes so
     `place_legend` avoids it. Boxes mix axes-fraction x with inch-from-edge y

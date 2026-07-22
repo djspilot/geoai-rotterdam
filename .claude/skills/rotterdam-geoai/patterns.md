@@ -460,3 +460,39 @@ per_sb[per_sb["n"] == 0].plot(ax=ax, facecolor=GEEN, alpha=0.85,
 add_proportional_legend(ax, legend_vals, legend_sizes, title="Aantal bomen",
                         extras=[(GEEN, "Geen bomen")])   # kleurstaal onder de cirkels
 ```
+
+## 12. Gebiedsnaam-/grenzenkaart — namen op de kaart zonder botsing
+
+Als de **indeling zelf het onderwerp** is (een grenzenkaart, een kaart met
+gebiedsnamen — intake punt 4), geen thematische kleuring: één neutrale vulling, de
+informatie zit in de grenzen en de namen. Labels op de centroïde botsen zodra
+gebieden dicht op elkaar liggen (de TIR-gebieden rond het centrum). `add_area_labels`
+lost dat op: het duwt overlappende labels **verticaal** uit elkaar en zet een dun
+verwijslijntje bij elk label dat noemenswaardig opschuift. Roep aan **vóór**
+`finalize_map`/`fit_figure_to_data` (het meet de labels op de huidige figuur).
+
+```python
+gebieden = load_layer("gebieden")
+
+fig, ax = plt.subplots(figsize=(14, 10))
+gebieden.plot(ax=ax, facecolor="#f6f3ee", alpha=0.45,
+              edgecolor="#333333", linewidth=1.6, zorder=2)   # grens = onderwerp: donkerder/dikker
+add_rotterdam_basemap(ax, layer="kleur")
+
+n_leaders = add_area_labels(ax, gebieden, "GEBDNAAM", fontsize=8.5)
+print(f"{n_leaders} labels met verwijslijntje")
+
+style_map(ax, "Gebiedsindeling — Rotterdam", subtitle="de 21 gebieden van de gemeente")
+finalize_map(fig, source="Gemeente Rotterdam via diensten.rotterdam.nl")
+fit_figure_to_data(fig, ax)
+add_swatch_legend(ax, ["#f6f3ee"], ["Gebied"], title="Legenda")   # inv. 4: ook hier een legenda
+save_map(fig, "gebiedsindeling_rotterdam")
+```
+
+**Valkuilen**
+- De grenzen zijn hét onderwerp maar vallen op een gekleurde basemap weg tegen de
+  wegen. Zet ze donkerder/dikker dan de `STYLE`-default (`#333333`, ~1,6).
+- Grenzenkaart heeft nog steeds een legenda nodig (invariant 4). Eén klasse "Gebied"
+  volstaat: alle vlakken zijn gelijkwaardig, de legenda benoemt wat een vlak *is*.
+- Op **buurt/subbuurt** worden het te veel labels om leesbaar op de kaart te zetten →
+  nummers op de kaart + een naamlijst in een zijpaneel (patroon 10), niet dit patroon.
