@@ -8,17 +8,50 @@ Intake is **geen interview**. De meeste vragen zijn na drie regels denken al com
 
 ## Werkwijze
 
+0. **Is de vraag beschrijvend of normatief?** Zie hieronder. Is hij normatief, dan is de checklist nog niet aan de orde — benoem het eerst.
 1. Loop de checklist hieronder langs. Vul elk punt in met (a) wat de gebruiker zei, of (b) de default uit deze skill.
 2. Blijft er een **blokkerend** punt open (kolom "Blokkerend?" = ja, en geen default toepasbaar) → **stel een vraag** en wacht op antwoord. Ga niet gokken.
 3. Alleen niet-blokkerende punten open → **niet vragen**: neem de default/aanname, maak de kaart, en benoem de aanname in één regel bij de oplevering.
 4. Vat vóór het renderen in **één regel** samen wat je gaat maken ("Ik maak een choropleet afvalbakken per km² per subbuurt, Rotterdam Zuid, PNG."). Zo kan de gebruiker vroeg bijsturen.
+
+## Stap 0: beschrijvend of normatief?
+
+De checklist gaat over **beschrijvende** kaarten: *toon X*. Sommige vragen zijn
+**normatief** — ze vragen niet wat er ís maar wat er zou **moeten**:
+
+> "Waar **moeten** we meer bomen planten?" · "Waar is het **tekort** aan speelplekken?"
+> · "Welke buurten hebben **te weinig** afvalbakken?" · "Waar kunnen we het **beste** …?"
+
+Herken ze aan *moeten*, *tekort*, *te weinig/te veel*, *het beste*, *prioriteit*,
+*achterstand*, *knelpunt* — woorden die een norm veronderstellen.
+
+**Zo'n vraag voer je niet als kaart uit.** Een kaart die gebieden op prioriteit
+classificeert maakt het oordeel impliciet en verbergt dat er een norm is gekozen: hoevéél
+bomen zijn genoeg, en afgemeten waaraan? Dat is beleid, geen data, en die keuze is niet
+aan jou. Het botst bovendien met invariant 19.5 (de titel beschrijft, interpreteert niet).
+
+**Wat je in plaats daarvan doet:**
+
+1. **Benoem dat de vraag normatief is** en waarom dat hier niet ingevuld kan worden: het
+   antwoord hangt aan een norm die de gebruiker vaststelt, niet de data.
+2. **Bied de beschrijvende variant aan** — de huidige stand, zodat de gebruiker de
+   afweging zelf maakt (bv. boomdichtheid per gebied in plaats van "waar bijplanten").
+   Zeg er **expliciet bij dat die variant een andere vraag beantwoordt** dan de gestelde:
+   hij toont de stand, niet waar iets zou moeten komen, en de afweging blijft bij de
+   gebruiker. Zonder die zin leest het aanbod als "hier is je antwoord" en sluipt het
+   oordeel alsnog binnen — precies wat stap 0 moet voorkomen.
+3. **Ga pas verder met de checklist** als de gebruiker die beschrijvende kaart wil.
+
+Kiest de gebruiker daarna alsnog voor een normatieve kaart, dan moet **hij** het criterium
+én de drempels leveren; jij verzint ze niet. Voeg nooit ongevraagd een prioriteits- of
+tekortclassificatie toe aan een kaart waar niet om gevraagd is.
 
 ## Checklist
 
 | # | Wat | Blokkerend? | Default als het niet genoemd is |
 |---|-----|-------------|--------------------------------|
 | 1 | **Onderwerp** — welk thema/welke laag? | **Ja** | geen |
-| 2 | **Vraagtype** — locaties tonen / aantallen vergelijken / dichtheid / verdeling / relatie tussen twee variabelen | Nee | leid af uit de formulering; bij twijfel: locaties tonen |
+| 2 | **Vraagtype** — locaties tonen / aantallen vergelijken / dichtheid / verdeling / relatie tussen twee variabelen. Past de vraag in géén van deze: waarschijnlijk normatief → stap 0 | Nee | leid af uit de formulering; bij twijfel: locaties tonen |
 | 3 | **Gebied** — hele stad, gebied, buurt, of een straal rond een adres? | **Ja**, tenzij afleidbaar | hele gemeente Rotterdam |
 | 4 | **Detailniveau** — gebied / buurt / subbuurt (TIR) of CBS-wijk/buurt | **Ja** bij aggregatie ("per …") **of als de gebiedsindeling zelf het onderwerp is** | TIR-buurt (`WIJK`-veld, invariant 2) |
 | 5 | **Kaarttype + maat** — zie de gekoppelde vraag hieronder | **Ja** bij aggregatie | choropleet per km² |
@@ -84,3 +117,7 @@ Aanvullend, alleen relevant als het speelt:
 **Niet-blokkerende aanname.**
 > "Maak een dichtheidskaart van lichtpunten in Rotterdam."
 > Alles ingevuld via defaults; peilmoment en filter niet genoemd. Kaart maken, en bij oplevering melden: "Alle lichtpunten, actuele stand Obsurv, per km² op TIR-buurtniveau."
+
+**Normatieve vraag — checklist nog niet aan de orde.**
+> "Waar moeten we meer bomen planten?"
+> Onderwerp is duidelijk, maar "moeten" veronderstelt een norm die de data niet levert. Niet stilzwijgend platslaan tot een dichtheidskaart en al helemaal geen prioriteitsclassificatie. Benoem dat de vraag om een oordeel vraagt, bied de beschrijvende variant aan (boomdichtheid per gebied), en loop de checklist pas daarna langs.
